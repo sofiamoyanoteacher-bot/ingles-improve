@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Ensure upload directories exist
-['uploads', 'resources', 'module-content'].forEach(dir => {
+['uploads', 'resources', 'module-content', 'profiles'].forEach(dir => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
@@ -30,7 +30,12 @@ const moduleContentStorage = multer.diskStorage({
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
 });
 
+const profileStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'profiles/'),
+  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
+});
 const uploadVideo = multer({ storage: submissionStorage, limits: { fileSize: 500 * 1024 * 1024 } });
+const uploadProfilePhoto = multer({ storage: profileStorage, limits: { fileSize: 10 * 1024 * 1024 } });
 const uploadResource = multer({ storage: resourceStorage, limits: { fileSize: 500 * 1024 * 1024 } });
 const uploadModulePdf = multer({ storage: moduleContentStorage, limits: { fileSize: 500 * 1024 * 1024 } });
 
@@ -41,6 +46,7 @@ app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 app.use('/resources', express.static('resources'));
 app.use('/module-content', express.static('module-content'));
+app.use('/profiles', express.static('profiles'));
 
 app.use(session({
   store: new pgSession({ pool, createTableIfMissing: true }),
@@ -76,6 +82,38 @@ app.post('/api/auth/logout', (req, res) => {
 app.get('/api/me', (req, res) => {
   if (!req.session.userId) return res.status(401).json({ error: 'Not authenticated' });
   res.json({ id: req.session.userId, name: req.session.name, role: req.session.role });
+});
+
+// ─── PROFILE ────────────────────────────────────────────────────────────────
+
+app.get('/api/profile', requireAuth, async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT id, name, email, age, profession, photo, role FROM users WHERE id = $1',
+      [req.session.userId]
+    );
+    res.json(result.rows[0]);
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.put('/api/profile', requireAuth, async (req, res) => {
+  const { name, email, age, profession } = req.body;
+  try {
+    await pool.query(
+      'UPDATE users SET name=$1, email=$2, age=$3, profession=$4 WHERE id=$5',
+      [name, email, age || null, profession || null, req.session.userId]
+    );
+    req.session.name = name;
+    res.json({ ok: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.post('/api/profile/photo', requireAuth, uploadProfilePhoto.single('photo'), async (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  try {
+    await pool.query('UPDATE users SET photo=$1 WHERE id=$2', [req.file.filename, req.session.userId]);
+    res.json({ ok: true, filename: req.file.filename });
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 // ─── MODULES ────────────────────────────────────────────────────────────────

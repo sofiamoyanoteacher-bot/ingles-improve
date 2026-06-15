@@ -18,6 +18,9 @@ async function initDB() {
         email VARCHAR(255) UNIQUE NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
         name VARCHAR(255) NOT NULL,
+        age INTEGER,
+        profession VARCHAR(255),
+        photo VARCHAR(255),
         role VARCHAR(20) DEFAULT 'student',
         created_at TIMESTAMP DEFAULT NOW()
       );
@@ -53,6 +56,13 @@ async function initDB() {
         filename VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT NOW()
       );
+    `);
+
+    // Migrate: add profile columns if missing
+    await client.query(`
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS age INTEGER;
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS profession VARCHAR(255);
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS photo VARCHAR(255);
     `);
 
     // Seed users if empty

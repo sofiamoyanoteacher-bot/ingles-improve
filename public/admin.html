@@ -11,6 +11,7 @@
     --black: #0a0a0a; --white: #ffffff; --gray: #737373; --bg: #f8f8fb;
     --gradient: linear-gradient(135deg, #4cc0f1 0%, #b5beea 50%, #ea4fb9 100%);
   }
+  :root { --sidebar-w: 260px; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Poppins',sans-serif; background:var(--bg); color:var(--black); }
 
@@ -53,17 +54,29 @@
   /* ── LAYOUT ── */
   #app { display:none; }
   .sidebar {
-    position:fixed; top:0; left:0; width:260px; height:100vh;
-    background:var(--black); display:flex; flex-direction:column; z-index:100; overflow-y:auto;
+    position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+    background:rgba(10,10,10,0.97); backdrop-filter:blur(20px);
+    border-right:1px solid rgba(255,255,255,0.06);
+    display:flex; flex-direction:column; z-index:200; overflow-y:auto;
+    transition:transform 0.3s ease;
   }
+  .sidebar.collapsed { transform:translateX(-100%); }
   .sidebar-logo { padding:28px 24px 20px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,.06); }
   .sidebar-logo .brand-name { font-size:18px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
   .sidebar-logo .brand-sub { font-size:10px; color:rgba(255,255,255,.4); letter-spacing:1.5px; text-transform:uppercase; }
   .sidebar-logo .admin-badge { font-size:10px; font-weight:700; color:var(--magenta); background:rgba(234,79,185,.12); padding:3px 10px; border-radius:20px; margin-top:4px; display:inline-block; }
-  .sidebar-user { padding:20px 24px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,.06); }
-  .avatar { width:42px; height:42px; border-radius:50%; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:700; color:white; font-size:15px; flex-shrink:0; }
+  .sidebar-user { padding:16px 20px; border-bottom:1px solid rgba(255,255,255,.06); }
+  .sidebar-user-btn {
+    display:flex; align-items:center; gap:12px; width:100%;
+    background:none; border:none; cursor:pointer; padding:8px 10px; border-radius:10px;
+    transition:background .2s; text-align:left;
+  }
+  .sidebar-user-btn:hover { background:rgba(255,255,255,.06); }
+  .avatar { width:42px; height:42px; border-radius:50%; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:700; color:white; font-size:15px; flex-shrink:0; overflow:hidden; }
+  .avatar img { width:100%; height:100%; object-fit:cover; }
   .user-name { font-size:13px; font-weight:600; color:var(--white); }
   .user-role { font-size:11px; color:var(--gray); }
+  .user-edit-hint { font-size:10px; color:var(--cyan); margin-top:2px; opacity:.7; }
   .sidebar-nav { flex:1; padding:16px 12px; }
   .nav-item {
     display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:10px;
@@ -83,15 +96,30 @@
   .btn-logout:hover { background:rgba(234,79,185,.1); border-color:var(--magenta); color:var(--magenta); }
 
   /* ── MAIN ── */
-  .main { margin-left:260px; min-height:100vh; }
+  .main { margin-left:var(--sidebar-w); min-height:100vh; transition:margin-left .3s ease; }
+  .main.expanded { margin-left:0; }
   .topbar {
     position:sticky; top:0; z-index:50; background:var(--white);
-    border-bottom:1px solid rgba(0,0,0,.07); padding:0 32px;
+    border-bottom:1px solid rgba(0,0,0,.07); padding:0 24px;
     height:64px; display:flex; align-items:center; justify-content:space-between;
   }
+  .topbar-left { display:flex; align-items:center; gap:12px; }
   .topbar-title { font-size:17px; font-weight:700; }
-  .topbar-right { display:flex; align-items:center; gap:16px; }
-  .topbar-avatar { width:36px; height:36px; border-radius:50%; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:700; color:white; font-size:13px; }
+  .topbar-right { display:flex; align-items:center; gap:12px; }
+  .toggle-btn {
+    width:38px; height:38px; border-radius:10px; background:var(--bg);
+    border:1px solid rgba(0,0,0,.08); display:flex; align-items:center;
+    justify-content:center; cursor:pointer; color:var(--gray); transition:background .2s;
+  }
+  .toggle-btn:hover { background:rgba(76,192,241,.1); color:var(--cyan); }
+  .topbar-avatar-btn {
+    width:36px; height:36px; border-radius:50%; background:var(--gradient);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:white; font-size:13px; cursor:pointer;
+    border:2px solid rgba(255,255,255,.3); overflow:hidden; transition:transform .2s;
+  }
+  .topbar-avatar-btn:hover { transform:scale(1.08); }
+  .topbar-avatar-btn img { width:100%; height:100%; object-fit:cover; }
 
   .page { display:none; padding:32px; }
   .page.active { display:block; }
@@ -227,18 +255,25 @@
       </div>
     </div>
     <div class="sidebar-user">
-      <div class="avatar" id="sidebar-avatar">PR</div>
-      <div>
-        <div class="user-name" id="sidebar-name">Profesor</div>
-        <div class="user-role">Panel de administración</div>
-      </div>
+      <button class="sidebar-user-btn" onclick="navToProfile()">
+        <div class="avatar" id="sidebar-avatar-wrap"><span id="sidebar-initials">PR</span></div>
+        <div>
+          <div class="user-name" id="sidebar-name">Profesor</div>
+          <div class="user-role">Panel de administración</div>
+          <div class="user-edit-hint">Editar perfil →</div>
+        </div>
+      </button>
     </div>
     <nav class="sidebar-nav">
-      <div class="nav-item active" onclick="showPage('dashboard',this)">
+      <div class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard',this)">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/></svg>
         Dashboard
       </div>
-      <div class="nav-item" onclick="showPage('students',this)">
+      <div class="nav-item" id="nav-profile" onclick="showPage('profile',this)">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+        Mi perfil
+      </div>
+      <div class="nav-item" id="nav-students" onclick="showPage('students',this)">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
         Alumnos
       </div>
@@ -265,9 +300,55 @@
 
   <main class="main">
     <div class="topbar">
-      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-left">
+        <button class="toggle-btn" onclick="toggleSidebar()" title="Mostrar/ocultar menú">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+      </div>
       <div class="topbar-right">
-        <div class="topbar-avatar" id="topbar-avatar">PR</div>
+        <button class="topbar-avatar-btn" id="topbar-avatar-btn" onclick="navToProfile()">
+          <span id="topbar-initials">PR</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="page-profile" class="page">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:800px">
+        <div class="card" style="grid-column:1/-1;display:flex;align-items:center;gap:24px">
+          <div style="position:relative;flex-shrink:0">
+            <div id="prof-photo" style="width:90px;height:90px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:28px;color:white;overflow:hidden;border:4px solid white;box-shadow:0 4px 20px rgba(0,0,0,.15)">
+              <span id="prof-initials">PR</span>
+            </div>
+            <div onclick="document.getElementById('prof-photo-input').click()" style="position:absolute;bottom:0;right:0;width:30px;height:30px;border-radius:50%;background:var(--gradient);border:3px solid white;display:flex;align-items:center;justify-content:center;cursor:pointer">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="white"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+            </div>
+            <input type="file" id="prof-photo-input" accept="image/*" style="display:none" onchange="uploadProfPhoto(this)">
+          </div>
+          <div>
+            <div style="font-size:20px;font-weight:800" id="prof-display-name">...</div>
+            <div style="display:inline-block;margin:6px 0;padding:4px 14px;border-radius:20px;background:var(--gradient);color:white;font-size:11px;font-weight:700">Profesor</div>
+            <div style="font-size:13px;color:var(--gray)" id="prof-display-profession"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Información personal</div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div><label style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Nombre</label><input id="pf-name" type="text" style="width:100%;padding:11px 14px;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:Poppins,sans-serif;font-size:14px;background:var(--bg);outline:none"></div>
+            <div><label style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Email</label><input id="pf-email" type="text" style="width:100%;padding:11px 14px;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:Poppins,sans-serif;font-size:14px;background:var(--bg);outline:none"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Perfil profesional</div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div><label style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Edad</label><input id="pf-age" type="text" style="width:100%;padding:11px 14px;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:Poppins,sans-serif;font-size:14px;background:var(--bg);outline:none"></div>
+            <div><label style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Profesión</label><input id="pf-profession" type="text" style="width:100%;padding:11px 14px;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:Poppins,sans-serif;font-size:14px;background:var(--bg);outline:none"></div>
+          </div>
+        </div>
+        <div style="grid-column:1/-1">
+          <button class="btn btn-gradient" style="padding:13px 32px;font-size:14px" onclick="saveProfile()">Guardar cambios</button>
+        </div>
       </div>
     </div>
 
@@ -350,6 +431,7 @@ let currentUser = null;
 let allSubmissions = [];
 let allStudents = [];
 let allModules = [];
+let sidebarOpen = true;
 
 // ── INIT ──────────────────────────────────
 async function init() {
@@ -371,10 +453,78 @@ function showLogin() {
 async function showApp() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  const initials = currentUser.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  ['sidebar-avatar','topbar-avatar'].forEach(id => document.getElementById(id).textContent = initials);
-  document.getElementById('sidebar-name').textContent = currentUser.name;
+  updateAvatarUI();
   await loadAll();
+}
+
+function updateAvatarUI(data) {
+  const src = data || currentUser;
+  const initials = (src.name||'').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('sidebar-name').textContent = src.name || '';
+  if (src.photo) {
+    const img = `<img src="/profiles/${src.photo}" alt="foto">`;
+    document.getElementById('sidebar-avatar-wrap').innerHTML = img;
+    document.getElementById('topbar-avatar-btn').innerHTML = img;
+  } else {
+    document.getElementById('sidebar-initials').textContent = initials;
+    document.getElementById('topbar-initials').textContent = initials;
+  }
+}
+
+function toggleSidebar() {
+  sidebarOpen = !sidebarOpen;
+  document.getElementById('sidebar').classList.toggle('collapsed', !sidebarOpen);
+  document.getElementById('main').classList.toggle('expanded', !sidebarOpen);
+}
+
+function navToProfile() { showPage('profile', document.getElementById('nav-profile')); }
+
+async function loadProfile() {
+  const r = await fetch('/api/profile', { credentials:'include' });
+  const data = await r.json();
+  document.getElementById('pf-name').value = data.name || '';
+  document.getElementById('pf-email').value = data.email || '';
+  document.getElementById('pf-age').value = data.age || '';
+  document.getElementById('pf-profession').value = data.profession || '';
+  document.getElementById('prof-display-name').textContent = data.name || '';
+  document.getElementById('prof-display-profession').textContent = data.profession || 'Completá tu perfil';
+  const initials = (data.name||'').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  if (data.photo) {
+    document.getElementById('prof-photo').innerHTML = `<img src="/profiles/${data.photo}" style="width:100%;height:100%;object-fit:cover">`;
+  } else {
+    document.getElementById('prof-initials').textContent = initials;
+  }
+}
+
+async function saveProfile() {
+  const body = {
+    name: document.getElementById('pf-name').value,
+    email: document.getElementById('pf-email').value,
+    age: document.getElementById('pf-age').value,
+    profession: document.getElementById('pf-profession').value,
+  };
+  const r = await fetch('/api/profile', { method:'PUT', credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  if (r.ok) {
+    showToast('Perfil actualizado', 'success');
+    currentUser.name = body.name;
+    updateAvatarUI(body);
+    loadProfile();
+  } else { showToast('Error al guardar', 'error'); }
+}
+
+async function uploadProfPhoto(input) {
+  if (!input.files[0]) return;
+  const fd = new FormData();
+  fd.append('photo', input.files[0]);
+  const r = await fetch('/api/profile/photo', { method:'POST', credentials:'include', body: fd });
+  if (r.ok) {
+    const data = await r.json();
+    showToast('Foto actualizada', 'success');
+    const src = `/profiles/${data.filename}`;
+    document.getElementById('prof-photo').innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover">`;
+    document.getElementById('sidebar-avatar-wrap').innerHTML = `<img src="${src}" alt="foto">`;
+    document.getElementById('topbar-avatar-btn').innerHTML = `<img src="${src}" alt="foto">`;
+  } else { showToast('Error al subir foto', 'error'); }
 }
 
 async function loadAll() {
@@ -431,15 +581,16 @@ async function doLogout() {
 }
 
 // ── NAVIGATION ────────────────────────────
-const pageTitles = { dashboard:'Dashboard', students:'Alumnos', submissions:'Prácticas recibidas', modules:'Gestionar módulos', resources:'Subir recursos' };
+const pageTitles = { dashboard:'Dashboard', profile:'Mi perfil', students:'Alumnos', submissions:'Prácticas recibidas', modules:'Gestionar módulos', resources:'Subir recursos' };
 
 function showPage(name, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
-  el.classList.add('active');
-  document.getElementById('topbar-title').textContent = pageTitles[name];
+  if (el) el.classList.add('active');
+  document.getElementById('topbar-title').textContent = pageTitles[name] || name;
 
+  if (name === 'profile') loadProfile();
   if (name === 'submissions') renderSubmissions();
   if (name === 'students') renderStudents();
   if (name === 'modules') renderModules();

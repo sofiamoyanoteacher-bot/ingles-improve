@@ -7,318 +7,406 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cyan: #4cc0f1;
-    --magenta: #ea4fb9;
-    --purple: #b5beea;
-    --black: #0a0a0a;
-    --white: #ffffff;
-    --gray: #737373;
-    --bg: #f8f8fb;
+    --cyan: #4cc0f1; --magenta: #ea4fb9; --purple: #b5beea;
+    --black: #0a0a0a; --white: #ffffff; --gray: #737373; --bg: #f8f8fb;
     --gradient: linear-gradient(135deg, #4cc0f1 0%, #b5beea 50%, #ea4fb9 100%);
+    --glass: rgba(255,255,255,0.82);
+    --glass-border: rgba(255,255,255,0.4);
+    --sidebar-w: 260px;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--black); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Poppins',sans-serif; color:var(--black); min-height:100vh;
+    background: #0a0a0a;
+  }
+
+  /* ── BACKGROUND ── */
+  .bg-image {
+    position: fixed; inset: 0; z-index: 0;
+    background: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+  }
+  .bg-overlay {
+    position: fixed; inset: 0; z-index: 1;
+    background: linear-gradient(135deg, rgba(10,10,10,0.75) 0%, rgba(20,10,30,0.7) 100%);
+    backdrop-filter: blur(2px);
+  }
 
   /* ── LOGIN ── */
   #login-screen {
-    display: flex; align-items: center; justify-content: center;
-    min-height: 100vh; background: var(--black); position: relative; overflow: hidden;
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh; position:fixed; inset:0; z-index:1000;
   }
-  .orb {
-    position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; pointer-events: none;
-  }
-  .orb-1 { width: 400px; height: 400px; background: var(--cyan); top: -100px; left: -100px; }
-  .orb-2 { width: 350px; height: 350px; background: var(--magenta); bottom: -80px; right: -80px; }
-  .orb-3 { width: 300px; height: 300px; background: var(--purple); top: 40%; left: 50%; transform: translateX(-50%); }
   .login-card {
-    position: relative; z-index: 1;
-    background: rgba(255,255,255,0.06); backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.12); border-radius: 24px;
-    padding: 48px; width: 420px; max-width: 95vw;
+    position:relative; z-index:2;
+    background:rgba(255,255,255,0.1); backdrop-filter:blur(24px);
+    border:1px solid rgba(255,255,255,0.18); border-radius:24px;
+    padding:48px; width:420px; max-width:95vw; box-shadow: 0 24px 64px rgba(0,0,0,0.4);
   }
-  .login-logo { text-align: center; margin-bottom: 32px; }
-  .login-logo svg { width: 48px; height: 48px; }
-  .login-logo .brand { font-size: 22px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .login-logo .sub { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-  .login-card h1 { color: var(--white); font-size: 26px; font-weight: 700; text-align: center; margin-bottom: 8px; }
-  .login-card p.sub { color: rgba(255,255,255,0.5); font-size: 13px; text-align: center; margin-bottom: 32px; }
-  .form-group { margin-bottom: 16px; }
-  .form-group label { display: block; color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 500; margin-bottom: 8px; }
+  .login-logo { text-align:center; margin-bottom:32px; }
+  .login-logo .brand { font-size:22px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .login-logo .sub { font-size:11px; color:rgba(255,255,255,0.5); letter-spacing:2px; text-transform:uppercase; margin-top:4px; }
+  .login-card h1 { color:var(--white); font-size:26px; font-weight:700; text-align:center; margin-bottom:8px; }
+  .login-card p.sub { color:rgba(255,255,255,0.5); font-size:13px; text-align:center; margin-bottom:32px; }
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; color:rgba(255,255,255,0.6); font-size:12px; font-weight:500; margin-bottom:8px; }
   .form-group input {
-    width: 100%; padding: 14px 16px; border-radius: 10px;
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
-    color: var(--white); font-family: 'Poppins', sans-serif; font-size: 14px;
-    outline: none; transition: border-color .2s;
+    width:100%; padding:14px 16px; border-radius:10px;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+    color:var(--white); font-family:'Poppins',sans-serif; font-size:14px; outline:none;
   }
-  .form-group input:focus { border-color: var(--cyan); }
+  .form-group input::placeholder { color:rgba(255,255,255,0.35); }
+  .form-group input:focus { border-color:var(--cyan); }
   .btn-login {
-    width: 100%; padding: 15px; border: none; border-radius: 10px;
-    background: var(--gradient); color: var(--white); font-family: 'Poppins', sans-serif;
-    font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 8px;
-    transition: opacity .2s;
+    width:100%; padding:15px; border:none; border-radius:10px;
+    background:var(--gradient); color:white; font-family:'Poppins',sans-serif;
+    font-size:15px; font-weight:700; cursor:pointer; margin-top:8px;
   }
-  .btn-login:hover { opacity: .9; }
-  .login-error { color: #ff6b6b; font-size: 13px; text-align: center; margin-top: 12px; display: none; }
+  .login-error { color:#ff8888; font-size:13px; text-align:center; margin-top:12px; display:none; }
 
   /* ── APP LAYOUT ── */
-  #app { display: none; }
+  #app { display:none; position:relative; z-index:2; }
+
   .sidebar {
-    position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
-    background: var(--black); display: flex; flex-direction: column; z-index: 100; overflow-y: auto;
+    position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+    background:rgba(10,10,10,0.92); backdrop-filter:blur(20px);
+    border-right:1px solid rgba(255,255,255,0.06);
+    display:flex; flex-direction:column; z-index:200;
+    transition:transform 0.3s ease; overflow-y:auto; overflow-x:hidden;
   }
-  .sidebar-logo {
-    padding: 28px 24px 20px; display: flex; align-items: center; gap: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+  .sidebar.collapsed { transform:translateX(-100%); }
+
+  .sidebar-logo { padding:24px 20px 18px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .brand-name { font-size:18px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .brand-sub { font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:1.5px; text-transform:uppercase; }
+
+  .sidebar-user { padding:16px 20px; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .sidebar-user-btn {
+    display:flex; align-items:center; gap:12px; width:100%;
+    background:none; border:none; cursor:pointer; padding:8px 10px; border-radius:10px;
+    transition:background .2s; text-align:left;
   }
-  .sidebar-logo svg { width: 36px; height: 36px; flex-shrink: 0; }
-  .sidebar-logo .brand-name { font-size: 18px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .sidebar-logo .brand-sub { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; }
-  .sidebar-user { padding: 20px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 15px; flex-shrink: 0; }
-  .sidebar-user .user-name { font-size: 13px; font-weight: 600; color: var(--white); }
-  .sidebar-user .user-role { font-size: 11px; color: var(--gray); }
-  .sidebar-nav { flex: 1; padding: 16px 12px; }
+  .sidebar-user-btn:hover { background:rgba(255,255,255,0.06); }
+  .avatar {
+    width:42px; height:42px; border-radius:50%; background:var(--gradient);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:white; font-size:15px; flex-shrink:0; overflow:hidden;
+  }
+  .avatar img { width:100%; height:100%; object-fit:cover; }
+  .user-name { font-size:13px; font-weight:600; color:var(--white); }
+  .user-role { font-size:11px; color:var(--gray); }
+  .user-edit-hint { font-size:10px; color:var(--cyan); margin-top:2px; opacity:.7; }
+
+  .sidebar-nav { flex:1; padding:14px 10px; }
   .nav-item {
-    display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px;
-    color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 500; cursor: pointer;
-    transition: all .2s; margin-bottom: 4px; text-decoration: none;
-    border-left: 3px solid transparent;
+    display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:10px;
+    color:rgba(255,255,255,0.5); font-size:13px; font-weight:500; cursor:pointer;
+    transition:all .2s; margin-bottom:3px; border-left:3px solid transparent;
   }
-  .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--white); }
-  .nav-item.active { border-left-color: var(--cyan); background: rgba(76,192,241,0.1); color: var(--white); }
-  .nav-item svg { width: 18px; height: 18px; flex-shrink: 0; }
-  .badge {
-    margin-left: auto; background: var(--gradient); color: white;
-    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
-  }
-  .sidebar-bottom { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .nav-item:hover { background:rgba(255,255,255,0.05); color:var(--white); }
+  .nav-item.active { border-left-color:var(--cyan); background:rgba(76,192,241,0.12); color:var(--white); }
+  .nav-item svg { width:18px; height:18px; flex-shrink:0; }
+  .nav-badge { margin-left:auto; background:var(--gradient); color:white; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; }
+
+  .sidebar-bottom { padding:14px 10px; border-top:1px solid rgba(255,255,255,0.06); }
   .btn-logout {
-    width: 100%; padding: 11px; border-radius: 10px; background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5);
-    font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer;
-    transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+    width:100%; padding:11px; border-radius:10px; background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08); color:rgba(255,255,255,0.4);
+    font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:8px; transition:all .2s;
   }
-  .btn-logout:hover { background: rgba(234,79,185,0.1); border-color: var(--magenta); color: var(--magenta); }
+  .btn-logout:hover { background:rgba(234,79,185,0.1); border-color:var(--magenta); color:var(--magenta); }
 
   /* ── MAIN ── */
-  .main { margin-left: 260px; min-height: 100vh; }
+  .main { margin-left:var(--sidebar-w); min-height:100vh; transition:margin-left .3s ease; }
+  .main.expanded { margin-left:0; }
+
   .topbar {
-    position: sticky; top: 0; z-index: 50; background: var(--white);
-    border-bottom: 1px solid rgba(0,0,0,0.07); padding: 0 32px;
-    height: 64px; display: flex; align-items: center; justify-content: space-between;
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,0.1); backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+    padding:0 28px; height:64px; display:flex; align-items:center; justify-content:space-between;
   }
-  .topbar-title { font-size: 17px; font-weight: 700; }
-  .topbar-right { display: flex; align-items: center; gap: 16px; }
-  .topbar-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 13px; cursor: pointer; }
-  .icon-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--gray); }
+  .topbar-left { display:flex; align-items:center; gap:14px; }
+  .toggle-btn {
+    width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; color:white; transition:background .2s; flex-shrink:0;
+  }
+  .toggle-btn:hover { background:rgba(76,192,241,0.2); }
+  .topbar-title { font-size:16px; font-weight:700; color:white; }
+  .topbar-right { display:flex; align-items:center; gap:12px; }
+  .topbar-avatar-btn {
+    width:38px; height:38px; border-radius:50%; background:var(--gradient);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:white; font-size:13px; cursor:pointer;
+    border:2px solid rgba(255,255,255,0.3); overflow:hidden;
+    transition:transform .2s; flex-shrink:0;
+  }
+  .topbar-avatar-btn:hover { transform:scale(1.08); }
+  .topbar-avatar-btn img { width:100%; height:100%; object-fit:cover; }
+  .icon-btn {
+    width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.1);
+    border:none; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; color:rgba(255,255,255,0.7);
+  }
 
-  .page { display: none; padding: 32px; }
-  .page.active { display: block; }
+  /* ── PAGES ── */
+  .page { display:none; padding:28px; }
+  .page.active { display:block; }
 
-  /* ── CARDS & UTILS ── */
-  .card { background: var(--white); border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 24px; }
-  .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px; }
-  .stat-card { background: var(--white); border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 20px 24px; }
-  .stat-label { font-size: 12px; color: var(--gray); font-weight: 500; text-transform: uppercase; letter-spacing: .5px; }
-  .stat-value { font-size: 32px; font-weight: 800; margin: 6px 0 2px; }
-  .stat-sub { font-size: 12px; color: var(--gray); }
-  .section-title { font-size: 17px; font-weight: 700; margin-bottom: 16px; }
+  /* ── GLASS CARD ── */
+  .card {
+    background:var(--glass); backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border); border-radius:16px; padding:24px;
+    box-shadow:0 4px 24px rgba(0,0,0,0.12);
+  }
+  .section-title { font-size:17px; font-weight:700; margin-bottom:16px; color:var(--black); }
+
+  /* ── STATS ROW ── */
+  .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+  .stat-card {
+    background:var(--glass); backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border); border-radius:14px; padding:20px 22px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.1);
+  }
+  .stat-card.clickable { cursor:pointer; transition:transform .2s, box-shadow .2s; }
+  .stat-card.clickable:hover { transform:translateY(-3px); box-shadow:0 8px 32px rgba(76,192,241,0.2); }
+  .stat-label { font-size:11px; color:var(--gray); font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
+  .stat-value { font-size:30px; font-weight:800; margin:6px 0 2px; }
+  .stat-sub { font-size:12px; color:var(--gray); }
+  .stat-icon { width:40px; height:40px; border-radius:10px; background:var(--gradient); display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
 
   /* ── HOME ── */
   .hero-banner {
-    background: var(--black); border-radius: 16px; padding: 40px 48px; margin-bottom: 28px;
-    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 24px 24px; position: relative; overflow: hidden;
+    border-radius:20px; padding:44px 48px; margin-bottom:24px;
+    position:relative; overflow:hidden; min-height:280px;
+    background: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1400&q=80') center/cover;
   }
-  .hero-banner .hero-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
-  .hero-banner h2 { font-size: 32px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; margin-bottom: 14px; }
-  .hero-banner p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.7; max-width: 500px; margin-bottom: 24px; }
-  .hero-quote { border-left: 3px solid; border-image: var(--gradient) 1; padding: 16px 20px; background: rgba(255,255,255,0.04); border-radius: 0 10px 10px 0; }
-  .hero-quote p { color: rgba(255,255,255,0.8); font-size: 14px; font-style: italic; line-height: 1.6; }
-  .hero-quote cite { color: var(--gray); font-size: 12px; margin-top: 8px; display: block; }
+  .hero-banner::before {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(30,10,50,0.75) 100%);
+  }
+  .hero-banner > * { position:relative; z-index:1; }
+  .hero-label { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:12px; }
+  .hero-banner h2 { font-size:34px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1.2; margin-bottom:14px; }
+  .hero-banner p { color:rgba(255,255,255,0.7); font-size:14px; line-height:1.7; max-width:520px; margin-bottom:24px; }
+  .hero-quote {
+    border-left:3px solid var(--cyan); padding:16px 20px;
+    background:rgba(255,255,255,0.06); border-radius:0 10px 10px 0;
+    backdrop-filter:blur(10px); max-width:560px;
+  }
+  .hero-quote p { color:rgba(255,255,255,0.85); font-size:14px; font-style:italic; line-height:1.6; }
+  .hero-quote-sig { display:flex; align-items:center; gap:10px; margin-top:10px; }
+  .improve-logo-sig { display:flex; align-items:center; gap:6px; }
+  .improve-logo-sig .sig-text { font-size:12px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .improve-logo-sig .sig-sub { font-size:10px; color:rgba(255,255,255,0.4); }
 
-  .next-modules { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-  .next-card { background: var(--white); border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 20px; }
-  .next-card-label { font-size: 11px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
-  .next-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 12px; line-height: 1.4; }
-  .progress-bar-wrap { background: var(--bg); border-radius: 4px; height: 6px; overflow: hidden; }
-  .progress-bar { height: 100%; background: var(--gradient); border-radius: 4px; transition: width .5s; }
+  .quick-nav { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
+  .quick-card {
+    background:var(--glass); backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border); border-radius:14px; padding:20px;
+    cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:14px;
+    box-shadow:0 4px 16px rgba(0,0,0,0.08);
+  }
+  .quick-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(76,192,241,0.18); border-color:var(--cyan); }
+  .quick-card-icon { width:44px; height:44px; border-radius:12px; background:var(--gradient); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .quick-card h4 { font-size:14px; font-weight:700; margin-bottom:3px; }
+  .quick-card p { font-size:12px; color:var(--gray); }
+
+  .next-modules { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .next-card { background:var(--glass); backdrop-filter:blur(16px); border:1px solid var(--glass-border); border-radius:14px; padding:20px; box-shadow:0 4px 16px rgba(0,0,0,0.08); }
+  .next-card-label { font-size:11px; font-weight:600; color:var(--gray); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+  .next-card h4 { font-size:14px; font-weight:700; margin-bottom:12px; line-height:1.4; }
+  .progress-bar-wrap { background:rgba(0,0,0,0.08); border-radius:4px; height:6px; overflow:hidden; }
+  .progress-bar { height:100%; background:var(--gradient); border-radius:4px; transition:width .5s; }
 
   /* ── MODULES ── */
-  .filter-pills { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .filter-pills { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
   .pill {
-    padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer;
-    border: 1.5px solid rgba(0,0,0,0.1); background: var(--white); color: var(--gray);
-    transition: all .2s;
+    padding:8px 18px; border-radius:20px; font-size:13px; font-weight:600; cursor:pointer;
+    border:1.5px solid rgba(255,255,255,0.25); background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(10px); color:rgba(255,255,255,0.7); transition:all .2s;
   }
-  .pill.active { background: var(--gradient); border-color: transparent; color: var(--white); }
+  .pill:hover { background:rgba(255,255,255,0.2); color:white; }
+  .pill.active { background:var(--gradient); border-color:transparent; color:white; }
+
   .module-card {
-    background: var(--white); border: 1px solid rgba(0,0,0,0.07); border-radius: 12px;
-    margin-bottom: 12px; overflow: hidden; transition: box-shadow .2s;
+    background:var(--glass); backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border); border-radius:14px;
+    margin-bottom:10px; overflow:hidden; transition:box-shadow .2s;
+    box-shadow:0 2px 12px rgba(0,0,0,0.08);
   }
-  .module-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  .module-header { padding: 18px 24px; display: flex; align-items: center; gap: 16px; cursor: pointer; }
-  .mod-number {
-    width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 16px; flex-shrink: 0;
-  }
-  .mod-number.unlocked { background: var(--gradient); color: var(--white); }
-  .mod-number.locked { background: rgba(0,0,0,0.06); color: var(--gray); }
-  .mod-info { flex: 1; min-width: 0; }
-  .mod-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .mod-meta { display: flex; gap: 8px; flex-wrap: wrap; }
-  .chip { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
-  .chip-month { background: rgba(0,0,0,0.05); color: var(--gray); }
-  .chip-video { background: rgba(76,192,241,0.15); color: var(--cyan); }
-  .chip-text { background: rgba(181,190,234,0.25); color: #6b7ab8; }
-  .chip-practice { background: rgba(234,79,185,0.15); color: var(--magenta); }
-  .mod-status { flex-shrink: 0; }
-  .status-badge { font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 20px; }
-  .status-unlocked { background: rgba(76,192,241,0.15); color: var(--cyan); }
-  .status-locked { background: rgba(0,0,0,0.05); color: var(--gray); }
-  .mod-chevron { flex-shrink: 0; color: var(--gray); transition: transform .2s; }
-  .module-card.open .mod-chevron { transform: rotate(180deg); }
-  .module-body { display: none; padding: 0 24px 20px; border-top: 1px solid rgba(0,0,0,0.05); }
-  .module-card.open .module-body { display: block; }
-  .module-body p { font-size: 14px; color: #444; line-height: 1.7; margin: 16px 0 12px; }
-  .module-body .practice-box { background: rgba(234,79,185,0.06); border: 1px solid rgba(234,79,185,0.2); border-radius: 10px; padding: 16px; margin: 12px 0; }
-  .module-body .practice-box strong { font-size: 12px; color: var(--magenta); text-transform: uppercase; letter-spacing: .5px; }
-  .module-body .practice-box p { margin: 8px 0 0; font-size: 13px; color: #555; }
-  .module-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
-  .btn-action {
-    padding: 10px 20px; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
-    cursor: pointer; border: none; transition: opacity .2s;
-  }
-  .btn-gradient { background: var(--gradient); color: white; }
-  .btn-outline { background: transparent; border: 1.5px solid rgba(0,0,0,0.12); color: var(--gray); }
-  .btn-action:hover { opacity: .85; }
-  .mod-video-wrap { margin-top: 16px; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
-  .mod-video-wrap iframe { width: 100%; height: 100%; border: none; }
-  .locked-msg { text-align: center; padding: 24px; color: var(--gray); font-size: 14px; }
-  .locked-msg svg { display: block; margin: 0 auto 10px; opacity: .4; }
+  .module-card:hover { box-shadow:0 6px 24px rgba(0,0,0,0.15); }
+  .module-header { padding:16px 20px; display:flex; align-items:center; gap:14px; cursor:pointer; }
+  .mod-number { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:16px; flex-shrink:0; }
+  .mod-number.unlocked { background:var(--gradient); color:white; }
+  .mod-number.locked { background:rgba(0,0,0,0.08); color:var(--gray); }
+  .mod-info { flex:1; min-width:0; }
+  .mod-title { font-size:14px; font-weight:700; margin-bottom:4px; }
+  .mod-meta { display:flex; gap:6px; flex-wrap:wrap; }
+  .chip { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; }
+  .chip-month { background:rgba(0,0,0,0.06); color:var(--gray); }
+  .chip-video { background:rgba(76,192,241,0.15); color:var(--cyan); }
+  .chip-text { background:rgba(181,190,234,0.25); color:#6b7ab8; }
+  .chip-practice { background:rgba(234,79,185,0.15); color:var(--magenta); }
+  .status-badge { font-size:11px; font-weight:700; padding:5px 12px; border-radius:20px; }
+  .status-unlocked { background:rgba(76,192,241,0.15); color:var(--cyan); }
+  .status-locked { background:rgba(0,0,0,0.06); color:var(--gray); }
+  .mod-chevron { flex-shrink:0; color:var(--gray); transition:transform .2s; }
+  .module-card.open .mod-chevron { transform:rotate(180deg); }
+  .module-body { display:none; padding:0 20px 20px; border-top:1px solid rgba(0,0,0,0.06); }
+  .module-card.open .module-body { display:block; }
+
+  .month-banner { border-radius:12px; overflow:hidden; margin:16px 0 14px; height:140px; position:relative; }
+  .month-banner img { width:100%; height:100%; object-fit:cover; }
+  .month-banner::after { content:''; position:absolute; inset:0; background:linear-gradient(to right, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.1) 100%); }
+  .month-banner-label { position:absolute; bottom:12px; left:16px; z-index:1; }
+  .month-banner-label span { font-size:13px; font-weight:700; color:white; }
+  .month-banner-label p { font-size:11px; color:rgba(255,255,255,0.7); margin-top:2px; }
+
+  .module-body > p { font-size:14px; color:#333; line-height:1.7; margin:12px 0; }
+  .practice-box { background:rgba(234,79,185,0.06); border:1px solid rgba(234,79,185,0.2); border-radius:10px; padding:16px; margin:12px 0; }
+  .practice-box strong { font-size:11px; color:var(--magenta); text-transform:uppercase; letter-spacing:.5px; }
+  .practice-box p { margin:8px 0 0; font-size:13px; color:#555; }
+  .module-actions { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+  .btn-action { padding:10px 20px; border-radius:10px; font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; cursor:pointer; border:none; transition:opacity .2s; }
+  .btn-gradient { background:var(--gradient); color:white; }
+  .btn-outline { background:transparent; border:1.5px solid rgba(0,0,0,0.12); color:var(--gray); }
+  .btn-action:hover { opacity:.85; }
+  .mod-video-wrap { margin-top:14px; border-radius:10px; overflow:hidden; aspect-ratio:16/9; }
+  .mod-video-wrap iframe { width:100%; height:100%; border:none; }
+  .locked-msg { text-align:center; padding:24px; color:var(--gray); font-size:14px; }
 
   /* ── UPLOAD ── */
   .upload-zone {
-    border: 2px dashed var(--cyan); border-radius: 16px; padding: 48px 24px; text-align: center;
-    background: rgba(76,192,241,0.03); cursor: pointer; transition: background .2s; margin-bottom: 24px;
+    border:2px dashed var(--cyan); border-radius:16px; padding:44px 24px; text-align:center;
+    background:rgba(76,192,241,0.04); backdrop-filter:blur(10px);
+    cursor:pointer; transition:background .2s; margin-bottom:20px;
   }
-  .upload-zone:hover, .upload-zone.drag-over { background: rgba(76,192,241,0.08); }
-  .upload-zone .upload-icon { width: 60px; height: 60px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-  .upload-zone h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .upload-zone p { color: var(--gray); font-size: 13px; }
-  .upload-zone a { color: var(--cyan); font-weight: 600; }
-  #file-input { display: none; }
-  .upload-form { background: var(--white); border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 28px; margin-bottom: 28px; }
-  .form-row { margin-bottom: 18px; }
-  .form-row label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .upload-zone:hover, .upload-zone.drag-over { background:rgba(76,192,241,0.1); }
+  .upload-zone .upload-icon { width:56px; height:56px; background:var(--gradient); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+  .upload-zone h3 { font-size:16px; font-weight:700; margin-bottom:8px; }
+  .upload-zone p { color:var(--gray); font-size:13px; }
+  .upload-zone a { color:var(--cyan); font-weight:600; }
+  #file-input { display:none; }
+  .upload-form { background:var(--glass); backdrop-filter:blur(16px); border:1px solid var(--glass-border); border-radius:14px; padding:24px; margin-bottom:24px; }
+  .form-row { margin-bottom:16px; }
+  .form-row label { display:block; font-size:13px; font-weight:600; margin-bottom:8px; }
   .form-row select, .form-row input[type=text], .form-row textarea {
-    width: 100%; padding: 12px 14px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 10px;
-    font-family: 'Poppins', sans-serif; font-size: 14px; background: var(--bg); outline: none;
-    transition: border-color .2s;
+    width:100%; padding:12px 14px; border:1.5px solid rgba(0,0,0,0.1); border-radius:10px;
+    font-family:'Poppins',sans-serif; font-size:14px; background:rgba(255,255,255,0.7); outline:none; transition:border-color .2s;
   }
-  .form-row select:focus, .form-row input:focus, .form-row textarea:focus { border-color: var(--cyan); }
-  .form-row textarea { resize: vertical; min-height: 90px; }
-  .selected-file { background: rgba(76,192,241,0.08); border: 1px solid rgba(76,192,241,0.3); border-radius: 10px; padding: 12px 16px; font-size: 13px; margin-bottom: 12px; display: none; }
-  .submissions-list { background: var(--white); border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; overflow: hidden; }
-  .submission-row { display: flex; align-items: center; gap: 16px; padding: 16px 24px; border-bottom: 1px solid rgba(0,0,0,0.05); }
-  .submission-row:last-child { border-bottom: none; }
-  .sub-thumb { width: 56px; height: 40px; background: var(--bg); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .sub-info { flex: 1; min-width: 0; }
-  .sub-name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sub-meta { font-size: 12px; color: var(--gray); margin-top: 2px; }
-  .sub-status { flex-shrink: 0; }
-  .status-pending { background: rgba(234,79,185,0.15); color: var(--magenta); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
-  .status-reviewed { background: rgba(76,192,241,0.15); color: var(--cyan); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
-  .sub-feedback { font-size: 12px; color: #555; margin-top: 6px; font-style: italic; padding: 8px 12px; background: var(--bg); border-radius: 8px; }
+  .form-row select:focus, .form-row input:focus, .form-row textarea:focus { border-color:var(--cyan); }
+  .form-row textarea { resize:vertical; min-height:80px; }
+  .selected-file { background:rgba(76,192,241,0.08); border:1px solid rgba(76,192,241,0.3); border-radius:10px; padding:12px 16px; font-size:13px; margin-bottom:12px; display:none; }
+  .submissions-list { background:var(--glass); backdrop-filter:blur(16px); border:1px solid var(--glass-border); border-radius:14px; overflow:hidden; }
+  .submission-row { display:flex; align-items:center; gap:14px; padding:14px 20px; border-bottom:1px solid rgba(0,0,0,0.05); }
+  .submission-row:last-child { border-bottom:none; }
+  .sub-thumb { width:52px; height:38px; background:rgba(0,0,0,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .sub-info { flex:1; min-width:0; }
+  .sub-name { font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .sub-meta { font-size:12px; color:var(--gray); margin-top:2px; }
+  .status-pending { background:rgba(234,79,185,0.15); color:var(--magenta); font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; }
+  .status-reviewed { background:rgba(76,192,241,0.15); color:var(--cyan); font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; }
+  .sub-feedback { font-size:12px; color:#555; margin-top:6px; font-style:italic; padding:8px 12px; background:rgba(76,192,241,0.06); border-radius:8px; }
 
   /* ── PROGRESS ── */
-  .timeline { padding: 8px 0; }
-  .tl-item { display: flex; gap: 16px; margin-bottom: 8px; }
-  .tl-dot-col { display: flex; flex-direction: column; align-items: center; }
-  .tl-dot { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
-  .tl-dot.done { background: var(--gradient); color: white; }
-  .tl-dot.current { background: transparent; border: 2px solid var(--magenta); color: var(--magenta); }
-  .tl-dot.pending { background: rgba(0,0,0,0.06); color: var(--gray); }
-  .tl-line { width: 2px; flex: 1; background: rgba(0,0,0,0.06); margin: 4px 0; }
-  .tl-content { padding-top: 4px; flex: 1; min-width: 0; }
-  .tl-title { font-size: 13px; font-weight: 600; }
-  .tl-sub { font-size: 12px; color: var(--gray); }
+  .timeline { padding:4px 0; }
+  .tl-item { display:flex; gap:14px; margin-bottom:6px; }
+  .tl-dot-col { display:flex; flex-direction:column; align-items:center; }
+  .tl-dot { width:28px; height:28px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+  .tl-dot.done { background:var(--gradient); color:white; }
+  .tl-dot.current { background:transparent; border:2px solid var(--magenta); color:var(--magenta); }
+  .tl-dot.pending { background:rgba(0,0,0,0.07); color:var(--gray); }
+  .tl-line { width:2px; flex:1; background:rgba(0,0,0,0.07); margin:3px 0; }
+  .tl-content { padding-top:4px; flex:1; }
+  .tl-title { font-size:13px; font-weight:600; }
+  .tl-sub { font-size:12px; color:var(--gray); }
 
   /* ── RESOURCES ── */
-  .resource-row { display: flex; align-items: center; gap: 16px; padding: 16px 24px; border-bottom: 1px solid rgba(0,0,0,0.05); }
-  .resource-row:last-child { border-bottom: none; }
-  .file-type-badge { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; }
-  .badge-pdf { background: rgba(234,79,185,0.12); color: var(--magenta); }
-  .badge-doc { background: rgba(76,192,241,0.12); color: var(--cyan); }
-  .badge-xls { background: rgba(76,192,185,0.12); color: #2da870; }
-  .resource-name { flex: 1; font-size: 14px; font-weight: 600; }
-  .btn-download {
-    padding: 8px 18px; border-radius: 10px; background: var(--gradient); color: white;
-    font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700;
-    border: none; cursor: pointer; text-decoration: none; display: inline-block;
-  }
+  .resource-row { display:flex; align-items:center; gap:14px; padding:14px 20px; border-bottom:1px solid rgba(0,0,0,0.05); }
+  .resource-row:last-child { border-bottom:none; }
+  .file-type-badge { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; flex-shrink:0; }
+  .badge-pdf { background:rgba(234,79,185,0.12); color:var(--magenta); }
+  .badge-doc { background:rgba(76,192,241,0.12); color:var(--cyan); }
+  .badge-xls { background:rgba(76,192,185,0.12); color:#2da870; }
+  .resource-name { flex:1; font-size:14px; font-weight:600; }
+  .btn-download { padding:8px 18px; border-radius:10px; background:var(--gradient); color:white; font-family:'Poppins',sans-serif; font-size:12px; font-weight:700; border:none; cursor:pointer; text-decoration:none; display:inline-block; }
 
-  /* ── EMPTY ── */
-  .empty-state { text-align: center; padding: 48px 24px; color: var(--gray); }
-  .empty-state svg { opacity: .3; margin-bottom: 16px; }
-  .empty-state p { font-size: 14px; }
-
-  /* ── TOAST ── */
-  .toast {
-    position: fixed; bottom: 28px; right: 28px; background: var(--black); color: var(--white);
-    padding: 14px 22px; border-radius: 12px; font-size: 14px; font-weight: 500;
-    z-index: 9999; opacity: 0; transform: translateY(10px); transition: all .3s;
-    pointer-events: none;
+  /* ── PROFILE PAGE ── */
+  .profile-hero { display:flex; align-items:center; gap:28px; margin-bottom:28px; padding:28px; background:var(--glass); backdrop-filter:blur(16px); border:1px solid var(--glass-border); border-radius:20px; }
+  .profile-photo-wrap { position:relative; flex-shrink:0; }
+  .profile-photo {
+    width:100px; height:100px; border-radius:50%; background:var(--gradient);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:32px; color:white; overflow:hidden;
+    border:4px solid white; box-shadow:0 4px 20px rgba(0,0,0,0.15);
   }
-  .toast.show { opacity: 1; transform: translateY(0); }
-  .toast.success { border-left: 3px solid var(--cyan); }
-  .toast.error { border-left: 3px solid var(--magenta); }
+  .profile-photo img { width:100%; height:100%; object-fit:cover; }
+  .profile-photo-edit {
+    position:absolute; bottom:0; right:0; width:32px; height:32px;
+    border-radius:50%; background:var(--gradient); border:3px solid white;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  #profile-photo-input { display:none; }
+  .profile-name { font-size:22px; font-weight:800; margin-bottom:4px; }
+  .profile-role-badge { display:inline-block; padding:4px 14px; border-radius:20px; background:var(--gradient); color:white; font-size:11px; font-weight:700; margin-bottom:8px; }
+  .profile-profession { font-size:14px; color:var(--gray); }
+
+  .profile-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .profile-form-full { grid-column:1/-1; }
+  .profile-form-group { display:flex; flex-direction:column; gap:8px; }
+  .profile-form-group label { font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:.5px; }
+  .profile-form-group input {
+    padding:12px 14px; border:1.5px solid rgba(0,0,0,0.1); border-radius:10px;
+    font-family:'Poppins',sans-serif; font-size:14px; background:rgba(255,255,255,0.7); outline:none;
+  }
+  .profile-form-group input:focus { border-color:var(--cyan); }
+
+  /* ── EMPTY & TOAST ── */
+  .empty-state { text-align:center; padding:48px 24px; color:var(--gray); }
+  .empty-state p { font-size:14px; }
+  .toast { position:fixed; bottom:28px; right:28px; background:rgba(10,10,10,0.95); backdrop-filter:blur(10px); color:white; padding:14px 22px; border-radius:12px; font-size:14px; font-weight:500; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+  .toast.show { opacity:1; transform:translateY(0); }
+  .toast.success { border-left:3px solid var(--cyan); }
+  .toast.error { border-left:3px solid var(--magenta); }
 </style>
 </head>
 <body>
 
-<!-- ── LOGIN ──────────────────────────────── -->
+<div class="bg-image"></div>
+<div class="bg-overlay"></div>
+
+<!-- ── LOGIN ── -->
 <div id="login-screen">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
   <div class="login-card">
     <div class="login-logo">
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="48" height="48" rx="14" fill="url(#lg)"/>
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect width="48" height="48" rx="14" fill="url(#llg)"/>
         <path d="M10 16h28M10 24h20M10 32h24" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-        <defs><linearGradient id="lg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#4cc0f1"/><stop offset=".5" stop-color="#b5beea"/><stop offset="1" stop-color="#ea4fb9"/>
-        </linearGradient></defs>
+        <defs><linearGradient id="llg" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#4cc0f1"/><stop offset=".5" stop-color="#b5beea"/><stop offset="1" stop-color="#ea4fb9"/></linearGradient></defs>
       </svg>
       <div class="brand">IMPROVE</div>
       <div class="sub">Ingles IMPROVE Language School</div>
     </div>
     <h1>Bienvenido</h1>
     <p class="sub">Accedé a tu programa de inglés profesional</p>
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" id="login-email" placeholder="tu@email.com" />
-    </div>
-    <div class="form-group">
-      <label>Contraseña</label>
-      <input type="password" id="login-pass" placeholder="••••••••" />
-    </div>
+    <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="tu@email.com"/></div>
+    <div class="form-group"><label>Contraseña</label><input type="password" id="login-pass" placeholder="••••••••"/></div>
     <button class="btn-login" onclick="doLogin()">Ingresar</button>
     <div class="login-error" id="login-error"></div>
   </div>
 </div>
 
-<!-- ── APP ───────────────────────────────── -->
+<!-- ── APP ── -->
 <div id="app">
-  <aside class="sidebar">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
         <rect width="36" height="36" rx="10" fill="url(#slg)"/>
         <path d="M8 12h20M8 18h14M8 24h17" stroke="white" stroke-width="2" stroke-linecap="round"/>
-        <defs><linearGradient id="slg" x1="0" y1="0" x2="36" y2="36">
-          <stop stop-color="#4cc0f1"/><stop offset=".5" stop-color="#b5beea"/><stop offset="1" stop-color="#ea4fb9"/>
-        </linearGradient></defs>
+        <defs><linearGradient id="slg" x1="0" y1="0" x2="36" y2="36"><stop stop-color="#4cc0f1"/><stop offset=".5" stop-color="#b5beea"/><stop offset="1" stop-color="#ea4fb9"/></linearGradient></defs>
       </svg>
       <div>
         <div class="brand-name">IMPROVE</div>
@@ -326,32 +414,41 @@
       </div>
     </div>
     <div class="sidebar-user">
-      <div class="avatar" id="sidebar-avatar">--</div>
-      <div>
-        <div class="user-name" id="sidebar-name">...</div>
-        <div class="user-role">High-Value Professional</div>
-      </div>
+      <button class="sidebar-user-btn" onclick="navToProfile()">
+        <div class="avatar" id="sidebar-avatar-wrap">
+          <span id="sidebar-initials">--</span>
+        </div>
+        <div>
+          <div class="user-name" id="sidebar-name">...</div>
+          <div class="user-role">High-Value Professional</div>
+          <div class="user-edit-hint">Editar perfil →</div>
+        </div>
+      </button>
     </div>
     <nav class="sidebar-nav">
-      <div class="nav-item active" onclick="showPage('home',this)">
-        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h4a1 1 0 001-1v-3h2v3a1 1 0 001 1h4a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
+      <div class="nav-item active" id="nav-home" onclick="showPage('home',this)">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h4v-4h2v4h4a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
         Inicio
       </div>
-      <div class="nav-item" onclick="showPage('modules',this)">
+      <div class="nav-item" id="nav-profile" onclick="showPage('profile',this)">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+        Mi perfil
+      </div>
+      <div class="nav-item" id="nav-modules" onclick="showPage('modules',this)">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.468 0 2.834.41 4 1.125V4.804zM10 14c1.166-.715 2.532-1.125 4-1.125a7.97 7.97 0 013.5.804v-10A7.969 7.969 0 0014.5 4c-1.255 0-2.443.29-3.5.804V14z"/></svg>
-        Módulos del programa
-        <span class="badge" id="modules-badge">24</span>
+        Programa
+        <span class="nav-badge" id="modules-badge">24</span>
       </div>
-      <div class="nav-item" onclick="showPage('upload',this)">
-        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
-        Subir prácticas
-        <span class="badge" id="subs-badge">0</span>
-      </div>
-      <div class="nav-item" onclick="showPage('progress',this)">
+      <div class="nav-item" id="nav-progress" onclick="showPage('progress',this)">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
         Mi progreso
       </div>
-      <div class="nav-item" onclick="showPage('resources',this)">
+      <div class="nav-item" id="nav-upload" onclick="showPage('upload',this)">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+        Prácticas subidas
+        <span class="nav-badge" id="subs-badge">0</span>
+      </div>
+      <div class="nav-item" id="nav-resources" onclick="showPage('resources',this)">
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"/></svg>
         Material de apoyo
       </div>
@@ -364,14 +461,22 @@
     </div>
   </aside>
 
-  <main class="main">
+  <!-- MAIN -->
+  <main class="main" id="main">
     <div class="topbar">
-      <div class="topbar-title" id="topbar-title">Inicio</div>
+      <div class="topbar-left">
+        <button class="toggle-btn" onclick="toggleSidebar()" title="Mostrar/ocultar menú">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="topbar-title" id="topbar-title">Inicio</div>
+      </div>
       <div class="topbar-right">
         <button class="icon-btn">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/></svg>
         </button>
-        <div class="topbar-avatar" id="topbar-avatar">--</div>
+        <button class="topbar-avatar-btn" id="topbar-avatar-btn" onclick="navToProfile()">
+          <span id="topbar-initials">--</span>
+        </button>
       </div>
     </div>
 
@@ -383,17 +488,109 @@
         <p>Transformá tu inglés en una ventaja competitiva real. 24 módulos diseñados para ejecutivos, consultores y profesionales de alto rendimiento.</p>
         <div class="hero-quote">
           <p>"Your language is your currency. Master it and the world negotiates with you, not around you."</p>
-          <cite>— Ingles IMPROVE</cite>
+          <div class="hero-quote-sig">
+            <div class="improve-logo-sig">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <rect width="36" height="36" rx="8" fill="url(#qslg)"/>
+                <path d="M8 12h20M8 18h14M8 24h17" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <defs><linearGradient id="qslg" x1="0" y1="0" x2="36" y2="36"><stop stop-color="#4cc0f1"/><stop offset=".5" stop-color="#b5beea"/><stop offset="1" stop-color="#ea4fb9"/></linearGradient></defs>
+              </svg>
+              <div>
+                <div class="sig-text">IMPROVE</div>
+                <div class="sig-sub">Ingles IMPROVE Language School</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="stats-row" id="home-stats">
-        <div class="stat-card"><div class="stat-label">Clases completadas</div><div class="stat-value" id="stat-done">—</div><div class="stat-sub">de 24 módulos</div></div>
-        <div class="stat-card"><div class="stat-label">Clases restantes</div><div class="stat-value" id="stat-left">—</div><div class="stat-sub">por completar</div></div>
-        <div class="stat-card"><div class="stat-label">Prácticas enviadas</div><div class="stat-value" id="stat-subs">—</div><div class="stat-sub">en total</div></div>
-        <div class="stat-card"><div class="stat-label">Progreso total</div><div class="stat-value" id="stat-pct">—</div><div class="stat-sub">del programa</div></div>
+        <div class="stat-card clickable" onclick="showPage('modules', document.getElementById('nav-modules'))">
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.468 0 2.834.41 4 1.125V4.804zM10 14c1.166-.715 2.532-1.125 4-1.125a7.97 7.97 0 013.5.804v-10A7.969 7.969 0 0014.5 4c-1.255 0-2.443.29-3.5.804V14z"/></svg></div>
+          <div class="stat-label">Clases disponibles</div>
+          <div class="stat-value" id="stat-done">—</div>
+          <div class="stat-sub">de 24 módulos</div>
+        </div>
+        <div class="stat-card clickable" onclick="showPage('progress', document.getElementById('nav-progress'))">
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg></div>
+          <div class="stat-label">Clases restantes</div>
+          <div class="stat-value" id="stat-left">—</div>
+          <div class="stat-sub">por completar</div>
+        </div>
+        <div class="stat-card clickable" onclick="showPage('upload', document.getElementById('nav-upload'))">
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg></div>
+          <div class="stat-label">Prácticas enviadas</div>
+          <div class="stat-value" id="stat-subs">—</div>
+          <div class="stat-sub">en total</div>
+        </div>
+        <div class="stat-card clickable" onclick="showPage('progress', document.getElementById('nav-progress'))">
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg></div>
+          <div class="stat-label">Progreso total</div>
+          <div class="stat-value" id="stat-pct">—</div>
+          <div class="stat-sub">del programa</div>
+        </div>
       </div>
-      <div class="section-title">Próximos módulos</div>
+
+      <div class="section-title" style="color:white;margin-bottom:14px">Acceso rápido</div>
+      <div class="quick-nav" style="margin-bottom:28px">
+        <div class="quick-card" onclick="showPage('modules', document.getElementById('nav-modules'))">
+          <div class="quick-card-icon"><svg width="22" height="22" viewBox="0 0 20 20" fill="white"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.468 0 2.834.41 4 1.125V4.804zM10 14c1.166-.715 2.532-1.125 4-1.125a7.97 7.97 0 013.5.804v-10A7.969 7.969 0 0014.5 4c-1.255 0-2.443.29-3.5.804V14z"/></svg></div>
+          <div><h4>Ver Programa</h4><p>Los 24 módulos del curso</p></div>
+        </div>
+        <div class="quick-card" onclick="showPage('upload', document.getElementById('nav-upload'))">
+          <div class="quick-card-icon"><svg width="22" height="22" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg></div>
+          <div><h4>Subir práctica</h4><p>Enviá tu video al profesor</p></div>
+        </div>
+        <div class="quick-card" onclick="showPage('resources', document.getElementById('nav-resources'))">
+          <div class="quick-card-icon"><svg width="22" height="22" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"/></svg></div>
+          <div><h4>Material de apoyo</h4><p>PDFs y recursos del curso</p></div>
+        </div>
+      </div>
+
+      <div class="section-title" style="color:white;margin-bottom:14px">Próximos módulos</div>
       <div class="next-modules" id="next-modules"></div>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="page-profile" class="page">
+      <div class="profile-hero">
+        <div class="profile-photo-wrap">
+          <div class="profile-photo" id="profile-photo-display">
+            <span id="profile-photo-initials">--</span>
+          </div>
+          <div class="profile-photo-edit" onclick="document.getElementById('profile-photo-input').click()" title="Cambiar foto">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="white"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+          </div>
+          <input type="file" id="profile-photo-input" accept="image/*" onchange="uploadProfilePhoto(this)">
+        </div>
+        <div>
+          <div class="profile-name" id="profile-display-name">...</div>
+          <div class="profile-role-badge" id="profile-display-role">Alumno</div>
+          <div class="profile-profession" id="profile-display-profession"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title">Editar información</div>
+        <div class="profile-form-grid">
+          <div class="profile-form-group">
+            <label>Nombre completo</label>
+            <input type="text" id="pf-name" placeholder="Tu nombre">
+          </div>
+          <div class="profile-form-group">
+            <label>Email</label>
+            <input type="text" id="pf-email" placeholder="tu@email.com">
+          </div>
+          <div class="profile-form-group">
+            <label>Edad</label>
+            <input type="text" id="pf-age" placeholder="Ej: 32">
+          </div>
+          <div class="profile-form-group">
+            <label>Profesión / Trabajo</label>
+            <input type="text" id="pf-profession" placeholder="Ej: Gerente de Ventas, Consultora...">
+          </div>
+        </div>
+        <button class="btn-action btn-gradient" style="margin-top:20px;padding:13px 32px;font-size:14px" onclick="saveProfile()">Guardar cambios</button>
+      </div>
     </div>
 
     <!-- MODULES -->
@@ -409,26 +606,24 @@
 
     <!-- UPLOAD -->
     <div id="page-upload" class="page">
-      <div class="card" style="margin-bottom:24px">
-        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">Cómo funciona</h3>
+      <div class="card" style="margin-bottom:20px">
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:8px">¿Cómo funciona?</h3>
         <p style="font-size:13px;color:var(--gray);line-height:1.7">Subí tu práctica en video (MP4, MOV, WebM) o en texto para los módulos que lo requieran. Tu profesor revisará la entrega y te dará feedback personalizado.</p>
       </div>
       <div class="upload-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
         <div class="upload-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
         </div>
         <h3>Arrastrá tu archivo aquí</h3>
         <p>o hacé click para <a>buscar en tu equipo</a></p>
-        <p style="margin-top:8px;font-size:12px">Máx. 500MB — MP4, MOV, WebM, PDF, DOC</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--gray)">Máx. 500MB — MP4, MOV, WebM, PDF, DOC</p>
       </div>
       <input type="file" id="file-input" onchange="fileSelected(this)">
       <div class="selected-file" id="selected-file-info"></div>
       <form class="upload-form" onsubmit="submitPractice(event)">
         <div class="form-row">
           <label>Módulo de práctica</label>
-          <select id="upload-module" required>
-            <option value="">Seleccioná un módulo...</option>
-          </select>
+          <select id="upload-module" required><option value="">Seleccioná un módulo...</option></select>
         </div>
         <div class="form-row">
           <label>Nombre de la práctica</label>
@@ -438,9 +633,9 @@
           <label>Notas para el profesor (opcional)</label>
           <textarea id="upload-notes" placeholder="Contale al profe en qué trabajaste o qué dudas tenés..."></textarea>
         </div>
-        <button type="submit" class="btn-action btn-gradient" style="padding:14px 32px;font-size:14px">Enviar práctica</button>
+        <button type="submit" class="btn-action btn-gradient" style="padding:13px 32px;font-size:14px">Enviar práctica</button>
       </form>
-      <div class="section-title">Mis prácticas enviadas</div>
+      <div class="section-title" style="color:white">Mis prácticas enviadas</div>
       <div class="submissions-list" id="subs-list">
         <div class="empty-state"><p>Todavía no enviaste ninguna práctica.</p></div>
       </div>
@@ -448,11 +643,11 @@
 
     <!-- PROGRESS -->
     <div id="page-progress" class="page">
-      <div class="stats-row" id="prog-stats">
+      <div class="stats-row">
         <div class="stat-card"><div class="stat-label">Completados</div><div class="stat-value" id="p-done">—</div><div class="stat-sub">de 24</div></div>
         <div class="stat-card"><div class="stat-label">Mes actual</div><div class="stat-value" id="p-month">—</div><div class="stat-sub">del programa</div></div>
-        <div class="stat-card"><div class="stat-label">Próxima clase</div><div class="stat-value" id="p-next" style="font-size:16px;line-height:1.3">—</div><div class="stat-sub"></div></div>
-        <div class="stat-card"><div class="stat-label">Prácticas enviadas</div><div class="stat-value" id="p-subs">—</div><div class="stat-sub">en total</div></div>
+        <div class="stat-card"><div class="stat-label">Próxima clase</div><div class="stat-value" id="p-next" style="font-size:14px;line-height:1.3">—</div></div>
+        <div class="stat-card"><div class="stat-label">Prácticas enviadas</div><div class="stat-value" id="p-subs">—</div></div>
       </div>
       <div class="card">
         <div class="section-title">Línea de tiempo del programa</div>
@@ -464,9 +659,7 @@
     <div id="page-resources" class="page">
       <div class="card">
         <div class="section-title">Material de apoyo</div>
-        <div id="resources-list">
-          <div class="empty-state"><p>No hay material disponible todavía.</p></div>
-        </div>
+        <div id="resources-list"><div class="empty-state"><p>No hay material disponible todavía.</p></div></div>
       </div>
     </div>
   </main>
@@ -480,11 +673,19 @@ let allModules = [];
 let mySubmissions = [];
 let currentFilter = 'all';
 let selectedFile = null;
+let sidebarOpen = true;
+
+const MONTH_IMAGES = {
+  1: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
+  2: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+  3: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=800&q=80',
+};
+const MONTH_LABELS = { 1:'Mes 1 — The Foundation', 2:'Mes 2 — Elite Candidate', 3:'Mes 3 — Neurosales' };
 
 // ── INIT ──────────────────────────────────
 async function init() {
   try {
-    const r = await fetch('/api/me', { credentials: 'include' });
+    const r = await fetch('/api/me', { credentials:'include' });
     if (!r.ok) { showLogin(); return; }
     currentUser = await r.json();
     if (currentUser.role === 'teacher') { window.location.href = '/admin'; return; }
@@ -500,11 +701,25 @@ function showLogin() {
 async function showApp() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  const initials = currentUser.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  document.getElementById('sidebar-avatar').textContent = initials;
-  document.getElementById('topbar-avatar').textContent = initials;
-  document.getElementById('sidebar-name').textContent = currentUser.name;
+  updateAvatarUI();
   await loadAll();
+}
+
+function updateAvatarUI(profileData) {
+  const data = profileData || currentUser;
+  const initials = (data.name || '').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('sidebar-name').textContent = data.name || '';
+  document.getElementById('sidebar-initials').textContent = initials;
+  document.getElementById('topbar-initials').textContent = initials;
+
+  if (data.photo) {
+    const imgHtml = `<img src="/profiles/${data.photo}" alt="foto">`;
+    document.getElementById('sidebar-avatar-wrap').innerHTML = imgHtml;
+    document.getElementById('topbar-avatar-btn').innerHTML = imgHtml;
+  } else {
+    document.getElementById('sidebar-avatar-wrap').innerHTML = `<span id="sidebar-initials">${initials}</span>`;
+    document.getElementById('topbar-avatar-btn').innerHTML = `<span id="topbar-initials">${initials}</span>`;
+  }
 }
 
 async function loadAll() {
@@ -513,14 +728,14 @@ async function loadAll() {
 }
 
 async function loadModules() {
-  const r = await fetch('/api/modules', { credentials: 'include' });
+  const r = await fetch('/api/modules', { credentials:'include' });
   allModules = await r.json();
   document.getElementById('modules-badge').textContent = allModules.length;
   renderModules();
 }
 
 async function loadSubmissions() {
-  const r = await fetch('/api/submissions/mine', { credentials: 'include' });
+  const r = await fetch('/api/submissions/mine', { credentials:'include' });
   mySubmissions = await r.json();
   document.getElementById('subs-badge').textContent = mySubmissions.length;
   renderSubmissions();
@@ -528,74 +743,126 @@ async function loadSubmissions() {
 }
 
 async function loadResources() {
-  const r = await fetch('/admin/api/resources', { credentials: 'include' });
+  const r = await fetch('/admin/api/resources', { credentials:'include' });
   if (!r.ok) return;
-  const res = await r.json();
-  renderResources(res);
+  renderResources(await r.json());
 }
 
-// ── LOGIN ──────────────────────────────────
+// ── AUTH ──────────────────────────────────
 async function doLogin() {
   const email = document.getElementById('login-email').value;
   const pass = document.getElementById('login-pass').value;
   const errEl = document.getElementById('login-error');
   errEl.style.display = 'none';
   try {
-    const r = await fetch('/api/auth/login', {
-      method: 'POST', credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password: pass })
-    });
+    const r = await fetch('/api/auth/login', { method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email, password: pass }) });
     const data = await r.json();
     if (!r.ok) { errEl.textContent = data.error; errEl.style.display = 'block'; return; }
     currentUser = data;
     if (data.role === 'teacher') { window.location.href = '/admin'; return; }
     await showApp();
-  } catch(e) { errEl.textContent = 'Error de conexión'; errEl.style.display = 'block'; }
+  } catch { errEl.textContent = 'Error de conexión'; errEl.style.display = 'block'; }
 }
-
 document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 document.getElementById('login-email').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 
 async function doLogout() {
-  await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
-  currentUser = null;
-  showLogin();
+  await fetch('/api/auth/logout', { method:'POST', credentials:'include' });
+  window.location.reload();
+}
+
+// ── SIDEBAR TOGGLE ────────────────────────
+function toggleSidebar() {
+  sidebarOpen = !sidebarOpen;
+  document.getElementById('sidebar').classList.toggle('collapsed', !sidebarOpen);
+  document.getElementById('main').classList.toggle('expanded', !sidebarOpen);
 }
 
 // ── NAVIGATION ────────────────────────────
-const pageTitles = { home:'Inicio', modules:'Módulos del programa', upload:'Subir prácticas', progress:'Mi progreso', resources:'Material de apoyo' };
+const pageTitles = { home:'Inicio', profile:'Mi perfil', modules:'Programa', progress:'Mi progreso', upload:'Prácticas subidas', resources:'Material de apoyo' };
 
 function showPage(name, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
-  el.classList.add('active');
-  document.getElementById('topbar-title').textContent = pageTitles[name];
+  if (el) el.classList.add('active');
+  document.getElementById('topbar-title').textContent = pageTitles[name] || name;
+  if (name === 'profile') loadProfile();
   if (name === 'upload') loadSubmissions();
   if (name === 'resources') loadResources();
+  if (name === 'progress') renderTimeline();
+}
+
+function navToProfile() {
+  showPage('profile', document.getElementById('nav-profile'));
+}
+
+// ── PROFILE ───────────────────────────────
+async function loadProfile() {
+  const r = await fetch('/api/profile', { credentials:'include' });
+  const data = await r.json();
+  document.getElementById('pf-name').value = data.name || '';
+  document.getElementById('pf-email').value = data.email || '';
+  document.getElementById('pf-age').value = data.age || '';
+  document.getElementById('pf-profession').value = data.profession || '';
+  document.getElementById('profile-display-name').textContent = data.name || '';
+  document.getElementById('profile-display-role').textContent = data.role === 'teacher' ? 'Profesor' : 'Alumno';
+  document.getElementById('profile-display-profession').textContent = data.profession || 'Completá tu perfil';
+
+  const photoEl = document.getElementById('profile-photo-display');
+  if (data.photo) {
+    photoEl.innerHTML = `<img src="/profiles/${data.photo}" alt="foto">`;
+  } else {
+    const initials = (data.name||'').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    photoEl.innerHTML = `<span>${initials}</span>`;
+  }
+}
+
+async function saveProfile() {
+  const body = {
+    name: document.getElementById('pf-name').value,
+    email: document.getElementById('pf-email').value,
+    age: document.getElementById('pf-age').value,
+    profession: document.getElementById('pf-profession').value,
+  };
+  const r = await fetch('/api/profile', { method:'PUT', credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  if (r.ok) {
+    showToast('Perfil actualizado', 'success');
+    currentUser.name = body.name;
+    updateAvatarUI(body);
+    loadProfile();
+  } else { showToast('Error al guardar', 'error'); }
+}
+
+async function uploadProfilePhoto(input) {
+  if (!input.files[0]) return;
+  const fd = new FormData();
+  fd.append('photo', input.files[0]);
+  const r = await fetch('/api/profile/photo', { method:'POST', credentials:'include', body: fd });
+  if (r.ok) {
+    const data = await r.json();
+    showToast('Foto actualizada', 'success');
+    const src = `/profiles/${data.filename}`;
+    document.getElementById('profile-photo-display').innerHTML = `<img src="${src}" alt="foto">`;
+    document.getElementById('sidebar-avatar-wrap').innerHTML = `<img src="${src}" alt="foto">`;
+    document.getElementById('topbar-avatar-btn').innerHTML = `<img src="${src}" alt="foto">`;
+  } else { showToast('Error al subir foto', 'error'); }
 }
 
 // ── HOME ──────────────────────────────────
 function renderHome() {
-  const unlocked = allModules.filter(m => m.is_unlocked);
-  const done = unlocked.length;
-  const left = 24 - done;
-  const pct = Math.round((done / 24) * 100);
-  document.getElementById('stat-done').textContent = done;
-  document.getElementById('stat-left').textContent = left;
+  const unlocked = allModules.filter(m => m.is_unlocked).length;
+  document.getElementById('stat-done').textContent = unlocked;
+  document.getElementById('stat-left').textContent = 24 - unlocked;
   document.getElementById('stat-subs').textContent = mySubmissions.length;
-  document.getElementById('stat-pct').textContent = pct + '%';
+  document.getElementById('stat-pct').textContent = Math.round((unlocked/24)*100) + '%';
 
-  // Next modules
-  const pending = allModules.filter(m => m.is_unlocked);
-  const next3 = pending.slice(-3);
-  const container = document.getElementById('next-modules');
-  container.innerHTML = next3.map(m => `
+  const next3 = allModules.filter(m => m.is_unlocked).slice(-3);
+  document.getElementById('next-modules').innerHTML = next3.map(m => `
     <div class="next-card">
       <div class="next-card-label">Módulo ${m.number}</div>
       <h4>${m.title}</h4>
-      <div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.min(100, (m.number/24)*100)}%"></div></div>
+      <div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.min(100,(m.number/24)*100)}%"></div></div>
     </div>
   `).join('');
   renderTimeline();
@@ -612,7 +879,7 @@ function filterModules(filter, el) {
 function renderModules() {
   const filtered = currentFilter === 'all' ? allModules : allModules.filter(m => m.month == currentFilter);
   const container = document.getElementById('modules-list');
-  if (!filtered.length) { container.innerHTML = '<div class="empty-state"><p>No hay módulos en esta categoría.</p></div>'; return; }
+  if (!filtered.length) { container.innerHTML = '<div class="empty-state" style="color:white"><p>No hay módulos en esta categoría.</p></div>'; return; }
   container.innerHTML = filtered.map(m => buildModuleCard(m)).join('');
 }
 
@@ -622,21 +889,27 @@ function buildModuleCard(m) {
   chips.push('<span class="chip chip-text">📄 Contenido</span>');
   if (m.practice_instructions) chips.push('<span class="chip chip-practice">🎯 Práctica</span>');
 
-  const monthLabel = ['','Mes 1 — Foundation','Mes 2 — Interview','Mes 3 — Neurosales'][m.month] || '';
-
   let body = '';
   if (m.is_unlocked) {
+    const img = MONTH_IMAGES[m.month];
     body = `
+      <div class="month-banner">
+        <img src="${img}" alt="Mes ${m.month}" loading="lazy">
+        <div class="month-banner-label">
+          <span>${MONTH_LABELS[m.month]}</span>
+          <p>Módulo ${m.number} de 24</p>
+        </div>
+      </div>
       <p>${m.description || ''}</p>
       ${m.practice_instructions ? `<div class="practice-box"><strong>🎯 Práctica</strong><p>${m.practice_instructions}</p></div>` : ''}
       ${m.video_url ? `<div class="mod-video-wrap"><iframe src="${toEmbedUrl(m.video_url)}" allowfullscreen></iframe></div>` : ''}
       ${m.pdf_filename ? `<div style="margin-top:12px"><a href="/module-content/${m.pdf_filename}" target="_blank" class="btn-action btn-outline" style="font-size:12px;padding:8px 16px;display:inline-block;text-decoration:none">📥 Descargar PDF del módulo</a></div>` : ''}
       <div class="module-actions">
-        ${m.practice_instructions ? `<button class="btn-action btn-gradient" onclick="event.stopPropagation();document.querySelector('.nav-item:nth-child(3)').click();preselectModule(${m.id})">Subir práctica</button>` : ''}
+        ${m.practice_instructions ? `<button class="btn-action btn-gradient" onclick="event.stopPropagation();showPage('upload',document.getElementById('nav-upload'));setTimeout(()=>document.getElementById('upload-module').value=${m.id},100)">Subir práctica</button>` : ''}
       </div>
     `;
   } else {
-    body = `<div class="locked-msg"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Este módulo se desbloquea cuando completés el anterior.</div>`;
+    body = `<div class="locked-msg"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Este módulo se desbloquea cuando el profesor lo habilite.</div>`;
   }
 
   return `
@@ -646,24 +919,19 @@ function buildModuleCard(m) {
         <div class="mod-info">
           <div class="mod-title">${m.title}</div>
           <div class="mod-meta">
-            <span class="chip chip-month">${monthLabel}</span>
+            <span class="chip chip-month">${MONTH_LABELS[m.month]}</span>
             ${chips.join('')}
           </div>
         </div>
-        <div class="mod-status">
-          <span class="status-badge ${m.is_unlocked ? 'status-unlocked' : 'status-locked'}">${m.is_unlocked ? 'Disponible' : 'Bloqueado'}</span>
-        </div>
-        <svg class="mod-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        <span class="status-badge ${m.is_unlocked ? 'status-unlocked' : 'status-locked'}">${m.is_unlocked ? 'Disponible' : 'Bloqueado'}</span>
+        <svg class="mod-chevron" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
       </div>
       <div class="module-body">${body}</div>
     </div>
   `;
 }
 
-function toggleModule(id) {
-  const card = document.getElementById('mc-' + id);
-  card.classList.toggle('open');
-}
+function toggleModule(id) { document.getElementById('mc-' + id).classList.toggle('open'); }
 
 function toEmbedUrl(url) {
   if (!url) return '';
@@ -671,20 +939,12 @@ function toEmbedUrl(url) {
   return m ? `https://www.youtube.com/embed/${m[1]}` : url;
 }
 
-function preselectModule(id) {
-  document.getElementById('upload-module').value = id;
-}
-
 // ── UPLOAD ───────────────────────────────
 const dropZone = document.getElementById('drop-zone');
 dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-dropZone.addEventListener('drop', e => {
-  e.preventDefault(); dropZone.classList.remove('drag-over');
-  if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
-});
-
-function fileSelected(input) { if (input.files[0]) setFile(input.files[0]); }
+dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); if(e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]); });
+function fileSelected(input) { if(input.files[0]) setFile(input.files[0]); }
 function setFile(file) {
   selectedFile = file;
   const info = document.getElementById('selected-file-info');
@@ -695,9 +955,8 @@ function setFile(file) {
 function renderUploadSelect() {
   const sel = document.getElementById('upload-module');
   const prev = sel.value;
-  const withPractice = allModules.filter(m => m.is_unlocked && m.practice_instructions);
   sel.innerHTML = '<option value="">Seleccioná un módulo...</option>' +
-    withPractice.map(m => `<option value="${m.id}">Módulo ${m.number} — ${m.title}</option>`).join('');
+    allModules.filter(m => m.is_unlocked && m.practice_instructions).map(m => `<option value="${m.id}">Módulo ${m.number} — ${m.title}</option>`).join('');
   if (prev) sel.value = prev;
 }
 
@@ -705,50 +964,40 @@ async function submitPractice(e) {
   e.preventDefault();
   if (!selectedFile) { showToast('Seleccioná un archivo primero', 'error'); return; }
   const moduleId = document.getElementById('upload-module').value;
-  const notes = document.getElementById('upload-notes').value;
   if (!moduleId) { showToast('Seleccioná un módulo', 'error'); return; }
-
   const fd = new FormData();
   fd.append('video', selectedFile);
   fd.append('module_id', moduleId);
-  fd.append('notes', notes);
-
+  fd.append('notes', document.getElementById('upload-notes').value);
   const btn = e.target.querySelector('button[type=submit]');
   btn.textContent = 'Subiendo...'; btn.disabled = true;
-
   try {
-    const r = await fetch('/api/submissions', { method: 'POST', credentials: 'include', body: fd });
+    const r = await fetch('/api/submissions', { method:'POST', credentials:'include', body: fd });
     const data = await r.json();
     if (!r.ok) { showToast(data.error, 'error'); } else {
-      showToast('Práctica enviada correctamente', 'success');
+      showToast('Práctica enviada', 'success');
       selectedFile = null;
       document.getElementById('selected-file-info').style.display = 'none';
       document.getElementById('file-input').value = '';
       document.getElementById('upload-notes').value = '';
       await loadSubmissions();
     }
-  } catch { showToast('Error al subir el archivo', 'error'); }
+  } catch { showToast('Error al subir', 'error'); }
   btn.textContent = 'Enviar práctica'; btn.disabled = false;
 }
 
 function renderSubmissions() {
   const list = document.getElementById('subs-list');
-  if (!mySubmissions.length) {
-    list.innerHTML = '<div class="empty-state"><p>Todavía no enviaste ninguna práctica.</p></div>'; return;
-  }
+  if (!mySubmissions.length) { list.innerHTML = '<div class="empty-state"><p>Todavía no enviaste ninguna práctica.</p></div>'; return; }
   list.innerHTML = mySubmissions.map(s => `
     <div class="submission-row">
-      <div class="sub-thumb">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gray)" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-      </div>
+      <div class="sub-thumb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray)" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
       <div class="sub-info">
         <div class="sub-name">${s.original_name}</div>
         <div class="sub-meta">Módulo ${s.module_number} — ${s.module_title} · ${new Date(s.created_at).toLocaleDateString('es-AR')}</div>
         ${s.feedback ? `<div class="sub-feedback">💬 ${s.feedback}</div>` : ''}
       </div>
-      <div class="sub-status">
-        <span class="${s.status === 'reviewed' ? 'status-reviewed' : 'status-pending'}">${s.status === 'reviewed' ? '✓ Revisado' : '⏳ Pendiente'}</span>
-      </div>
+      <span class="${s.status === 'reviewed' ? 'status-reviewed' : 'status-pending'}">${s.status === 'reviewed' ? '✓ Revisado' : '⏳ Pendiente'}</span>
     </div>
   `).join('');
 }
@@ -758,23 +1007,21 @@ function renderTimeline() {
   const unlocked = allModules.filter(m => m.is_unlocked).length;
   document.getElementById('p-done').textContent = unlocked;
   document.getElementById('p-subs').textContent = mySubmissions.length;
-  const currentMod = allModules[unlocked] || allModules[allModules.length-1];
-  document.getElementById('p-month').textContent = `Mes ${currentMod ? currentMod.month : 3}`;
-  document.getElementById('p-next').textContent = currentMod ? currentMod.title : 'Completado';
+  const cur = allModules[unlocked] || allModules[allModules.length-1];
+  document.getElementById('p-month').textContent = `Mes ${cur?.month || 3}`;
+  document.getElementById('p-next').textContent = cur?.title || 'Completado';
 
-  const tl = document.getElementById('timeline');
-  tl.innerHTML = allModules.map((m, i) => {
-    const state = m.is_unlocked ? (i < unlocked - 1 ? 'done' : 'current') : 'pending';
-    const isLast = i === allModules.length - 1;
+  document.getElementById('timeline').innerHTML = allModules.map((m, i) => {
+    const state = m.is_unlocked ? (i < unlocked-1 ? 'done' : 'current') : 'pending';
     return `
       <div class="tl-item">
         <div class="tl-dot-col">
-          <div class="tl-dot ${state}">${state === 'done' ? '✓' : m.number}</div>
-          ${!isLast ? '<div class="tl-line"></div>' : ''}
+          <div class="tl-dot ${state}">${state==='done'?'✓':m.number}</div>
+          ${i < allModules.length-1 ? '<div class="tl-line"></div>' : ''}
         </div>
         <div class="tl-content">
           <div class="tl-title">${m.title}</div>
-          <div class="tl-sub">Módulo ${m.number} · ${['','Mes 1','Mes 2','Mes 3'][m.month]}</div>
+          <div class="tl-sub">Módulo ${m.number} · ${MONTH_LABELS[m.month]}</div>
         </div>
       </div>
     `;
@@ -783,13 +1030,11 @@ function renderTimeline() {
 
 // ── RESOURCES ────────────────────────────
 function renderResources(list) {
-  const container = document.getElementById('resources-list');
-  if (!list || !list.length) {
-    container.innerHTML = '<div class="empty-state"><p>No hay material disponible todavía.</p></div>'; return;
-  }
-  container.innerHTML = list.map(r => `
+  const el = document.getElementById('resources-list');
+  if (!list || !list.length) { el.innerHTML = '<div class="empty-state"><p>No hay material disponible todavía.</p></div>'; return; }
+  el.innerHTML = list.map(r => `
     <div class="resource-row">
-      <div class="file-type-badge badge-${r.file_type.toLowerCase()}">${r.file_type}</div>
+      <div class="file-type-badge badge-${(r.file_type||'').toLowerCase()}">${r.file_type}</div>
       <div class="resource-name">${r.title}</div>
       <a href="/resources/${r.filename}" target="_blank" class="btn-download">Descargar</a>
     </div>
@@ -797,7 +1042,7 @@ function renderResources(list) {
 }
 
 // ── TOAST ─────────────────────────────────
-function showToast(msg, type = 'success') {
+function showToast(msg, type='success') {
   const t = document.getElementById('toast');
   t.textContent = msg; t.className = `toast ${type} show`;
   setTimeout(() => t.classList.remove('show'), 3000);
