@@ -120,15 +120,18 @@ app.post('/api/profile/photo', requireAuth, uploadProfilePhoto.single('photo'), 
 
 app.get('/api/modules', requireAuth, async (req, res) => {
   try {
-    let query = 'SELECT * FROM modules ORDER BY number';
-    if (req.session.role !== 'teacher') {
-      query = 'SELECT * FROM modules WHERE is_unlocked = TRUE ORDER BY number';
-    }
-    const result = await pool.query(query);
-    // Teachers get all, including locked (but we expose lock status)
     if (req.session.role === 'teacher') {
-      return res.json(await pool.query('SELECT * FROM modules ORDER BY number').then(r => r.rows));
+      const result = await pool.query('SELECT * FROM modules ORDER BY number');
+      return res.json(result.rows);
     }
+    // Students: use per-student access table
+    const result = await pool.query(
+      `SELECT m.*, COALESCE(sma.is_unlocked, FALSE) as is_unlocked
+       FROM modules m
+       LEFT JOIN student_module_access sma ON sma.module_id = m.id AND sma.user_id = $1
+       ORDER BY m.number`,
+      [req.session.userId]
+    );
     res.json(result.rows);
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -197,6 +200,15 @@ app.post('/admin/api/feedback/:id', requireTeacher, async (req, res) => {
   }
 });
 
+app.post('/admin/api/submissions/:id/status', requireTeacher, async (req, res) => {
+  const { status } = req.body;
+  if (!['pending', 'reviewed'].includes(status)) return res.status(400).json({ error: 'Invalid status' });
+  try {
+    await pool.query('UPDATE submissions SET status = $1 WHERE id = $2', [status, req.params.id]);
+    res.json({ ok: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 app.post('/admin/api/module/:id/video', requireTeacher, async (req, res) => {
   const { video_url } = req.body;
   try {
@@ -220,15 +232,96 @@ app.post('/admin/api/module/:id/pdf', requireTeacher, uploadModulePdf.single('pd
 app.get('/admin/api/students', requireTeacher, async (req, res) => {
   try {
     const students = await pool.query(
-      `SELECT u.id, u.name, u.email, u.created_at,
+      `SELECT u.id, u.name, u.email, u.is_suspended, u.created_at,
         (SELECT COUNT(*) FROM submissions s WHERE s.user_id = u.id) as total_submissions,
-        (SELECT COUNT(*) FROM submissions s WHERE s.user_id = u.id AND s.status = 'reviewed') as reviewed_submissions
+        (SELECT COUNT(*) FROM submissions s WHERE s.user_id = u.id AND s.status = 'reviewed') as reviewed_submissions,
+        (SELECT COUNT(*) FROM student_module_access sma WHERE sma.user_id = u.id AND sma.is_unlocked = TRUE) as unlocked_modules
        FROM users u WHERE u.role = 'student' ORDER BY u.name`
     );
     res.json(students.rows);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
+});
+
+app.post('/admin/api/students', requireTeacher, async (req, res) => {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) return res.status(400).json({ error: 'Nombre, email y contraseña son requeridos' });
+  try {
+    const hash = await require('bcryptjs').hash(password, 10);
+    const result = await pool.query(
+      `INSERT INTO users (name, email, password_hash, role) VALUES ($1,$2,$3,'student') RETURNING id`,
+      [name, email, hash]
+    );
+    const userId = result.rows[0].id;
+    // Create module access entries for new student
+    await pool.query(
+      `INSERT INTO student_module_access (user_id, module_id, is_unlocked)
+       SELECT $1, m.id, FALSE FROM modules m`,
+      [userId]
+    );
+    res.json({ ok: true, id: userId });
+  } catch (e) {
+    if (e.code === '23505') return res.status(400).json({ error: 'Ese email ya está registrado' });
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.put('/admin/api/students/:id', requireTeacher, async (req, res) => {
+  const { name, email } = req.body;
+  try {
+    await pool.query('UPDATE users SET name=$1, email=$2 WHERE id=$3 AND role=$4', [name, email, req.params.id, 'student']);
+    res.json({ ok: true });
+  } catch (e) {
+    if (e.code === '23505') return res.status(400).json({ error: 'Ese email ya está en uso' });
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/admin/api/students/:id/suspend', requireTeacher, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `UPDATE users SET is_suspended = NOT is_suspended WHERE id=$1 AND role='student' RETURNING is_suspended`,
+      [req.params.id]
+    );
+    res.json({ is_suspended: result.rows[0].is_suspended });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.delete('/admin/api/students/:id', requireTeacher, async (req, res) => {
+  try {
+    await pool.query(`DELETE FROM submissions WHERE user_id=$1`, [req.params.id]);
+    await pool.query(`DELETE FROM student_module_access WHERE user_id=$1`, [req.params.id]);
+    await pool.query(`DELETE FROM users WHERE id=$1 AND role='student'`, [req.params.id]);
+    res.json({ ok: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.get('/admin/api/students/:id/modules', requireTeacher, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT m.id, m.number, m.month, m.title, COALESCE(sma.is_unlocked, FALSE) as is_unlocked
+       FROM modules m
+       LEFT JOIN student_module_access sma ON sma.module_id = m.id AND sma.user_id = $1
+       ORDER BY m.number`,
+      [req.params.id]
+    );
+    res.json(result.rows);
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.post('/admin/api/students/:id/module/:moduleId/toggle', requireTeacher, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `INSERT INTO student_module_access (user_id, module_id, is_unlocked)
+       VALUES ($1, $2, TRUE)
+       ON CONFLICT (user_id, module_id)
+       DO UPDATE SET is_unlocked = NOT student_module_access.is_unlocked
+       RETURNING is_unlocked`,
+      [req.params.id, req.params.moduleId]
+    );
+    res.json({ is_unlocked: result.rows[0].is_unlocked });
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 app.post('/admin/api/module/:id/unlock', requireTeacher, async (req, res) => {

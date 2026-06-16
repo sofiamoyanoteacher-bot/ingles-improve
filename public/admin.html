@@ -120,10 +120,12 @@
   input:checked+.toggle-slider:before{transform:translateX(20px);}
 
   /* BADGES */
-  .badge-pending{background:rgba(234,79,185,.15);color:var(--magenta);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap;}
-  .badge-reviewed{background:rgba(76,192,241,.15);color:var(--cyan);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap;}
+  .badge-pending{background:rgba(234,79,185,.12);color:var(--magenta);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap;border:1.5px solid rgba(234,79,185,.25);}
+  .badge-reviewed{background:rgba(34,197,94,.12);color:#16a34a;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap;border:1.5px solid rgba(34,197,94,.3);}
   .badge-active{background:rgba(76,192,241,.12);color:var(--cyan);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;}
   .badge-suspended{background:rgba(255,80,80,.1);color:#e04;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;}
+  .status-btn{background:none;border:none;cursor:pointer;padding:0;font-family:'Poppins',sans-serif;}
+  .status-btn:hover{opacity:.75;}
 
   /* MODAL */
   .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:500;display:none;align-items:center;justify-content:center;}
@@ -300,10 +302,10 @@
     <!-- DASHBOARD -->
     <div id="page-dashboard" class="page active">
       <div class="stats-row">
-        <div class="stat-card"><div class="stat-label">Total alumnos</div><div class="stat-value" id="d-students">—</div><div class="stat-sub">registrados</div></div>
-        <div class="stat-card"><div class="stat-label">Prácticas pendientes</div><div class="stat-value" id="d-pending">—</div><div class="stat-sub">sin revisar</div></div>
-        <div class="stat-card"><div class="stat-label">Prácticas revisadas</div><div class="stat-value" id="d-reviewed">—</div><div class="stat-sub">con feedback</div></div>
-        <div class="stat-card"><div class="stat-label">Módulos globales</div><div class="stat-value" id="d-unlocked">—</div><div class="stat-sub">desbloqueados</div></div>
+        <div class="stat-card" onclick="showPage('students',document.getElementById('nav-students'))" style="cursor:pointer;transition:box-shadow .2s,transform .15s" onmouseenter="this.style.boxShadow='0 6px 20px rgba(76,192,241,.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''"><div class="stat-label">Total alumnos</div><div class="stat-value" id="d-students">—</div><div class="stat-sub">registrados →</div></div>
+        <div class="stat-card" onclick="goSubmissions('pending')" style="cursor:pointer;transition:box-shadow .2s,transform .15s" onmouseenter="this.style.boxShadow='0 6px 20px rgba(234,79,185,.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''"><div class="stat-label">Prácticas pendientes</div><div class="stat-value" id="d-pending">—</div><div class="stat-sub">sin revisar →</div></div>
+        <div class="stat-card" onclick="goSubmissions('reviewed')" style="cursor:pointer;transition:box-shadow .2s,transform .15s" onmouseenter="this.style.boxShadow='0 6px 20px rgba(34,197,94,.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''"><div class="stat-label">Prácticas revisadas</div><div class="stat-value" id="d-reviewed">—</div><div class="stat-sub">con feedback →</div></div>
+        <div class="stat-card" onclick="showPage('modules',document.getElementById('nav-modules'))" style="cursor:pointer;transition:box-shadow .2s,transform .15s" onmouseenter="this.style.boxShadow='0 6px 20px rgba(181,190,234,.3)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''"><div class="stat-label">Módulos globales</div><div class="stat-value" id="d-unlocked">—</div><div class="stat-sub">desbloqueados →</div></div>
       </div>
       <div class="card"><div class="section-title">Prácticas recientes</div><div id="dash-recent"></div></div>
     </div>
@@ -591,9 +593,30 @@ function renderDashboard() {
       <td>Módulo ${s.module_number}</td>
       <td><a href="/uploads/${s.filename}" target="_blank" class="link-dl">${s.original_name}</a></td>
       <td style="color:var(--gray);font-size:12px">${new Date(s.created_at).toLocaleDateString('es-AR')}</td>
-      <td><span class="badge-${s.status}">${s.status==='reviewed'?'✓ Revisado':'⏳ Pendiente'}</span></td>
+      <td><button class="status-btn badge-${s.status}" onclick="toggleStatus(${s.id})" title="Cambiar estado">${s.status==='reviewed'?'✓ Corregido':'⏳ Pendiente'}</button></td>
     </tr>`).join('')}
   </tbody></table>`;
+}
+
+function goSubmissions(status) {
+  showPage('submissions', document.getElementById('nav-submissions'));
+  setTimeout(() => {
+    document.getElementById('filter-status').value = status;
+    filterSubs();
+  }, 100);
+}
+
+async function toggleStatus(id) {
+  const sub = allSubmissions.find(s => s.id === id);
+  if (!sub) return;
+  const newStatus = sub.status === 'reviewed' ? 'pending' : 'reviewed';
+  const r = await fetch(`/admin/api/submissions/${id}/status`, { method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status: newStatus}) });
+  if (r.ok) {
+    sub.status = newStatus;
+    showToast(newStatus === 'reviewed' ? '✓ Marcado como corregido' : 'Marcado como pendiente', 'success');
+    renderDashboard();
+    if (document.getElementById('page-submissions').classList.contains('active')) filterSubs();
+  } else showToast('Error al cambiar estado', 'error');
 }
 
 // ── STUDENTS ──────────────────────────────
@@ -795,7 +818,10 @@ function filterSubs() {
           ${s.feedback?`<div style="font-size:12px;color:var(--cyan);padding:8px 12px;background:rgba(76,192,241,.06);border-radius:8px;margin-bottom:10px">💬 ${s.feedback}</div>`:''}
           <div style="display:flex;gap:8px;align-items:flex-start">
             <textarea class="feedback-area" id="fb-${s.id}" placeholder="Escribí tu feedback...">${s.feedback||''}</textarea>
-            <button class="btn btn-gradient btn-sm" onclick="saveFeedback(${s.id})">Guardar</button>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <button class="btn btn-gradient btn-sm" onclick="saveFeedback(${s.id})">Guardar</button>
+              <button class="status-btn badge-${s.status}" onclick="toggleStatus(${s.id})" title="Cambiar estado" style="text-align:center;padding:5px 10px">${s.status==='reviewed'?'✓ Corregido':'⏳ Pendiente'}</button>
+            </div>
           </div>
         </div>
       </div>
