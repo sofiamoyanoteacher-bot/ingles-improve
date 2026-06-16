@@ -741,10 +741,16 @@ async function loadAll() {
 }
 
 async function loadModules() {
-  const r = await fetch('/api/modules', { credentials:'include' });
-  allModules = await r.json();
-  document.getElementById('modules-badge').textContent = allModules.length;
-  renderModules();
+  try {
+    const r = await fetch('/api/modules', { credentials:'include' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+    allModules = Array.isArray(data) ? data : [];
+    document.getElementById('modules-badge').textContent = allModules.length;
+    renderModules();
+  } catch(e) {
+    console.error('loadModules error:', e);
+  }
 }
 
 async function loadSubmissions() {
@@ -801,6 +807,7 @@ function showPage(name, el) {
   if (el) el.classList.add('active');
   document.getElementById('topbar-title').textContent = pageTitles[name] || name;
   if (name === 'profile') loadProfile();
+  if (name === 'modules') { loadModules(); }
   if (name === 'upload') loadSubmissions();
   if (name === 'resources') loadResources();
   if (name === 'progress') renderTimeline();

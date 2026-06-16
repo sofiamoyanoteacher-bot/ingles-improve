@@ -124,9 +124,11 @@ app.get('/api/modules', requireAuth, async (req, res) => {
       const result = await pool.query('SELECT * FROM modules ORDER BY number');
       return res.json(result.rows);
     }
-    // Students: use per-student access table
+    // Students: use per-student access table (explicit columns avoid duplicate is_unlocked from m.*)
     const result = await pool.query(
-      `SELECT m.*, COALESCE(sma.is_unlocked, FALSE) as is_unlocked
+      `SELECT m.id, m.number, m.month, m.title, m.description, m.practice_instructions,
+              m.video_url, m.pdf_filename,
+              COALESCE(sma.is_unlocked, FALSE) as is_unlocked
        FROM modules m
        LEFT JOIN student_module_access sma ON sma.module_id = m.id AND sma.user_id = $1
        ORDER BY m.number`,
