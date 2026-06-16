@@ -489,15 +489,28 @@
         <div class="hero-quote">
           <p>"Your language is your currency. Master it and the world negotiates with you, not around you."</p>
           <div class="hero-quote-sig">
-            <div class="improve-logo-sig">
-              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
-                <rect width="36" height="36" rx="8" fill="url(#qslg)"/>
-                <path d="M8 12h20M8 18h14M8 24h17" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                <defs><linearGradient id="qslg" x1="0" y1="0" x2="36" y2="36"><stop stop-color="#4cc0f1"/><stop offset=".5" stop-color="#b5beea"/><stop offset="1" stop-color="#ea4fb9"/></linearGradient></defs>
+            <!-- Logo Terciario: fondo negro, burbuja con gradiente, texto blanco + gradiente -->
+            <div style="display:inline-flex;align-items:center;gap:9px;background:#0a0a0a;border-radius:40px;padding:8px 16px 8px 8px;border:1px solid rgba(255,255,255,0.08)">
+              <!-- Isotipo: dos burbujas de chat superpuestas -->
+              <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="28" height="22" rx="6" stroke="url(#sig-g1)" stroke-width="2"/>
+                <circle cx="9" cy="13" r="2" fill="url(#sig-g1)"/>
+                <circle cx="16" cy="13" r="2" fill="url(#sig-g1)"/>
+                <circle cx="23" cy="13" r="2" fill="url(#sig-g1)"/>
+                <path d="M6 24 L4 31 L13 24" fill="none" stroke="url(#sig-g1)" stroke-width="1.8" stroke-linejoin="round"/>
+                <rect x="16" y="18" width="30" height="22" rx="6" stroke="url(#sig-g2)" stroke-width="2"/>
+                <circle cx="24" cy="29" r="2" fill="url(#sig-g2)"/>
+                <circle cx="31" cy="29" r="2" fill="url(#sig-g2)"/>
+                <circle cx="38" cy="29" r="2" fill="url(#sig-g2)"/>
+                <path d="M20 40 L18 47 L28 40" fill="none" stroke="url(#sig-g2)" stroke-width="1.5" stroke-linejoin="round"/>
+                <defs>
+                  <linearGradient id="sig-g1" x1="2" y1="2" x2="30" y2="24"><stop stop-color="#4cc0f1"/><stop offset="1" stop-color="#b5beea"/></linearGradient>
+                  <linearGradient id="sig-g2" x1="16" y1="18" x2="46" y2="40"><stop stop-color="#b5beea"/><stop offset="1" stop-color="#ea4fb9"/></linearGradient>
+                </defs>
               </svg>
               <div>
-                <div class="sig-text">IMPROVE</div>
-                <div class="sig-sub">Ingles IMPROVE Language School</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:1.5px;text-transform:uppercase;line-height:1">Ingles</div>
+                <div style="font-size:15px;font-weight:800;background:linear-gradient(90deg,#4cc0f1,#b5beea,#ea4fb9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1">IMPROVE</div>
               </div>
             </div>
           </div>
