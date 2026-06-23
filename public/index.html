@@ -308,6 +308,13 @@
   .sub-meta { font-size:12px; color:var(--gray); margin-top:2px; }
   .status-pending { background:rgba(234,79,185,0.15); color:var(--magenta); font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; }
   .status-reviewed { background:rgba(76,192,241,0.15); color:var(--cyan); font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; }
+  .sub-actions { display:flex; gap:6px; flex-shrink:0; }
+  .sub-icon-btn { width:30px; height:30px; border-radius:8px; border:1.5px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.6); color:var(--gray); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .15s; }
+  .sub-icon-btn:hover { border-color:var(--cyan); color:var(--cyan); background:rgba(76,192,241,0.08); }
+  .sub-icon-btn.danger:hover { border-color:var(--magenta); color:var(--magenta); background:rgba(234,79,185,0.08); }
+  .sub-edit-row { display:flex; gap:8px; margin-top:8px; }
+  .sub-edit-row textarea { flex:1; padding:8px 10px; border:1.5px solid rgba(0,0,0,0.12); border-radius:8px; font-family:'Poppins',sans-serif; font-size:12px; resize:vertical; min-height:50px; outline:none; }
+  .sub-edit-row textarea:focus { border-color:var(--cyan); }
   .sub-feedback { font-size:12px; color:#555; margin-top:6px; font-style:italic; padding:8px 12px; background:rgba(76,192,241,0.06); border-radius:8px; }
 
   /* ── PROGRESS ── */
@@ -428,7 +435,7 @@
     <nav class="sidebar-nav">
       <div class="nav-item active" id="nav-home" onclick="showPage('home',this)">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h4v-4h2v4h4a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
-        Inicio
+        Home
       </div>
       <div class="nav-item" id="nav-profile" onclick="showPage('profile',this)">
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
@@ -436,7 +443,7 @@
       </div>
       <div class="nav-item" id="nav-modules" onclick="showPage('modules',this)">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.468 0 2.834.41 4 1.125V4.804zM10 14c1.166-.715 2.532-1.125 4-1.125a7.97 7.97 0 013.5.804v-10A7.969 7.969 0 0014.5 4c-1.255 0-2.443.29-3.5.804V14z"/></svg>
-        Programa
+        Program
         <span class="nav-badge" id="modules-badge">24</span>
       </div>
       <div class="nav-item" id="nav-progress" onclick="showPage('progress',this)">
@@ -693,7 +700,7 @@ const MONTH_IMAGES = {
   2: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
   3: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=800&q=80',
 };
-const MONTH_LABELS = { 1:'Mes 1 — The Foundation', 2:'Mes 2 — Elite Candidate', 3:'Month 3 — Neurosales' };
+const MONTH_LABELS = { 1:'Month 1 — The Foundation', 2:'Month 2 — Elite Candidate', 3:'Month 3 — Neurosales' };
 
 // ── INIT ──────────────────────────────────
 async function init() {
@@ -798,7 +805,7 @@ function toggleSidebar() {
 }
 
 // ── NAVIGATION ────────────────────────────
-const pageTitles = { home:'Inicio', profile:'My Profile', modules:'Programa', progress:'My Progress', upload:'Submitted Practice', resources:'Resources' };
+const pageTitles = { home:'Home', profile:'My Profile', modules:'Program', progress:'My Progress', upload:'Submitted Practice', resources:'Resources' };
 
 function showPage(name, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1004,16 +1011,56 @@ function renderSubmissions() {
   const list = document.getElementById('subs-list');
   if (!mySubmissions.length) { list.innerHTML = '<div class="empty-state"><p>You have not submitted any practice yet.</p></div>'; return; }
   list.innerHTML = mySubmissions.map(s => `
-    <div class="submission-row">
+    <div class="submission-row" id="sub-row-${s.id}">
       <div class="sub-thumb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray)" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
       <div class="sub-info">
         <div class="sub-name">${s.original_name}</div>
         <div class="sub-meta">Module ${s.module_number} — ${s.module_title} · ${new Date(s.created_at).toLocaleDateString('en-US')}</div>
+        ${s.notes ? `<div class="sub-meta" id="sub-notes-${s.id}" style="font-style:italic">"${s.notes}"</div>` : `<div class="sub-meta" id="sub-notes-${s.id}"></div>`}
         ${s.feedback ? `<div class="sub-feedback">💬 ${s.feedback}</div>` : ''}
+        <div class="sub-edit-row" id="sub-edit-${s.id}" style="display:none">
+          <textarea id="sub-edit-input-${s.id}">${s.notes || ''}</textarea>
+          <button class="btn-action btn-gradient" style="padding:8px 14px;font-size:12px" onclick="saveSubmissionEdit(${s.id})">Save</button>
+          <button class="btn-action btn-outline" style="padding:8px 14px;font-size:12px" onclick="cancelSubmissionEdit(${s.id})">Cancel</button>
+        </div>
       </div>
       <span class="${s.status === 'reviewed' ? 'status-reviewed' : 'status-pending'}">${s.status === 'reviewed' ? '✓ Reviewed' : '⏳ Pending'}</span>
+      <div class="sub-actions">
+        <button class="sub-icon-btn" title="Edit notes" onclick="editSubmission(${s.id})">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+        </button>
+        <button class="sub-icon-btn danger" title="Delete" onclick="deleteSubmission(${s.id})">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
     </div>
   `).join('');
+}
+
+function editSubmission(id) {
+  document.getElementById('sub-edit-' + id).style.display = 'flex';
+}
+
+function cancelSubmissionEdit(id) {
+  document.getElementById('sub-edit-' + id).style.display = 'none';
+}
+
+async function saveSubmissionEdit(id) {
+  const notes = document.getElementById('sub-edit-input-' + id).value;
+  const r = await fetch(`/api/submissions/${id}`, { method:'PUT', credentials:'include', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ notes }) });
+  if (r.ok) {
+    showToast('Practice updated', 'success');
+    await loadSubmissions();
+  } else { showToast('Error updating', 'error'); }
+}
+
+async function deleteSubmission(id) {
+  if (!confirm('Delete this submitted practice? This cannot be undone.')) return;
+  const r = await fetch(`/api/submissions/${id}`, { method:'DELETE', credentials:'include' });
+  if (r.ok) {
+    showToast('Practice deleted', 'success');
+    await loadSubmissions();
+  } else { showToast('Error deleting', 'error'); }
 }
 
 // ── PROGRESS ─────────────────────────────
@@ -1022,8 +1069,8 @@ function renderTimeline() {
   document.getElementById('p-done').textContent = unlocked;
   document.getElementById('p-subs').textContent = mySubmissions.length;
   const cur = allModules[unlocked] || allModules[allModules.length-1];
-  document.getElementById('p-month').textContent = `Mes ${cur?.month || 3}`;
-  document.getElementById('p-next').textContent = cur?.title || 'Completado';
+  document.getElementById('p-month').textContent = `Month ${cur?.month || 3}`;
+  document.getElementById('p-next').textContent = cur?.title || 'Completed';
 
   document.getElementById('timeline').innerHTML = allModules.map((m, i) => {
     const state = m.is_unlocked ? (i < unlocked-1 ? 'done' : 'current') : 'pending';

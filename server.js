@@ -159,6 +159,34 @@ app.post('/api/submissions', requireAuth, uploadVideo.single('video'), async (re
   }
 });
 
+app.put('/api/submissions/:id', requireAuth, async (req, res) => {
+  const { notes } = req.body;
+  try {
+    const result = await pool.query(
+      'UPDATE submissions SET notes = $1 WHERE id = $2 AND user_id = $3 RETURNING id',
+      [notes || null, req.params.id, req.session.userId]
+    );
+    if (!result.rows.length) return res.status(404).json({ error: 'Not found' });
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.delete('/api/submissions/:id', requireAuth, async (req, res) => {
+  try {
+    const result = await pool.query(
+      'DELETE FROM submissions WHERE id = $1 AND user_id = $2 RETURNING filename',
+      [req.params.id, req.session.userId]
+    );
+    if (!result.rows.length) return res.status(404).json({ error: 'Not found' });
+    fs.unlink(path.join('uploads', result.rows[0].filename), () => {});
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ─── ADMIN ROUTES ────────────────────────────────────────────────────────────
 
 app.get('/admin/api/submissions', requireTeacher, async (req, res) => {

@@ -101,33 +101,34 @@ async function initDB() {
 
     // Seed modules if empty
     const modCount = await client.query('SELECT COUNT(*) FROM modules');
+    const modules = [
+        { n:1,  m:1, title:'The Shift — From Employee to Asset', desc:'Mindset session. Identify your unique value proposition (USP). Learn to see yourself as a business asset, not an employee.', practice:'Write your personal USP in 3 sentences: [Professional identity] + [Result you generate] + [Unique differentiator]. Record a 60-second video saying it in English.' },
+        { n:2,  m:1, title:'The Elevator Pitch', desc:'Structure and practice to introduce yourself and hook your listener in just 60 seconds. 4-step method with real examples.', practice:'Record your complete elevator pitch (60 sec max). Use the structure: Identity → Result → Differentiator → Hook. No reading, no cuts.' },
+        { n:3,  m:1, title:'Professional Storytelling', desc:'Mastering the STAR Method to narrate past achievements and experiences in an engaging way for any international recruiter.', practice:'Record 3 STAR stories from your career. At least one must include a concrete impact number.' },
+        { n:4,  m:1, title:'Data & KPIs', desc:'How to talk about numbers, percentages, and financial metrics in English without hesitation. Specific high-level corporate vocabulary.', practice:null },
+        { n:5,  m:1, title:'Modern Corporate Jargon', desc:'Incorporating C-Suite language and jargon. Phrases that communicate authority without sounding artificial.', practice:null },
+        { n:6,  m:1, title:'Active Listening', desc:'Sales techniques applied to active listening to detect a company\'s pain points during a conversation.', practice:null },
+        { n:7,  m:1, title:'Overcoming Blocks', desc:'Coaching session to overcome impostor syndrome and prioritize conviction over perfection.', practice:'Record 90 seconds talking about your greatest professional achievement. No editing, no cuts. Conviction matters more than perfection.' },
+        { n:8,  m:1, title:'Overcoming Objections', desc:'The art of strategically answering tough questions about your resume without losing authority.', practice:'Record answers to these 3 questions: "Why did you leave your last job?", "What\'s your biggest weakness?", "Why should we hire you?".' },
+        { n:9,  m:2, title:'Leadership & Influence', desc:'Authority vocabulary and impact verbs to demonstrate leadership ability in front of any international panel.', practice:null },
+        { n:10, m:2, title:'Behavioral Interview Mastery', desc:'Mock interview and analysis to answer senior management behavioral questions with structure and confidence.', practice:'Record full STAR answers to these questions: "Tell me about a time you led a team through a challenge." / "Describe a situation where you had to meet a tight deadline."' },
+        { n:11, m:2, title:'Problem Solving Under Pressure', desc:'Linguistic structure to demonstrate emotional control and real-time crisis resolution.', practice:null },
+        { n:12, m:2, title:'Cultural Fit & Closing', desc:'How to assess company culture and close the interview with strategic questions for the recruiter.', practice:null },
+        { n:13, m:2, title:'High-Impact Written Pitch', desc:'The art of writing executive cold emails that land meetings. Structure, tone, and length for maximum impact.', practice:'Write a cold email to a real company you\'re interested in. Send it in writing (not video).' },
+        { n:14, m:2, title:'Executive Forms & ATS Filters', desc:'Optimizing cover letters and corporate forms to beat AI screening filters.', practice:null },
+        { n:15, m:2, title:'The Mock Interview Part 1', desc:'Full mock interview simulation — technical and profile-based — with feedback on structure, vocabulary, and body language.', practice:'Record an 8-10 minute simulated interview answering: Tell me about yourself / Why this company / Greatest achievement / Where do you see yourself in 5 years / Do you have questions for us.' },
+        { n:16, m:2, title:'The Mock Interview Part 2', desc:'Fine-tuning intonation, body language, and polishing errors detected in the previous session.', practice:'Re-record the mock interview incorporating the feedback received. Compare both versions.' },
+        { n:17, m:3, title:'Neurosales Concepts', desc:'Psychological hooks to speak to the decision-making brain of the client or boss.', practice:null },
+        { n:18, m:3, title:'Value-Based Pricing', desc:'Advanced salary negotiation strategies, budget handling, and numeric anchors.', practice:'Record a simulated 2-minute salary negotiation using the anchor phrase from the module.' },
+        { n:19, m:3, title:'B2B Meeting Setups', desc:'How to open and lead a virtual or in-person meeting as a strategic consultant, not as a vendor.', practice:null },
+        { n:20, m:3, title:'Discovery Calls', desc:'Crafting surgical questions so the other party admits their operational weaknesses.', practice:'Record a simulated 3-minute discovery call with questions like: "What\'s the biggest challenge your team is facing right now?"' },
+        { n:21, m:3, title:'High-Stakes Presentations', desc:'Zoom and Teams techniques to keep the audience\'s attention and handle interruptions with authority.', practice:null },
+        { n:22, m:3, title:'Live Fire Objections', desc:'Extreme practice rebutting tough sales objections live in English without losing your composure.', practice:'Record answers to these objections: "It\'s too expensive." / "We already have a provider." / "I need to think about it."' },
+        { n:23, m:3, title:'Internal Selling — Winning Stakeholders', desc:'How to sell innovation projects or ideas to directors in other areas of the company.', practice:null },
+        { n:24, m:3, title:'Executive Follow-Up & Scale Plan', desc:'The art of professional follow-up without coming across as pushy. Program closing and future roadmap.', practice:null },
+    ];
+
     if (parseInt(modCount.rows[0].count) === 0) {
-      const modules = [
-        { n:1,  m:1, title:'The Shift — From Employee to Asset', desc:'Sesión de mentalidad. Identificación de tu propuesta única de valor (USP). Aprendés a verte como un activo de negocio, no como un empleado.', practice:'Escribí tu USP personal en 3 oraciones: [Identidad profesional] + [Resultado que generás] + [Diferencial único]. Grabá un video de 60 segundos diciéndola en inglés.' },
-        { n:2,  m:1, title:'The Elevator Pitch', desc:'Estructura y práctica para presentarte y enganchar a tu interlocutor en solo 60 segundos. Método de 4 pasos con ejemplos reales.', practice:'Grabá tu elevator pitch completo (60 seg máx). Usá la estructura: Identidad → Resultado → Diferencial → Gancho. Sin leer, sin cortes.' },
-        { n:3,  m:1, title:'Professional Storytelling', desc:'Dominio del Método STAR para relatar logros y experiencias pasadas de forma atractiva para cualquier reclutador internacional.', practice:'Grabá 3 historias STAR de tu carrera. Al menos una debe incluir un número concreto de impacto.' },
-        { n:4,  m:1, title:'Data & KPIs', desc:'Cómo hablar de números, porcentajes y métricas financieras en inglés sin dudar. Vocabulario específico de alto nivel corporativo.', practice:null },
-        { n:5,  m:1, title:'Modern Corporate Jargon', desc:'Incorporación del lenguaje y jerga de la alta gerencia (C-Suite). Frases que comunican autoridad sin sonar artificiales.', practice:null },
-        { n:6,  m:1, title:'Active Listening', desc:'Técnicas de ventas aplicadas a la escucha activa para detectar los puntos de dolor de una empresa durante una conversación.', practice:null },
-        { n:7,  m:1, title:'Overcoming Blocks', desc:'Sesión de coaching para vencer el síndrome del impostor y priorizar la convicción sobre la perfección.', practice:'Grabá 90 segundos hablando de tu mayor logro profesional. Sin edición, sin cortes. La convicción importa más que la perfección.' },
-        { n:8,  m:1, title:'Overcoming Objections', desc:'El arte de responder preguntas difíciles sobre tu CV de manera estratégica sin perder autoridad.', practice:'Grabá respuestas a estas 3 preguntas: "Why did you leave your last job?", "What\'s your biggest weakness?", "Why should we hire you?".' },
-        { n:9,  m:2, title:'Leadership & Influence', desc:'Vocabulario de autoridad y verbos de impacto para demostrar capacidad de liderazgo ante cualquier panel internacional.', practice:null },
-        { n:10, m:2, title:'Behavioral Interview Mastery', desc:'Simulacro y análisis para responder preguntas de comportamiento en alta gerencia con estructura y confianza.', practice:'Grabá respuestas STAR completas a estas preguntas: "Tell me about a time you led a team through a challenge." / "Describe a situation where you had to meet a tight deadline."' },
-        { n:11, m:2, title:'Problem Solving Under Pressure', desc:'Estructura lingüística para demostrar control emocional y resolución de crisis en tiempo real.', practice:null },
-        { n:12, m:2, title:'Cultural Fit & Closing', desc:'Cómo evaluar la cultura de la empresa y cerrar la entrevista con preguntas estratégicas al reclutador.', practice:null },
-        { n:13, m:2, title:'High-Impact Written Pitch', desc:'El arte de redactar Cold Emails ejecutivos que consiguen reuniones. Estructura, tono y longitud para máximo impacto.', practice:'Redactá un cold email a una empresa real que te interese. Envialo por escrito (no video).' },
-        { n:14, m:2, title:'Executive Forms & ATS Filters', desc:'Optimización de Cover Letters y formularios corporativos para superar filtros de inteligencia artificial.', practice:null },
-        { n:15, m:2, title:'The Mock Interview Part 1', desc:'Simulacro completo de entrevista técnica y de perfil con feedback sobre estructura, vocabulario y lenguaje corporal.', practice:'Grabá una entrevista simulada de 8-10 minutos respondiendo: Tell me about yourself / Why this company / Greatest achievement / Where do you see yourself in 5 years / Do you have questions for us.' },
-        { n:16, m:2, title:'The Mock Interview Part 2', desc:'Ajustes finos de entonación, lenguaje corporal y pulido de errores detectados en la sesión anterior.', practice:'Regrabá la mock interview incorporando el feedback recibido. Comparar ambas versiones.' },
-        { n:17, m:3, title:'Neurosales Concepts', desc:'Ganchos psicológicos para hablarle al cerebro tomador de decisiones del cliente o jefe.', practice:null },
-        { n:18, m:3, title:'Value-Based Pricing', desc:'Estrategias de negociación salarial avanzada, manejo de presupuestos y anclas numéricas.', practice:'Grabá una negociación salarial simulada de 2 minutos usando la frase ancla del módulo.' },
-        { n:19, m:3, title:'B2B Meeting Setups', desc:'Cómo abrir y liderar una reunión virtual o presencial como consultor estratégico, no como proveedor.', practice:null },
-        { n:20, m:3, title:'Discovery Calls', desc:'Formulación de preguntas quirúrgicas para que la contraparte admita sus debilidades operativas.', practice:'Grabá una discovery call simulada de 3 minutos con preguntas tipo: "What\'s the biggest challenge your team is facing right now?"' },
-        { n:21, m:3, title:'High-Stakes Presentations', desc:'Técnicas de Zoom y Teams para mantener la atención del público y manejar interrupciones con autoridad.', practice:null },
-        { n:22, m:3, title:'Live Fire Objections', desc:'Práctica extrema para rebatir objeciones comerciales duras en vivo en inglés sin perder la calma.', practice:'Grabá respuestas a estas objeciones: "It\'s too expensive." / "We already have a provider." / "I need to think about it."' },
-        { n:23, m:3, title:'Internal Selling — Winning Stakeholders', desc:'Cómo vender proyectos o ideas de innovación a directores de otras áreas de la empresa.', practice:null },
-        { n:24, m:3, title:'Executive Follow-Up & Scale Plan', desc:'El arte del seguimiento profesional sin caer en la persecución. Cierre del programa y mapa de ruta futuro.', practice:null },
-      ];
       for (const mod of modules) {
         await client.query(
           `INSERT INTO modules (number, month, title, description, practice_instructions, is_unlocked) VALUES ($1,$2,$3,$4,$5,$6)`,
@@ -144,6 +145,13 @@ async function initDB() {
           WHEN number BETWEEN 17 AND 24 THEN 3
           ELSE 1 END
       `);
+      // Re-translate description/practice_instructions to English for modules seeded before the translation
+      for (const mod of modules) {
+        await client.query(
+          'UPDATE modules SET title=$1, description=$2, practice_instructions=$3 WHERE number=$4',
+          [mod.title, mod.desc, mod.practice || null, mod.n]
+        );
+      }
     }
 
   } finally {
