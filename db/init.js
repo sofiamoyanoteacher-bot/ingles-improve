@@ -154,6 +154,24 @@ async function initDB() {
       }
     }
 
+    // Create a demo student account if it doesn't exist yet
+    const demoCheck = await client.query("SELECT id FROM users WHERE email = 'demo@improve.com'");
+    if (!demoCheck.rows.length) {
+      const demoHash = await bcrypt.hash('demo2025', 10);
+      const demoResult = await client.query(
+        `INSERT INTO users (email, password_hash, name, role) VALUES ($1, $2, 'Demo Student', 'student') RETURNING id`,
+        ['demo@improve.com', demoHash]
+      );
+      const demoId = demoResult.rows[0].id;
+      await client.query(
+        `INSERT INTO student_module_access (user_id, module_id, is_unlocked)
+         SELECT $1, id, number <= 8 FROM modules
+         ON CONFLICT (user_id, module_id) DO NOTHING`,
+        [demoId]
+      );
+      console.log('Demo student account created.');
+    }
+
   } finally {
     client.release();
   }
