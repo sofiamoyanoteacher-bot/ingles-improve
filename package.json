@@ -1,22 +1,28 @@
 {
-  "name": "high-value-professional",
+  "name": "ingles-improve",
   "version": "1.0.0",
-  "description": "The High-Value Professional - Ingles IMPROVE Language School",
-  "main": "server.js",
+  "private": true,
+  "description": "Ingles IMPROVE - plataforma full-stack de la escuela de inglés",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node --watch server/index.js",
+    "client": "cd client && npm run dev",
+    "seed": "node server/seed.js",
+    "build": "cd client && npm run build",
+    "start": "node server/index.js",
+    "postinstall": "cd client && npm install"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "connect-pg-simple": "^9.0.1",
-    "express": "^4.18.2",
-    "express-session": "^1.17.3",
-    "multer": "^1.4.5-lts.1",
-    "pg": "^8.11.3"
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^11.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "concurrently": "^8.2.2"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,4 +1,7 @@
 node_modules/
 uploads/*
+data/*.sqlite
+data/*.sqlite-*
+client/dist/
 .env
 *.log
