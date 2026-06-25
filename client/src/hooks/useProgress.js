@@ -42,5 +42,40 @@ export function useProgress() {
     return 'locked';
   }
 
-  return { progress, loading, reload, rowFor, isComplete, pctFor, statusFor };
+  function classProgressFor(unitIndex) {
+    const row = rowFor(unitIndex);
+    return row?.class_progress || { 1: false, 2: false, 3: false, 4: false };
+  }
+
+  function isClassDone(unitIndex, classNum) {
+    return !!classProgressFor(unitIndex)[String(classNum)];
+  }
+
+  function isClassUnlocked(unitIndex, classNum) {
+    if (classNum <= 1) return true;
+    return isClassDone(unitIndex, classNum - 1);
+  }
+
+  function classesDoneCount(unitIndex) {
+    const cp = classProgressFor(unitIndex);
+    return [1, 2, 3, 4].filter((c) => cp[String(c)]).length;
+  }
+
+  function totalClassesDone() {
+    return UNITS.reduce((sum, _, i) => sum + classesDoneCount(i), 0);
+  }
+
+  function findNextClass() {
+    for (let u = 0; u < UNITS.length; u++) {
+      for (let c = 1; c <= 4; c++) {
+        if (!isClassDone(u, c)) return { unitIndex: u, classNum: c };
+      }
+    }
+    return { unitIndex: UNITS.length - 1, classNum: 4 };
+  }
+
+  return {
+    progress, loading, reload, rowFor, isComplete, pctFor, statusFor,
+    classProgressFor, isClassDone, isClassUnlocked, classesDoneCount, totalClassesDone, findNextClass,
+  };
 }

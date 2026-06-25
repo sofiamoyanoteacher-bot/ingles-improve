@@ -61,4 +61,12 @@ CREATE TABLE IF NOT EXISTS homework_files (
 );
 `);
 
+// Migration: class_progress tracks completion of the 4 classes per unit independently
+// from the existing tab-level flags. Guarded because SQLite has no ADD COLUMN IF NOT EXISTS.
+const hasClassProgress = db.prepare("PRAGMA table_info(unit_progress)").all()
+  .some((col) => col.name === 'class_progress');
+if (!hasClassProgress) {
+  db.exec(`ALTER TABLE unit_progress ADD COLUMN class_progress TEXT DEFAULT '{"1":false,"2":false,"3":false,"4":false}'`);
+}
+
 module.exports = db;

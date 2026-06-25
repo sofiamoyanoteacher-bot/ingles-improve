@@ -5,17 +5,36 @@ const { verifyToken } = require('../middleware/auth');
 const router = express.Router();
 router.use(verifyToken);
 
+function parseClassProgress(raw) {
+  try {
+    return { '1': false, '2': false, '3': false, '4': false, ...JSON.parse(raw || '{}') };
+  } catch {
+    return { '1': false, '2': false, '3': false, '4': false };
+  }
+}
+
+function withParsedClassProgress(row) {
+  return row ? { ...row, class_progress: parseClassProgress(row.class_progress) } : row;
+}
+
 router.get('/progress', (req, res) => {
   const rows = db.prepare('SELECT * FROM unit_progress WHERE user_id = ?').all(req.user.id);
-  res.json({ progress: rows });
+  res.json({ progress: rows.map(withParsedClassProgress) });
 });
 
 router.put('/progress/:unitIndex', (req, res) => {
   const unitIndex = Number(req.params.unitIndex);
-  const { reading_done, grammar_done, listening_done, letstalk_done, listening_score } = req.body || {};
+  const { reading_done, grammar_done, listening_done, letstalk_done, listening_score, class_number } = req.body || {};
 
   const existing = db.prepare('SELECT * FROM unit_progress WHERE user_id = ? AND unit_index = ?')
     .get(req.user.id, unitIndex);
+
+  let classProgressJson = null;
+  if (class_number != null) {
+    const current = parseClassProgress(existing?.class_progress);
+    current[String(class_number)] = true;
+    classProgressJson = JSON.stringify(current);
+  }
 
   if (existing) {
     db.prepare(`UPDATE unit_progress SET
@@ -24,6 +43,7 @@ router.put('/progress/:unitIndex', (req, res) => {
         listening_done = COALESCE(?, listening_done),
         letstalk_done = COALESCE(?, letstalk_done),
         listening_score = COALESCE(?, listening_score),
+        class_progress = COALESCE(?, class_progress),
         updated_at = datetime('now')
       WHERE id = ?`).run(
       reading_done != null ? Number(reading_done) : null,
@@ -31,24 +51,26 @@ router.put('/progress/:unitIndex', (req, res) => {
       listening_done != null ? Number(listening_done) : null,
       letstalk_done != null ? Number(letstalk_done) : null,
       listening_score != null ? Number(listening_score) : null,
+      classProgressJson,
       existing.id
     );
   } else {
     db.prepare(`INSERT INTO unit_progress
-        (user_id, unit_index, reading_done, grammar_done, listening_done, letstalk_done, listening_score)
-        VALUES (?,?,?,?,?,?,?)`).run(
+        (user_id, unit_index, reading_done, grammar_done, listening_done, letstalk_done, listening_score, class_progress)
+        VALUES (?,?,?,?,?,?,?,?)`).run(
       req.user.id, unitIndex,
       reading_done ? 1 : 0,
       grammar_done ? 1 : 0,
       listening_done ? 1 : 0,
       letstalk_done ? 1 : 0,
-      listening_score != null ? Number(listening_score) : null
+      listening_score != null ? Number(listening_score) : null,
+      classProgressJson || JSON.stringify({ '1': false, '2': false, '3': false, '4': false })
     );
   }
 
   const row = db.prepare('SELECT * FROM unit_progress WHERE user_id = ? AND unit_index = ?')
     .get(req.user.id, unitIndex);
-  res.json({ progress: row });
+  res.json({ progress: withParsedClassProgress(row) });
 });
 
 router.put('/profile', (req, res) => {

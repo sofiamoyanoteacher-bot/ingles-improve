@@ -1,7 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from './context/AuthContext.jsx';
 import Login from './pages/Login.jsx';
-import Dashboard from './pages/student/Dashboard.jsx';
+import Home from './pages/Home.jsx';
+import Progress from './pages/Progress.jsx';
+import ExtraMaterial from './pages/ExtraMaterial.jsx';
+import StudentLayout from './pages/student/StudentLayout.jsx';
 import Program from './pages/student/Program.jsx';
 import UnitDetail from './pages/student/UnitDetail.jsx';
 import Appendix from './pages/student/Appendix.jsx';
@@ -32,10 +35,14 @@ export default function App() {
     <Routes>
       <Route path="/login" element={user ? <Navigate to={user.role === 'teacher' ? '/teacher' : '/'} replace /> : <Login />} />
 
-      <Route path="/" element={<RequireAuth role="student"><Dashboard /></RequireAuth>} />
-      <Route path="/program" element={<RequireAuth role="student"><Program /></RequireAuth>} />
-      <Route path="/unit/:unitIndex" element={<RequireAuth role="student"><UnitDetail /></RequireAuth>} />
-      <Route path="/appendix/:id" element={<RequireAuth role="student"><Appendix /></RequireAuth>} />
+      <Route path="/" element={<RequireAuth role="student"><StudentLayout /></RequireAuth>}>
+        <Route index element={<Home />} />
+        <Route path="program" element={<Program />} />
+        <Route path="unit/:unitIndex" element={<UnitDetail />} />
+        <Route path="progress" element={<Progress />} />
+        <Route path="extra" element={<ExtraMaterial />} />
+        <Route path="appendix/:id" element={<Appendix />} />
+      </Route>
 
       <Route path="/teacher" element={<RequireAuth role="teacher"><TeacherLayout /></RequireAuth>}>
         <Route index element={<TeacherDashboard />} />

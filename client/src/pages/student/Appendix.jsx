@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { APPENDICES } from '../../data/appendices';
-import StudentNav from '../../components/StudentNav.jsx';
 
 function matchesQuery(row, query) {
   if (!query) return true;
@@ -110,16 +109,14 @@ export default function Appendix() {
   const appendix = APPENDICES.find((a) => a.id === id);
 
   if (!appendix) {
-    navigate('/program', { replace: true });
+    navigate('/extra', { replace: true });
     return null;
   }
 
   return (
-    <div className="min-h-screen">
-      <StudentNav />
-      <div className="max-w-[1100px] mx-auto px-6 py-7">
-        <button onClick={() => navigate('/program')} className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-sky mb-5">
-          ← Volver al programa
+    <div className="max-w-[1100px] mx-auto px-6 py-8 md:pt-8 pt-16">
+        <button onClick={() => navigate('/extra')} className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-sky mb-5">
+          ← Volver a Extra Material
         </button>
 
         <div className="card relative overflow-hidden p-7 mb-5 border-l-4 border-soft bg-gradient-to-br from-soft/10 to-purple-200/10">
@@ -153,7 +150,6 @@ export default function Appendix() {
           }
           return null;
         })}
-      </div>
     </div>
   );
 }
