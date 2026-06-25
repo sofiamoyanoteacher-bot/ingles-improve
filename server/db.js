@@ -8,7 +8,10 @@ const DB_DIR = process.env.DB_DIR
 if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
 
 const db = new Database(path.join(DB_DIR, 'improve.sqlite'));
-db.pragma('journal_mode = WAL');
+// DELETE (not WAL) journal mode: Railway's volume is networked storage and WAL's
+// shared-memory locking between processes isn't reliable there, which can leave
+// writes stuck in the -wal file and invisible to a freshly opened connection.
+db.pragma('journal_mode = DELETE');
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS users (
