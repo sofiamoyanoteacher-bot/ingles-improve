@@ -1,6 +1,22 @@
+import { useState } from 'react';
+
 export default function Logo({ size = 'md' }) {
+  const [imgFailed, setImgFailed] = useState(false);
+  const height = size === 'lg' ? 'h-12' : 'h-8';
   const dims = size === 'lg' ? 'w-14 h-14' : 'w-9 h-9';
   const text = size === 'lg' ? 'text-2xl' : 'text-base';
+
+  if (!imgFailed) {
+    return (
+      <img
+        src="/logo-improve.png"
+        alt="Ingles IMPROVE"
+        className={`${height} w-auto object-contain`}
+        onError={() => setImgFailed(true)}
+      />
+    );
+  }
+
   return (
     <div className="flex items-center gap-2.5 font-bold">
       <div className={`${dims} bg-grad rounded-full flex items-center justify-center flex-shrink-0`}>

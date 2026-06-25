@@ -57,9 +57,12 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="relative z-10 flex-shrink-0 w-full md:w-[260px] h-[180px] rounded-2xl bg-grad shadow-2xl flex items-center justify-center text-white text-5xl">
-          🎓
-        </div>
+        <img
+          src="/student-home.png"
+          alt="Estudiante de Ingles IMPROVE"
+          className="relative z-10 flex-shrink-0 w-full md:w-[280px] h-[200px] object-cover rounded-2xl shadow-2xl"
+          onError={(e) => { e.target.style.display = 'none'; }}
+        />
       </section>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
