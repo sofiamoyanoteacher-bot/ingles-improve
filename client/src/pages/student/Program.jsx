@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { UNITS, MONTHS } from '../../data/units';
+import { APPENDICES } from '../../data/appendices';
 import { useProgress } from '../../hooks/useProgress.js';
 import StudentNav from '../../components/StudentNav.jsx';
 
@@ -16,7 +17,7 @@ export default function Program() {
       <div className="max-w-[1100px] mx-auto px-6 py-7">
         <div className="mb-6">
           <h1 className="text-2xl font-bold">Programa completo</h1>
-          <p className="text-sm text-gray-500 mt-1">5 meses · 10 unidades · Seleccioná una unidad para comenzar</p>
+          <p className="text-sm text-gray-500 mt-1">5 meses · 11 unidades · Seleccioná una unidad para comenzar</p>
         </div>
 
         {!loading && MONTHS.map((m, mi) => {
@@ -58,6 +59,27 @@ export default function Program() {
             </div>
           );
         })}
+
+        <div className="mb-7">
+          <div className="text-[11px] font-bold uppercase tracking-wide text-[#534AB7] mb-3 flex items-center gap-2">
+            📚 Reference Appendices
+            <span className="flex-1 h-px bg-gradient-to-r from-soft/40 to-transparent" />
+          </div>
+          <div className="grid gap-3.5" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+            {APPENDICES.map((a) => (
+              <div
+                key={a.id}
+                onClick={() => navigate(`/appendix/${a.id}`)}
+                className="appendix-card card relative overflow-hidden border border-gray-100 p-5 cursor-pointer hover:-translate-y-1 transition-transform"
+              >
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-soft to-purple-400" />
+                <span className="appendix-badge inline-block text-[11px] font-bold px-2.5 py-1 rounded-lg mb-2.5">{a.badge}</span>
+                <div className="text-sm font-semibold mb-1.5 leading-snug">{a.title}</div>
+                <div className="text-xs text-gray-500 leading-relaxed">{a.subtitle}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

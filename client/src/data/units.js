@@ -44,7 +44,31 @@ export const UNITS = [
       'Some people say "a job is just a job." Do you agree? What makes work feel alive instead of empty?'
     ],
     talkTip:"Model: \"I wake up at seven. In the morning I take my kids to school. Then I work until six. I usually cook dinner, and at night I watch a series with my wife.\"",
-    hwTask:"Mini-presentación: Describí un día típico en tu vida en 6-8 oraciones usando el simple present. Podés grabarlo en audio o video."
+    hwTask:"Mini-presentación: Describí un día típico en tu vida en 6-8 oraciones usando el simple present. Podés grabarlo en audio o video.",
+    grammarExtra:{
+      icon:"⏱", title:"Frequency Adverbs — How often do you do it?",
+      intro:"Frequency adverbs tell us HOW OFTEN something happens. They are best friends with the simple present, because routines and habits are exactly what they describe.",
+      table:[
+        ["Adverb","Español","Frequency","Example"],
+        ["always","siempre","100%","I always wake up at five."],
+        ["usually","generalmente","~80%","She usually takes the bus."],
+        ["often","seguido","~60%","We often eat at home."],
+        ["sometimes","a veces","~40%","He sometimes works late."],
+        ["rarely","rara vez","~20%","They rarely eat fast food."],
+        ["never","nunca","0%","I never skip breakfast."]
+      ],
+      structureNotes:[
+        "Subject + ADVERB + main verb — \"I always wake up early.\" / \"She never drinks coffee.\"",
+        "Subject + am/is/are + ADVERB — \"He is always on time.\" / \"They are never bored.\""
+      ],
+      freqScale:true,
+      watch:"The adverb goes BEFORE the main verb but AFTER the verb \"to be.\"<br/>✗ <em>\"I wake always up early.\"</em> → ✓ <strong>\"I always wake up early.\"</strong><br/>✗ <em>\"He always is late.\"</em> → ✓ <strong>\"He is always late.\"</strong>",
+      practice:[
+        "How often do you cook at home?",
+        "Do you always eat breakfast? What do you usually have?",
+        "What do you rarely do but wish you did more often?"
+      ]
+    }
   },
   {
     num:"02", title:"Live from the airport", grammar:"Present Continuous", month:1,
@@ -134,7 +158,37 @@ export const UNITS = [
       "Is there a story from your past that you love to tell again and again? Why that one?"
     ],
     talkTip:"Structure: First… → Then… → Suddenly… → Finally…",
-    hwTask:"Storytelling: Contá una historia corta y verdadera sobre algo que salió mal en un viaje. Usá simple past. Audio o video de 2-3 minutos."
+    hwTask:"Storytelling: Contá una historia corta y verdadera sobre algo que salió mal en un viaje. Usá simple past. Audio o video de 2-3 minutos.",
+    grammarExtra:{
+      icon:"📅", title:"Time Words — Anchoring your story in the past",
+      intro:"Time words are the anchors of a past story. They tell your listener WHEN something happened. Without them, a story floats. With them, it lands.",
+      table:[
+        ["Time word","Español","Example"],
+        ["yesterday","ayer","I missed my flight yesterday."],
+        ["last night","anoche","We talked until last night."],
+        ["last week / month / year","la semana / mes / año pasado","She moved last year."],
+        ["ago","hace (+ tiempo)","It happened three years ago."],
+        ["in + year","en + año","I was born in 1995."],
+        ["in + month","en + mes","We met in March."],
+        ["on + date","el + fecha","It happened on December 18th."],
+        ["when I was…","cuando era / tenía…","When I was a kid, I loved football."],
+        ["that day / night","ese día / esa noche","That night changed everything."],
+        ["the day before","el día anterior","The day before, everything was fine."],
+        ["once","una vez","I missed my flight once."],
+        ["back then","en esa época","Back then, I was very different."]
+      ],
+      structureNotes:[
+        "TIME WORD + subject + simple past verb + (rest) — \"Three years ago, I arrived in Lima.\"",
+        "\"Last night, she called me and told me everything.\"",
+        "\"When I was twenty, I didn't know what I wanted.\""
+      ],
+      watch:"Time words usually go at the START or the END of the sentence — not in the middle.<br/>✓ <strong>\"Last year, I moved to Córdoba.\"</strong><br/>✓ <strong>\"I moved to Córdoba last year.\"</strong><br/>✗ <em>\"I last year moved to Córdoba.\"</em>",
+      practice:[
+        "Tell us something funny or strange that happened last week.",
+        "What did you do three years ago that you'd never do today?",
+        "\"When I was a kid, I always…\" — finish that sentence."
+      ]
+    }
   },
   {num:"04",title:"Where were you when it happened?",grammar:"Past Continuous",month:2,
     reading:`<p>Where were you on December 18th, 2022? Every Argentine remembers. I was sitting on my abuela's old sofa, and the whole family was screaming at the television.</p><p>Messi was running, the clock was ticking, and my mother was praying with her eyes closed. My uncle was not even watching — he was walking around the kitchen because he was too nervous. Outside, the city was holding its breath. Nobody was driving. Nobody was working. Even the dogs were quiet.</p><p>When France scored, my cousin was crying. When we scored again, the neighbours were banging pots from their windows. We were all sweating, laughing, and shaking at the same time.</p><p>I don't remember the exact minute we won. I only remember that my dad was hugging me while tears were falling down his face, and he wasn't saying anything. He didn't need to. Some moments are too big for words. You don't watch them — you live inside them while they are happening.</p>`,
@@ -191,9 +245,108 @@ export const UNITS = [
     listeningQ:[{q:"What do ants taste like, according to the narrator?",opts:["Chocolate","Lemon","Garlic","Nothing"],correct:1},{q:"How many countries has the narrator travelled to?",opts:["Ten","Eight","Twelve","Fifteen"],correct:2},{q:"Which country has the narrator NEVER visited?",opts:["Chile","Colombia","Brazil","Paraguay"],correct:2},{q:"How long has the narrator been practising guitar this time?",opts:["Two weeks","One month","Six months","Two months every day"],correct:3}],
     talkQ:["What are some of the surprising things the narrator has done?","What is something surprising you've done that people wouldn't expect?","Have you ever forgiven someone you were sure you never could?","Is there a place you've never visited but really want to see? Why that one?","What's still on your personal list — something you haven't done yet but plan to?"],
     talkTip:"Model: \"I've never eaten sushi, I've never broken a bone, and I've never seen the sea. But I've already run a 10k, I've already learned to drive, and I've already forgiven my brother — that's the big one.\"",
-    hwTask:"Compartí 3 'I've never…' y 3 'I've already…' sobre tu vida. Después elegí el más sorprendente y contá la historia completa. Audio o video de 2-3 minutos."
+    hwTask:"Compartí 3 'I've never…' y 3 'I've already…' sobre tu vida. Después elegí el más sorprendente y contá la historia completa. Audio o video de 2-3 minutos.",
+    grammarExtra:{
+      icon:"🔗", title:"Time Words — Connecting past to present",
+      intro:"Present perfect time words don't anchor a story to a specific point — they connect experience to NOW. They're the reason we use \"have\" instead of \"did.\"",
+      table:[
+        ["Time word","Español","Use","Example"],
+        ["ever","alguna vez","questions about life experience","Have you ever eaten insects?"],
+        ["never","nunca","negative life experience","I've never been to Brazil."],
+        ["already","ya","something done before expected","I've already finished the book."],
+        ["yet","todavía / aún","something expected but not done","I haven't called her yet."],
+        ["just","recién / justo","very recently completed","She's just arrived."],
+        ["recently","recientemente","in the recent past","I've recently started exercising."],
+        ["lately","últimamente","in the recent period","Have you been sleeping well lately?"],
+        ["for + period","hace / desde hace","duration up to now","I've lived here for ten years."],
+        ["since + point","desde","starting point up to now","I've known him since 2018."],
+        ["so far","hasta ahora","up to this point","I've made three mistakes so far."],
+        ["up to now","hasta ahora","same as so far","Up to now, everything is fine."]
+      ],
+      extraBlocks:[
+        {
+          heading:"FOR vs SINCE — the classic confusion",
+          rows:[
+            {label:"FOR = duration (how long)", examples:['"I\'ve studied English FOR two years."','"She\'s lived here FOR six months."']},
+            {label:"SINCE = starting point (from when)", examples:['"I\'ve studied English SINCE 2022."','"She\'s lived here SINCE March."']}
+          ],
+          note:"Trick: FOR + period of time / SINCE + specific moment"
+        },
+        {
+          heading:"ALREADY, YET, JUST — position matters",
+          rows:[
+            {label:"already → before the past participle (or end)", examples:['"I\'ve already eaten." / "I\'ve eaten already."']},
+            {label:"yet → at the end, only in negatives and questions", examples:['"I haven\'t eaten yet." / "Have you eaten yet?"']},
+            {label:"just → before the past participle", examples:['"I\'ve just eaten. I\'m not hungry."']}
+          ]
+        }
+      ],
+      watch:"NEVER use present perfect with a finished time word.<br/>✗ <em>\"I've been to Lima last year.\"</em><br/>✓ <strong>\"I went to Lima last year.\"</strong> (specific time → simple past)<br/>✓ <strong>\"I've been to Lima.\"</strong> (no specific time → present perfect)",
+      practice:[
+        "Have you ever done something that really surprised you? Tell us.",
+        "What haven't you done yet that you really want to do?",
+        "How long have you been living in your current city?"
+      ]
+    }
   },
-  {num:"08",title:"The best city to live in — is it yours?",grammar:"Comparatives & Superlatives",month:4,reading:`<p>Everybody thinks their city is the best — and everybody is a little bit right. I was born in Córdoba, but I've lived in Buenos Aires, Mendoza, and Montevideo. People always ask me which one is better. Honestly? It's the hardest question in the world.</p><p>Buenos Aires is bigger, louder, and more exciting than anywhere else. But it's also more stressful and more expensive. Mendoza is calmer and cleaner, and the wine is cheaper and better. Montevideo is the most relaxed city I know — slower, friendlier, and safer than the rest.</p><p>Córdoba? It has the funniest people in the country and the worst traffic. But it's home, so for me it will always be the most beautiful.</p><p>The truth is, there is no "best" city. The happiest people aren't in the richest places. The best city is the one where you sleep well, laugh often, and feel less alone. Sometimes that's a huge capital. Sometimes it's a small town nobody has heard of. The best city is the one that feels like yours.</p>`,
+  {
+    num:"08", title:"Shopping in Palermo — how much and how many?", grammar:"Countable & Uncountable Nouns", month:4,
+    reading:`<p>My favourite Sunday plan is walking around Palermo Soho and spending money I don't have.</p>
+<p>First stop: the market on Plaza Serrano. There is always a lot of fruit — mangoes, strawberries, figs. How many mangoes do I need? Probably three. How much money do I have? Not enough.</p>
+<p>I buy some coffee beans too. Coffee is uncountable, so you can't say "a coffee bean is an uncountable noun" — the bean is countable, but the coffee inside it is not. Language is strange.</p>
+<p>Then I walk into a little bookshop. There are a few books about cooking, a couple of travel guides, and one very old dictionary. Books are countable. Knowledge is not.</p>
+<p>At lunch, I sit at a café. The waiter asks: "How much water do you want?" and "How many glasses?" Both questions make sense, but they ask about different things. Water flows; glasses stand still.</p>
+<p>I walk home with too many bags and too little money. But I have a lot of happiness. And happiness, like water and knowledge and coffee, is uncountable.</p>`,
+    vocab:[
+      {word:"countable",trans:"contable",ex:'"Books are countable nouns."'},
+      {word:"uncountable",trans:"incontable",ex:'"Water is an uncountable noun."'},
+      {word:"a few",trans:"algunos/as (poco)",ex:'"I have a few friends in this city."'},
+      {word:"a little",trans:"un poco de",ex:'"She drinks a little coffee every morning."'},
+      {word:"a lot of",trans:"mucho/a/os/as",ex:'"There is a lot of fruit at the market."'},
+      {word:"how many",trans:"cuántos/as",ex:'"How many eggs do you need?"'},
+      {word:"how much",trans:"cuánto/a",ex:'"How much time do we have?"'},
+      {word:"enough",trans:"suficiente",ex:'"I don\'t have enough money."'},
+    ],
+    grammarExamples:[
+      '"There is a lot of fruit."',
+      '"How many mangoes do I need?"',
+      '"How much money do I have?"',
+      '"There are a few books about cooking."',
+      '"I have a lot of happiness."'
+    ],
+    grammarRule:"Nouns in English are either countable (you can count them: one book, two books) or uncountable (you can't count them: water, money, music, knowledge). This changes the words you use before them.",
+    grammarTable:[
+      ["","Countable","Uncountable"],
+      ["Singular","a book / one book","—"],
+      ["Plural","books / three books","—"],
+      ["Some (affirmative)","some books","some water"],
+      ["Any (negative/question)","any books?","any water?"],
+      ["A few / a little","a few books","a little water"],
+      ["A lot of","a lot of books","a lot of water"],
+      ["How many / how much","How many books?","How much water?"],
+      ["Enough","enough books","enough water"]
+    ],
+    grammarWatch:"<strong>Common uncountable nouns:</strong> advice, bread, coffee, furniture, hair, homework, information, knowledge, luggage, money, music, news, progress, rain, research, rice, sugar, time, traffic, travel, water, weather, work.<br/>✗ <em>\"I need an information.\"</em> → ✓ <strong>\"I need some information.\"</strong><br/>✗ <em>\"She gave me an advice.\"</em> → ✓ <strong>\"She gave me some advice.\"</strong><br/>✗ <em>\"How many money?\"</em> → ✓ <strong>\"How much money?\"</strong>",
+    grammarTip:"\"News\" looks plural but it's always singular and uncountable: <strong>\"The news IS bad today,\"</strong> never \"the news ARE bad.\" Same with information, advice, furniture, and homework.",
+    listeningTitle:"Sunday in Palermo",
+    listeningDesc:"Escuchá el paseo por Palermo y respondé las preguntas.",
+    listeningQ:[
+      {q:"What does the narrator buy at the market?",opts:["Vegetables and bread","Mangoes, strawberries, figs and coffee beans","Books and water","Clothes and shoes"],correct:1},
+      {q:"Why can't you say \"a coffee\" to mean the substance?",opts:["Because coffee is too expensive","Because coffee is an uncountable noun","Because you always order two","Because it's always in a cup"],correct:1},
+      {q:"What does the narrator buy at the bookshop?",opts:["Travel guides only","A dictionary only","Nothing — she just looks","Some books about cooking, travel guides, and a dictionary"],correct:3},
+      {q:"What does the narrator say about happiness?",opts:["You can count it easily","It is like books — countable","It is uncountable, like water and knowledge","It costs a lot of money"],correct:2},
+    ],
+    talkQ:[
+      "What is a countable noun from your home? And an uncountable one?",
+      "How many cups of coffee (or tea) do you drink a day? How much sugar do you use?",
+      "The narrator says books are countable but knowledge is not. What do you think — is that a good way to think about it?",
+      "Look around the room right now. Name five countable things and three uncountable things.",
+      '"I have a lot of happiness but not enough money." Do you agree that some of the most important things in life are uncountable?'
+    ],
+    talkTip:"Model: \"In my kitchen there is a lot of food. There are a few apples and some bread. There isn't much sugar, but there are enough cups for everyone.\"",
+    hwTask:"Grabá un audio o video de 2 minutos describiendo tu cocina, tu mochila o tu cuarto usando sustantivos contables e incontables. Usá: there is/are, a lot of, a few, a little, how much/many, enough."
+  },
+  {num:"09",title:"The best city to live in — is it yours?",grammar:"Comparatives & Superlatives",month:4,reading:`<p>Everybody thinks their city is the best — and everybody is a little bit right. I was born in Córdoba, but I've lived in Buenos Aires, Mendoza, and Montevideo. People always ask me which one is better. Honestly? It's the hardest question in the world.</p><p>Buenos Aires is bigger, louder, and more exciting than anywhere else. But it's also more stressful and more expensive. Mendoza is calmer and cleaner, and the wine is cheaper and better. Montevideo is the most relaxed city I know — slower, friendlier, and safer than the rest.</p><p>Córdoba? It has the funniest people in the country and the worst traffic. But it's home, so for me it will always be the most beautiful.</p><p>The truth is, there is no "best" city. The happiest people aren't in the richest places. The best city is the one where you sleep well, laugh often, and feel less alone. Sometimes that's a huge capital. Sometimes it's a small town nobody has heard of. The best city is the one that feels like yours.</p>`,
     vocab:[{word:"loud / louder",trans:"ruidoso / más ruidoso",ex:'"The party next door is louder than ours."'},{word:"stressful",trans:"estresante",ex:'"December is the most stressful month at work."'},{word:"expensive",trans:"caro",ex:'"Flights are more expensive in summer."'},{word:"calm / calmer",trans:"tranquilo / más tranquilo",ex:'"I feel calmer near the mountains."'},{word:"cheap / cheaper",trans:"barato / más barato",ex:'"The market is cheaper than the supermarket."'},{word:"friendly / friendlier",trans:"amable / más amable",ex:'"Small towns are usually friendlier."'},{word:"traffic",trans:"tráfico",ex:'"The traffic here is a nightmare at six."'},{word:"alone",trans:"solo",ex:'"A good city makes you feel less alone."'}],
     grammarExamples:['"Buenos Aires is bigger and louder than anywhere else."','"Mendoza is calmer and cleaner."','"The wine is cheaper and better."','"Montevideo is the most relaxed city I know."','"It has the funniest people and the worst traffic."'],
     grammarRule:"To compare two things use comparatives (-er or more); to talk about the top of a group use superlatives (the -est or the most).",
@@ -207,7 +360,7 @@ export const UNITS = [
     talkTip:"Model: \"My city is greener than yours, and the food is cheaper. We have the friendliest people in the country. Your city is more exciting, sure — but it's also more dangerous and much louder.\"",
     hwTask:"Debate: Defendé tu ciudad favorita comparándola con otra. Usá al menos 5 comparativos y 2 superlativos. Audio o video de 2 minutos."
   },
-  {num:"09",title:"The restaurant I'll never forget",grammar:"Adjectives & Adverbs",month:5,reading:`<p>It was a small, ugly restaurant on a quiet street in Salta, and it served the best food I've ever eaten.</p><p>We almost didn't go in. The sign was old, the door was heavy, and the lights were dim. But we were terribly hungry, so we walked in slowly and sat down nervously in the corner.</p><p>The owner, an old woman with bright eyes, moved quickly between the tables. She didn't give us a menu. She simply looked at us carefully and said, "I'll decide."</p><p>We laughed nervously and agreed. The food came out hot, fresh, and beautiful. The empanadas were perfectly crispy. The wine was deep and warm. We ate hungrily and talked loudly, like old friends, even though we had just met that morning.</p><p>She cooked everything herself, slowly and lovingly, like it actually mattered. And it did. We finished happily, paid almost nothing, and stepped outside into the cold mountain air.</p><p>Some places feed your stomach. The truly special ones feed something deeper, quietly, when you least expect it.</p>`,
+  {num:"10",title:"The restaurant I'll never forget",grammar:"Adjectives & Adverbs",month:5,reading:`<p>It was a small, ugly restaurant on a quiet street in Salta, and it served the best food I've ever eaten.</p><p>We almost didn't go in. The sign was old, the door was heavy, and the lights were dim. But we were terribly hungry, so we walked in slowly and sat down nervously in the corner.</p><p>The owner, an old woman with bright eyes, moved quickly between the tables. She didn't give us a menu. She simply looked at us carefully and said, "I'll decide."</p><p>We laughed nervously and agreed. The food came out hot, fresh, and beautiful. The empanadas were perfectly crispy. The wine was deep and warm. We ate hungrily and talked loudly, like old friends, even though we had just met that morning.</p><p>She cooked everything herself, slowly and lovingly, like it actually mattered. And it did. We finished happily, paid almost nothing, and stepped outside into the cold mountain air.</p><p>Some places feed your stomach. The truly special ones feed something deeper, quietly, when you least expect it.</p>`,
     vocab:[{word:"ugly",trans:"feo",ex:'"It was an ugly building with a beautiful soul."'},{word:"dim",trans:"tenue (luz)",ex:'"The light was dim and romantic."'},{word:"nervously",trans:"nerviosamente",ex:'"He waited nervously for the results."'},{word:"crispy",trans:"crocante",ex:'"I love crispy fried potatoes."'},{word:"deep",trans:"profundo",ex:'"She has a deep, calm voice."'},{word:"lovingly",trans:"con cariño",ex:'"She wrapped the gift lovingly."'},{word:"quietly",trans:"en silencio, en voz baja",ex:'"He closed the door quietly."'},{word:"to feed",trans:"alimentar",ex:'"Good music feeds the soul."'}],
     grammarExamples:['"It was a small, ugly restaurant on a quiet street."','"The owner moved quickly between the tables."','"We walked in slowly and sat down nervously."','"The empanadas were perfectly crispy."','"She cooked everything slowly and lovingly."'],
     grammarRule:"Adjectives describe nouns (a quiet street). Adverbs describe verbs — how something is done (she moved quickly). Most adverbs = adjective + -ly.",
@@ -221,7 +374,7 @@ export const UNITS = [
     talkTip:"Model: \"It was a noisy, colourful market. People walked quickly and shouted cheerfully. An old man played the guitar softly in the corner. The fruit smelled sweet, and everything felt wonderfully alive.\"",
     hwTask:"Describí un lugar memorable (un restaurante, una casa, un mercado). Usá al menos 5 adjetivos y 5 adverbios. Audio o video de 2 minutos."
   },
-  {num:"10",title:"From zero to conversation — student stories",grammar:"All Tenses",month:5,reading:`<p>Three years ago, Marcela couldn't say "hello" in English. Today she works as a tour guide in Cartagena.</p><p>"I was so scared at the beginning," she says. "I am still learning, but now I talk to tourists every single day. Last week I helped a family from Canada find their hotel. They were lost, and I understood everything. I almost cried."</p><p>Diego started later, at fifty-two. "People told me I was too old. I didn't listen. I've studied for two years now, and next month I'm going to give a presentation in English at work. I will probably make mistakes, and that's fine."</p><p>And Sofía? She was failing every class. "I hated English. Then I met a teacher who made me laugh. Everything changed. I've made friends from six countries. I am writing a blog now, and one day I will live abroad."</p><p>Three people. Three stories. One truth: nobody is born speaking English. Everybody starts at zero. The ones who succeed are simply the ones who keep going, one imperfect sentence at a time.</p>`,
+  {num:"11",title:"From zero to conversation — student stories",grammar:"All Tenses",month:5,reading:`<p>Three years ago, Marcela couldn't say "hello" in English. Today she works as a tour guide in Cartagena.</p><p>"I was so scared at the beginning," she says. "I am still learning, but now I talk to tourists every single day. Last week I helped a family from Canada find their hotel. They were lost, and I understood everything. I almost cried."</p><p>Diego started later, at fifty-two. "People told me I was too old. I didn't listen. I've studied for two years now, and next month I'm going to give a presentation in English at work. I will probably make mistakes, and that's fine."</p><p>And Sofía? She was failing every class. "I hated English. Then I met a teacher who made me laugh. Everything changed. I've made friends from six countries. I am writing a blog now, and one day I will live abroad."</p><p>Three people. Three stories. One truth: nobody is born speaking English. Everybody starts at zero. The ones who succeed are simply the ones who keep going, one imperfect sentence at a time.</p>`,
     vocab:[{word:"scared",trans:"asustado",ex:'"I was scared, but I did it anyway."'},{word:"tour guide",trans:"guía turístico",ex:'"Our tour guide knew every street by name."'},{word:"lost",trans:"perdido",ex:'"We got completely lost in the old town."'},{word:"to fail",trans:"reprobar, fracasar",ex:'"I failed the test, then I tried again."'},{word:"to succeed",trans:"tener éxito, lograrlo",ex:'"You succeed by not giving up."'},{word:"abroad",trans:"en el extranjero",ex:'"She has always wanted to live abroad."'},{word:"to keep going",trans:"seguir adelante",ex:'"It\'s hard, but keep going."'},{word:"imperfect",trans:"imperfecto",ex:'"An imperfect sentence is better than silence."'}],
     grammarExamples:['"Simple present — Today she works as a tour guide."','"Simple past — Last week I helped a family from Canada."','"Past continuous — She was failing every class."','"Present continuous — I am writing a blog now."','"Present perfect — I\'ve made friends from six countries."','"Future — Next month I\'m going to give a presentation."'],
     grammarRule:"This unit pulls everything together. Each tense answers a different question about time: is it a habit, happening now, finished, in progress, linked to now, or still ahead?",
@@ -245,5 +398,5 @@ export const MONTHS = [
   {label:"Mes 5 — Express yourself"}
 ];
 
-// Narrator gender per unit index: male (0,2,4,6,7,8,9) / female (1,3,5)
-export const NARRATOR_GENDER = ['male','female','male','female','male','female','male','male','female','male'];
+// Narrator gender per unit index (11 units): male (0,2,4,6,8,10) / female (1,3,5,7,9)
+export const NARRATOR_GENDER = ['male','female','male','female','male','female','male','female','male','female','male'];

@@ -40,3 +40,22 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
+
+.appendix-card {
+  border-left: 4px solid var(--soft);
+  background: linear-gradient(135deg, rgba(181, 190, 234, 0.08), rgba(167, 139, 250, 0.06));
+}
+
+.appendix-badge {
+  background: linear-gradient(135deg, var(--soft), #a78bfa);
+  color: #fff;
+}
+
+.appendix-search {
+  width: 100%;
+}
+
+.appendix-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

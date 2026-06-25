@@ -4,6 +4,7 @@ import Login from './pages/Login.jsx';
 import Dashboard from './pages/student/Dashboard.jsx';
 import Program from './pages/student/Program.jsx';
 import UnitDetail from './pages/student/UnitDetail.jsx';
+import Appendix from './pages/student/Appendix.jsx';
 import TeacherLayout from './pages/teacher/TeacherLayout.jsx';
 import TeacherDashboard from './pages/teacher/TeacherDashboard.jsx';
 import Students from './pages/teacher/Students.jsx';
@@ -34,6 +35,7 @@ export default function App() {
       <Route path="/" element={<RequireAuth role="student"><Dashboard /></RequireAuth>} />
       <Route path="/program" element={<RequireAuth role="student"><Program /></RequireAuth>} />
       <Route path="/unit/:unitIndex" element={<RequireAuth role="student"><UnitDetail /></RequireAuth>} />
+      <Route path="/appendix/:id" element={<RequireAuth role="student"><Appendix /></RequireAuth>} />
 
       <Route path="/teacher" element={<RequireAuth role="teacher"><TeacherLayout /></RequireAuth>}>
         <Route index element={<TeacherDashboard />} />

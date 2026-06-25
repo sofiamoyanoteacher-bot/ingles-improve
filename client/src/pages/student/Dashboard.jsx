@@ -34,7 +34,7 @@ export default function Dashboard() {
         </div>
 
         <div className="grid gap-4 mb-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
-          <DashCard icon="📚" iconBg="bg-grad" title="Mi programa" desc="10 unidades · 5 meses · 2 clases por semana" onClick={() => navigate('/program')} />
+          <DashCard icon="📚" iconBg="bg-grad" title="Mi programa" desc="11 unidades · 5 meses · 2 clases por semana" onClick={() => navigate('/program')} />
           <DashCard icon="▶️" iconBg="bg-gradient-to-br from-sky to-soft" title="Continuar" desc={`Unit ${continueUnit.num} — ${continueUnit.title}`} onClick={() => navigate(`/unit/${continueIndex}`)} />
           <DashCard icon="🎧" iconBg="bg-gradient-to-br from-mag to-purple-400" title="Listening" desc="Ejercicios de comprensión oral por unidad" onClick={() => navigate('/program')} />
           <DashCard icon="📤" iconBg="bg-gradient-to-br from-soft to-sky" title="Homework" desc="Subir audio, video, Word o PDF" onClick={() => navigate(`/unit/${continueIndex}?tab=homework`)} />
