@@ -12,20 +12,38 @@ function stripHtml(html) {
     .trim();
 }
 
+const FEMALE_VOICE_KW = [
+  'female', 'woman', 'girl', 'zira', 'samantha', 'victoria', 'karen', 'moira', 'tessa', 'fiona',
+  'susan', 'kate', 'alice', 'aria', 'jenny', 'michelle', 'ana', 'emma', 'sonia', 'libby', 'olivia',
+  'salli', 'joanna', 'kimberly', 'amy', 'eva', 'hazel',
+];
+const MALE_VOICE_KW = [
+  'male', 'man', 'guy', 'david', 'daniel', 'alex', 'george', 'lee', 'rishi', 'arthur', 'fred',
+  'oliver', 'mark', 'guy', 'ryan', 'christopher', 'eric', 'matthew', 'brian', 'justin', 'andrew',
+  'tony', 'liam', 'james', 'thomas', 'sean',
+];
+
+// Picks a distinct voice per gender when possible. Returns the matched voice plus
+// whether the match was a real gender-named voice, so the caller can compensate
+// with pitch when the browser only exposes one generic English voice.
 function pickVoice(availableVoices, gender) {
-  if (!availableVoices.length) return null;
+  if (!availableVoices.length) return { voice: null, matched: false };
   const en = availableVoices.filter((v) => v.lang.startsWith('en'));
   const us = en.filter((v) => v.lang === 'en-US');
   const pool = us.length ? us : en.length ? en : availableVoices;
 
-  const femaleKw = ['female', 'woman', 'girl', 'zira', 'samantha', 'victoria', 'karen', 'moira', 'tessa', 'fiona', 'susan', 'kate', 'alice'];
-  const maleKw = ['male', 'man', 'guy', 'david', 'daniel', 'alex', 'george', 'lee', 'rishi', 'arthur', 'fred', 'oliver'];
-  const femalePool = pool.filter((v) => femaleKw.some((k) => v.name.toLowerCase().includes(k)));
-  const malePool = pool.filter((v) => maleKw.some((k) => v.name.toLowerCase().includes(k)));
+  const femalePool = pool.filter((v) => FEMALE_VOICE_KW.some((k) => v.name.toLowerCase().includes(k)));
+  const malePool = pool.filter((v) => MALE_VOICE_KW.some((k) => v.name.toLowerCase().includes(k)));
 
-  if (gender === 'female' && femalePool.length) return femalePool[0];
-  if (gender === 'male' && malePool.length) return malePool[0];
-  return pool[gender === 'female' ? 0 : Math.min(1, pool.length - 1)] || null;
+  if (gender === 'female' && femalePool.length) return { voice: femalePool[0], matched: true };
+  if (gender === 'male' && malePool.length) return { voice: malePool[0], matched: true };
+
+  // No voice explicitly named for this gender — try to at least pick a different
+  // voice than the other gender would get, so units still sound distinct.
+  const otherPool = gender === 'male' ? femalePool : malePool;
+  const remaining = pool.filter((v) => !otherPool.includes(v));
+  const fallbackPool = remaining.length ? remaining : pool;
+  return { voice: fallbackPool[0] || null, matched: false };
 }
 
 export default function Listening({ unit, unitIndex, onComplete }) {
@@ -73,9 +91,13 @@ export default function Listening({ unit, unitIndex, onComplete }) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
     utterance.rate = 0.88;
-    utterance.pitch = 1.0;
-    const voice = pickVoice(voicesRef.current, gender);
+
+    const { voice, matched } = pickVoice(voicesRef.current, gender);
     if (voice) utterance.voice = voice;
+
+    // If the browser didn't expose a voice explicitly named for this gender,
+    // shift the pitch so male/female units still sound clearly different.
+    utterance.pitch = matched ? 1.0 : gender === 'male' ? 0.75 : 1.3;
 
     let charCount = 0;
     const charTotal = text.length;
