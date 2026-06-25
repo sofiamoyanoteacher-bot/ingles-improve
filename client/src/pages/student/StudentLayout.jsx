@@ -19,7 +19,7 @@ export default function StudentLayout() {
       <button
         onClick={() => setDrawerOpen(true)}
         className="md:hidden fixed top-3 left-3 z-[98] w-10 h-10 rounded-xl bg-white shadow-soft flex items-center justify-center text-lg"
-        aria-label="Abrir menú"
+        aria-label="Open menu"
       >
         ☰
       </button>

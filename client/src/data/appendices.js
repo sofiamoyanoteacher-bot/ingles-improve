@@ -4,14 +4,14 @@
 export const APPENDICES = [
   {
     id: 'a',
-    badge: 'ANEXO A',
+    badge: 'APPENDIX A',
     title: 'Irregular Verbs — The ones you need to know',
     subtitle: "These verbs don't follow the -ed rule. Learn them in groups — they're easier that way.",
     searchable: true,
     sections: [
       {
         type: 'table',
-        columns: ['Infinitive', 'Simple Past', 'Past Participle', 'Español'],
+        columns: ['Infinitive', 'Simple Past', 'Past Participle', 'Spanish'],
         rows: [
           ['be', 'was / were', 'been', 'ser / estar'],
           ['beat', 'beat', 'beaten', 'golpear / ganar'],
@@ -86,11 +86,11 @@ export const APPENDICES = [
       },
       {
         type: 'cards',
-        title: 'Grupos de verbos irregulares',
+        title: 'Irregular verb groups',
         cards: [
-          { heading: 'Grupo 1 — AAA (no cambian)', text: 'cost-cost-cost · cut-cut-cut · hit-hit-hit · hurt-hurt-hurt · let-let-let · put-put-put · read-read-read · set-set-set' },
-          { heading: 'Grupo 2 — ABA (pasado = participio)', text: 'bring-brought-brought · buy-bought-bought · catch-caught-caught · feel-felt-felt · find-found-found · have-had-had · hear-heard-heard · keep-kept-kept · leave-left-left · lose-lost-lost · make-made-made · mean-meant-meant · meet-met-met · pay-paid-paid · say-said-said · sell-sold-sold · send-sent-sent · sit-sat-sat · sleep-slept-slept · spend-spent-spent · stand-stood-stood · teach-taught-taught · tell-told-told · think-thought-thought · win-won-won' },
-          { heading: 'Grupo 3 — ABC (los tres distintos)', text: 'be-was/were-been · begin-began-begun · break-broke-broken · choose-chose-chosen · come-came-come · do-did-done · drink-drank-drunk · drive-drove-driven · eat-ate-eaten · fall-fell-fallen · fly-flew-flown · forget-forgot-forgotten · give-gave-given · go-went-gone · grow-grew-grown · know-knew-known · ride-rode-ridden · run-ran-run · see-saw-seen · show-showed-shown · sing-sang-sung · speak-spoke-spoken · steal-stole-stolen · swim-swam-swum · take-took-taken · throw-threw-thrown · wake-woke-woken · wear-wore-worn · write-wrote-written' },
+          { heading: 'Group 1 — AAA (no change)', text: 'cost-cost-cost · cut-cut-cut · hit-hit-hit · hurt-hurt-hurt · let-let-let · put-put-put · read-read-read · set-set-set' },
+          { heading: 'Group 2 — ABA (past = participle)', text: 'bring-brought-brought · buy-bought-bought · catch-caught-caught · feel-felt-felt · find-found-found · have-had-had · hear-heard-heard · keep-kept-kept · leave-left-left · lose-lost-lost · make-made-made · mean-meant-meant · meet-met-met · pay-paid-paid · say-said-said · sell-sold-sold · send-sent-sent · sit-sat-sat · sleep-slept-slept · spend-spent-spent · stand-stood-stood · teach-taught-taught · tell-told-told · think-thought-thought · win-won-won' },
+          { heading: 'Group 3 — ABC (all three different)', text: 'be-was/were-been · begin-began-begun · break-broke-broken · choose-chose-chosen · come-came-come · do-did-done · drink-drank-drunk · drive-drove-driven · eat-ate-eaten · fall-fell-fallen · fly-flew-flown · forget-forgot-forgotten · give-gave-given · go-went-gone · grow-grew-grown · know-knew-known · ride-rode-ridden · run-ran-run · see-saw-seen · show-showed-shown · sing-sang-sung · speak-spoke-spoken · steal-stole-stolen · swim-swam-swum · take-took-taken · throw-threw-thrown · wake-woke-woken · wear-wore-worn · write-wrote-written' },
         ],
       },
     ],
@@ -98,7 +98,7 @@ export const APPENDICES = [
 
   {
     id: 'b',
-    badge: 'ANEXO B',
+    badge: 'APPENDIX B',
     title: 'Grammar at a glance — All tenses, one place',
     subtitle: 'A summary card per tense: affirmative, negative, question, use, and time signals.',
     searchable: false,
@@ -196,7 +196,7 @@ export const APPENDICES = [
 
   {
     id: 'c',
-    badge: 'ANEXO C',
+    badge: 'APPENDIX C',
     title: 'Adjectives — describing the world around you',
     subtitle: 'Personality, appearance, feelings, places — plus comparative and superlative forms.',
     searchable: true,
@@ -204,7 +204,7 @@ export const APPENDICES = [
       {
         type: 'table',
         heading: 'Personality & character',
-        columns: ['Adjective', 'Español', 'Opposite', 'Español'],
+        columns: ['Adjective', 'Spanish', 'Opposite', 'Spanish'],
         rows: [
           ['kind', 'amable', 'unkind / mean', 'antipático'],
           ['friendly', 'simpático', 'unfriendly', 'poco amable'],
@@ -221,7 +221,7 @@ export const APPENDICES = [
       {
         type: 'table',
         heading: 'Appearance & physical',
-        columns: ['Adjective', 'Español', 'Opposite', 'Español'],
+        columns: ['Adjective', 'Spanish', 'Opposite', 'Spanish'],
         rows: [
           ['tall', 'alto', 'short', 'bajo'],
           ['thin', 'delgado', 'heavy / overweight', 'pesado'],
@@ -233,7 +233,7 @@ export const APPENDICES = [
       {
         type: 'table',
         heading: 'Feelings & emotions',
-        columns: ['Adjective', 'Español', 'Context'],
+        columns: ['Adjective', 'Spanish', 'Context'],
         rows: [
           ['excited', 'emocionado', 'before something good'],
           ['nervous', 'nervioso', 'before something uncertain'],
@@ -250,7 +250,7 @@ export const APPENDICES = [
       {
         type: 'table',
         heading: 'Describing places & things',
-        columns: ['Adjective', 'Español', 'Adjective', 'Español'],
+        columns: ['Adjective', 'Spanish', 'Adjective', 'Spanish'],
         rows: [
           ['huge / enormous', 'enorme', 'tiny / small', 'pequeño'],
           ['crowded', 'lleno de gente', 'empty', 'vacío'],
@@ -289,7 +289,7 @@ export const APPENDICES = [
 
   {
     id: 'd',
-    badge: 'ANEXO D',
+    badge: 'APPENDIX D',
     title: 'Adverbs — the how, when, where, and how much of English',
     subtitle: 'Manner, frequency, degree, and time — plus where to place them in a sentence.',
     searchable: true,
@@ -298,7 +298,7 @@ export const APPENDICES = [
         type: 'table',
         heading: 'Adverbs of manner (how?)',
         intro: 'Formed from adjectives + -ly. They describe HOW an action is done.',
-        columns: ['Adjective', 'Adverb', 'Español', 'Example'],
+        columns: ['Adjective', 'Adverb', 'Spanish', 'Example'],
         rows: [
           ['quick', 'quickly', 'rápidamente', 'She moved quickly.'],
           ['slow', 'slowly', 'lentamente', 'Walk slowly.'],
@@ -330,7 +330,7 @@ export const APPENDICES = [
         type: 'table',
         heading: 'Adverbs of degree (how much?)',
         intro: 'These modify adjectives or other adverbs — they intensify or reduce.',
-        columns: ['Adverb', 'Español', 'Strength', 'Example'],
+        columns: ['Adverb', 'Spanish', 'Strength', 'Example'],
         rows: [
           ['absolutely', 'absolutamente', 'very strong (with extreme adjectives)', 'It was absolutely perfect.'],
           ['extremely', 'extremadamente', 'very strong', 'She is extremely talented.'],
@@ -348,7 +348,7 @@ export const APPENDICES = [
       {
         type: 'table',
         heading: 'Adverbs of time (when?)',
-        columns: ['Adverb', 'Español', 'Example'],
+        columns: ['Adverb', 'Spanish', 'Example'],
         rows: [
           ['now', 'ahora', 'What are you doing now?'],
           ['then', 'entonces / luego', 'First we ate, then we walked.'],
@@ -375,7 +375,7 @@ export const APPENDICES = [
 
   {
     id: 'e',
-    badge: 'ANEXO E',
+    badge: 'APPENDIX E',
     title: 'Countable & Uncountable — the complete guide',
     subtitle: 'The core rule, quantifiers, and the most common mistakes Spanish speakers make.',
     searchable: true,
@@ -399,7 +399,7 @@ export const APPENDICES = [
       {
         type: 'table',
         heading: 'Quantifiers reference table',
-        columns: ['Quantifier', 'Countable', 'Uncountable', 'Español'],
+        columns: ['Quantifier', 'Countable', 'Uncountable', 'Spanish'],
         rows: [
           ['a / an', 'a book', '✗', 'un/una'],
           ['some', 'some books', 'some water', 'algunos / un poco de'],

@@ -45,7 +45,7 @@ export default function Class4Game({ unit, unitIndex }) {
           🎮 {unit.gameType === 'wordsearch' ? 'Word Search' : unit.gameType === 'matching' ? 'Matching Game' : 'Crossword'}
         </h3>
         <GameByType unit={unit} unitIndex={unitIndex} onGameComplete={() => setGameDone(true)} />
-        {gameDone && <p className="text-xs text-green-600 font-semibold mt-3">¡Juego completado! Ya podés seguir con el homework.</p>}
+        {gameDone && <p className="text-xs text-green-600 font-semibold mt-3">Game completed! You can move on to the homework now.</p>}
       </div>
 
       {unit.grammarTip && (

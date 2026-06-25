@@ -35,7 +35,7 @@ function TableSection({ section, query }) {
               </tr>
             ))}
             {rows.length === 0 && (
-              <tr><td colSpan={section.columns.length} className="px-3.5 py-4 text-center text-gray-400">Sin resultados</td></tr>
+              <tr><td colSpan={section.columns.length} className="px-3.5 py-4 text-center text-gray-400">No results</td></tr>
             )}
           </tbody>
         </table>
@@ -116,7 +116,7 @@ export default function Appendix() {
   return (
     <div className="max-w-[1100px] mx-auto px-6 py-8 md:pt-8 pt-16">
         <button onClick={() => navigate('/extra')} className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-sky mb-5">
-          ← Volver a Extra Material
+          ← Back to Extra Material
         </button>
 
         <div className="card relative overflow-hidden p-7 mb-5 border-l-4 border-soft bg-gradient-to-br from-soft/10 to-purple-200/10">

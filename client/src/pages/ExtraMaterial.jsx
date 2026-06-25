@@ -63,7 +63,7 @@ export default function ExtraMaterial() {
             className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm mb-2 outline-none focus:border-sky"
           />
           <div className="text-[13px] text-gray-600 leading-relaxed">
-            {verbResult === 'regular' && 'No está en la lista de verbos irregulares — probablemente es regular (+ -ed).'}
+            {verbResult === 'regular' && "Not in the irregular verbs list — it's probably regular (+ -ed)."}
             {verbResult && verbResult !== 'regular' && (
               <span>Simple Past: <strong>{verbResult[1]}</strong> · Past Participle: <strong>{verbResult[2]}</strong> · {verbResult[3]}</span>
             )}
@@ -80,8 +80,8 @@ export default function ExtraMaterial() {
             className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm mb-2 outline-none focus:border-sky"
           />
           <div className="text-[13px] text-gray-600 leading-relaxed">
-            {nounResult === 'uncountable' && 'Uncountable — usá some / much / a little (no "a/an", no plural).'}
-            {nounResult === 'countable' && 'Probablemente countable — usá a/an / many / a few, y puede ir en plural.'}
+            {nounResult === 'uncountable' && 'Uncountable — use some / much / a little (no "a/an", no plural).'}
+            {nounResult === 'countable' && 'Probably countable — use a/an / many / a few, and it can take a plural form.'}
           </div>
         </div>
       </div>

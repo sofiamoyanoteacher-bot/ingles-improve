@@ -71,7 +71,7 @@ export default function Sidebar({ open, onClose, onProfileClick, user, onLogout 
         <div className="p-4 border-t border-gray-200 flex items-center gap-2.5">
           <Avatar name={user?.name} lastName={user?.last_name} size="sm" />
           <span className="text-[13px] font-semibold flex-1 truncate">{user?.name} {user?.last_name}</span>
-          <button onClick={onLogout} className="text-gray-400 hover:text-mag text-base" title="Cerrar sesión">⏻</button>
+          <button onClick={onLogout} className="text-gray-400 hover:text-mag text-base" title="Log out">⏻</button>
         </div>
       </aside>
     </>

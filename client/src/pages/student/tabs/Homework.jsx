@@ -43,10 +43,10 @@ export default function Homework({ unit, unitIndex }) {
     setFiles((prev) => {
       const next = [...prev];
       for (const f of incoming) {
-        if (next.length >= MAX_FILES) { setError('Máximo 5 archivos por entrega.'); break; }
+        if (next.length >= MAX_FILES) { setError('Maximum 5 files per submission.'); break; }
         const ext = f.name.split('.').pop().toLowerCase();
-        if (!ALLOWED_EXT.includes(ext)) { setError(`Formato no permitido: .${ext}`); continue; }
-        if (f.size > MAX_SIZE) { setError('El archivo supera los 100 MB.'); continue; }
+        if (!ALLOWED_EXT.includes(ext)) { setError(`Format not allowed: .${ext}`); continue; }
+        if (f.size > MAX_SIZE) { setError('The file exceeds 100 MB.'); continue; }
         next.push(f);
       }
       return next;
@@ -58,7 +58,7 @@ export default function Homework({ unit, unitIndex }) {
   }
 
   async function handleSubmit() {
-    if (!files.length) { setError('Primero subí al menos un archivo.'); return; }
+    if (!files.length) { setError('Upload at least one file first.'); return; }
     setError('');
     setSubmitting(true);
     try {
@@ -87,14 +87,14 @@ export default function Homework({ unit, unitIndex }) {
         <div className="card p-5 mb-4">
           <div className="flex items-center gap-2 mb-2">
             {submission.status === 'reviewed' ? (
-              <span className="text-xs font-semibold bg-green-50 text-green-700 px-3 py-1 rounded-full">✅ Revisado — Feedback disponible</span>
+              <span className="text-xs font-semibold bg-green-50 text-green-700 px-3 py-1 rounded-full">✅ Reviewed — Feedback available</span>
             ) : (
-              <span className="text-xs font-semibold bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full">🟡 Pendiente de revisión</span>
+              <span className="text-xs font-semibold bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full">🟡 Pending review</span>
             )}
           </div>
           {submission.feedback_text && (
             <div className="mt-2 bg-[#f7f8fc] rounded-xl p-4">
-              <div className="text-xs text-gray-400 mb-1">Feedback del profe — {new Date(submission.feedback_at).toLocaleDateString()}</div>
+              <div className="text-xs text-gray-400 mb-1">Feedback from your teacher — {new Date(submission.feedback_at).toLocaleDateString()}</div>
               <div className="text-sm leading-relaxed">{submission.feedback_text}</div>
             </div>
           )}
@@ -109,8 +109,8 @@ export default function Homework({ unit, unitIndex }) {
         className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-colors mb-4 ${dragging ? 'border-sky bg-sky/5' : 'border-gray-200'}`}
       >
         <div className="text-4xl mb-3">☁️</div>
-        <h4 className="text-sm font-semibold mb-1">Arrastrá tu archivo o hacé clic para elegir</h4>
-        <p className="text-xs text-gray-500">Máximo 100 MB por archivo</p>
+        <h4 className="text-sm font-semibold mb-1">Drag your file here or click to browse</h4>
+        <p className="text-xs text-gray-500">Maximum 100 MB per file</p>
         <div className="flex flex-wrap gap-1.5 mt-3.5 justify-center">
           {['🎵 MP3', '🎤 M4A', '🎧 WAV', '🎬 MP4', '📄 Word', '📋 PDF'].map((chip) => (
             <span key={chip} className="px-2.5 py-0.5 rounded-lg text-[11px] font-semibold bg-[#f7f8fc] border border-gray-200 text-gray-500">{chip}</span>
@@ -149,12 +149,12 @@ export default function Homework({ unit, unitIndex }) {
         disabled={submitting}
         className="px-7 py-3 bg-grad rounded-xl text-white font-semibold text-sm hover:opacity-90 disabled:opacity-60"
       >
-        {submitting ? 'Enviando…' : 'Enviar al profe ✈️'}
+        {submitting ? 'Sending…' : 'Send to your teacher ✈️'}
       </button>
 
       {success && (
         <div className="bg-green-50 border border-green-500 rounded-xl p-4 text-center text-green-700 text-sm font-medium mt-3">
-          ✅ ¡Tarea enviada exitosamente! Tu profe la revisará pronto.
+          ✅ Homework sent successfully! Your teacher will review it soon.
         </div>
       )}
     </div>

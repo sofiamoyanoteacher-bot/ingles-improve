@@ -18,20 +18,20 @@ export default function TeacherDashboard() {
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-7">
-        <StatCard label="Alumnos activos" value={stats?.activeStudents ?? '—'} />
-        <StatCard label="Entregas pendientes" value={stats?.pending ?? '—'} />
-        <StatCard label="Entregas totales" value={stats?.total ?? '—'} />
+        <StatCard label="Active students" value={stats?.activeStudents ?? '—'} />
+        <StatCard label="Pending submissions" value={stats?.pending ?? '—'} />
+        <StatCard label="Total submissions" value={stats?.total ?? '—'} />
       </div>
 
       <div className="card p-5 overflow-x-auto">
-        <h3 className="text-sm font-semibold mb-4">Alumnos</h3>
+        <h3 className="text-sm font-semibold mb-4">Students</h3>
         <table className="w-full text-sm">
           <thead>
             <tr className="text-left text-xs text-gray-400 border-b border-gray-200">
-              <th className="py-2">Nombre</th>
+              <th className="py-2">Name</th>
               <th className="py-2">Email</th>
-              <th className="py-2">Última actividad</th>
-              <th className="py-2">Pendientes</th>
+              <th className="py-2">Last activity</th>
+              <th className="py-2">Pending</th>
             </tr>
           </thead>
           <tbody>

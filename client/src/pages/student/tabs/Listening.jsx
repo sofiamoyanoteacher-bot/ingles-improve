@@ -48,7 +48,7 @@ function pickVoice(availableVoices, gender) {
 
 export default function Listening({ unit, unitIndex, onComplete }) {
   const gender = NARRATOR_GENDER[unitIndex];
-  const genderLabel = gender === 'female' ? '👩 voz femenina' : '👨 voz masculina';
+  const genderLabel = gender === 'female' ? '👩 female voice' : '👨 male voice';
 
   const [started, setStarted] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -178,13 +178,13 @@ export default function Listening({ unit, unitIndex, onComplete }) {
       {!started && (
         <div className="bg-gradient-to-br from-sky/10 to-mag/5 rounded-2xl p-6 text-center mb-5">
           <div className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-grad text-white mb-2.5">{genderLabel}</div>
-          <p className="text-[13px] text-gray-500 mb-4">Presioná el botón para escuchar el texto en inglés</p>
+          <p className="text-[13px] text-gray-500 mb-4">Press the button to listen to the text</p>
           <button
             onClick={startListening}
             className="inline-flex items-center gap-2 px-7 py-3 bg-grad rounded-xl text-white font-semibold text-sm hover:opacity-90 shadow-lg"
           >
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><polygon points="5,3 19,12 5,21" /></svg>
-            Escuchar lectura
+            Listen to reading
           </button>
         </div>
       )}
@@ -205,13 +205,13 @@ export default function Listening({ unit, unitIndex, onComplete }) {
             </div>
             <div className="text-[11px] text-gray-500">{elapsedLabel}</div>
           </div>
-          <button onClick={stop} className="text-gray-400 hover:text-red-500 text-lg px-2" title="Detener">■</button>
+          <button onClick={stop} className="text-gray-400 hover:text-red-500 text-lg px-2" title="Stop">■</button>
         </div>
       )}
 
       <div className="flex flex-col gap-3.5">
         {!started && (
-          <div className="text-center py-5 text-gray-400 text-[13px]">🎧 Escuchá el texto primero y luego respondé las preguntas</div>
+          <div className="text-center py-5 text-gray-400 text-[13px]">🎧 Listen to the text first, then answer the questions</div>
         )}
         {started && unit.listeningQ.map((q, qi) => {
           const selected = selections[qi];

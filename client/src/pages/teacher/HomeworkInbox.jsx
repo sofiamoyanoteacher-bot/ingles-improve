@@ -3,8 +3,8 @@ import { api } from '../../api';
 import { UNITS } from '../../data/units';
 
 const STATUS_BADGE = {
-  pending: { label: '🟡 Pendiente', cls: 'bg-yellow-50 text-yellow-700' },
-  reviewed: { label: '✅ Revisado', cls: 'bg-green-50 text-green-700' },
+  pending: { label: '🟡 Pending', cls: 'bg-yellow-50 text-yellow-700' },
+  reviewed: { label: '✅ Reviewed', cls: 'bg-green-50 text-green-700' },
 };
 
 export default function HomeworkInbox() {
@@ -51,19 +51,19 @@ export default function HomeworkInbox() {
       <div className="flex gap-3 mb-5 flex-wrap">
         <select value={filters.studentId} onChange={(e) => setFilters({ ...filters, studentId: e.target.value })}
           className="px-3.5 py-2 border border-gray-200 rounded-xl text-sm">
-          <option value="">Todos los alumnos</option>
+          <option value="">All students</option>
           {students.map((s) => <option key={s.id} value={s.id}>{s.name} {s.last_name}</option>)}
         </select>
         <select value={filters.unitIndex} onChange={(e) => setFilters({ ...filters, unitIndex: e.target.value })}
           className="px-3.5 py-2 border border-gray-200 rounded-xl text-sm">
-          <option value="">Todas las unidades</option>
+          <option value="">All units</option>
           {UNITS.map((u, i) => <option key={u.num} value={i}>Unit {u.num}</option>)}
         </select>
         <select value={filters.status} onChange={(e) => setFilters({ ...filters, status: e.target.value })}
           className="px-3.5 py-2 border border-gray-200 rounded-xl text-sm">
-          <option value="">Todos los estados</option>
-          <option value="pending">Pendiente</option>
-          <option value="reviewed">Revisado</option>
+          <option value="">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="reviewed">Reviewed</option>
         </select>
       </div>
 
@@ -71,11 +71,11 @@ export default function HomeworkInbox() {
         <table className="w-full text-sm">
           <thead>
             <tr className="text-left text-xs text-gray-400 border-b border-gray-200">
-              <th className="py-3 px-4">Alumno</th>
-              <th className="py-3 px-4">Unidad</th>
-              <th className="py-3 px-4">Archivos</th>
-              <th className="py-3 px-4">Fecha</th>
-              <th className="py-3 px-4">Estado</th>
+              <th className="py-3 px-4">Student</th>
+              <th className="py-3 px-4">Unit</th>
+              <th className="py-3 px-4">Files</th>
+              <th className="py-3 px-4">Date</th>
+              <th className="py-3 px-4">Status</th>
               <th className="py-3 px-4"></th>
             </tr>
           </thead>
@@ -90,14 +90,14 @@ export default function HomeworkInbox() {
                     <div className="text-xs text-gray-500">{s.email}</div>
                   </td>
                   <td className="py-3 px-4">Unit {unit?.num}</td>
-                  <td className="py-3 px-4 text-gray-500">{s.files.length} archivo(s)</td>
+                  <td className="py-3 px-4 text-gray-500">{s.files.length} file(s)</td>
                   <td className="py-3 px-4 text-gray-500">{new Date(s.submitted_at).toLocaleDateString()}</td>
                   <td className="py-3 px-4">
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${badge.cls}`}>{badge.label}</span>
                   </td>
                   <td className="py-3 px-4">
                     <button onClick={() => openSubmission(s)} className="text-xs px-3 py-1.5 border border-gray-200 rounded-lg hover:border-sky">
-                      Revisar
+                      Review
                     </button>
                   </td>
                 </tr>
@@ -115,7 +115,7 @@ export default function HomeworkInbox() {
             <p className="text-sm text-gray-500 mb-1">Unit {UNITS[active.unit_index]?.num} — {UNITS[active.unit_index]?.title}</p>
             <p className="text-xs text-gray-400 mb-5">{new Date(active.submitted_at).toLocaleString()}</p>
 
-            <h3 className="text-xs font-semibold text-gray-400 uppercase mb-2">Archivos</h3>
+            <h3 className="text-xs font-semibold text-gray-400 uppercase mb-2">Files</h3>
             <div className="flex flex-col gap-2 mb-5">
               {active.files.map((f) => (
                 <div key={f.id} className="flex flex-col gap-1.5 border border-gray-100 rounded-xl p-3">
@@ -125,7 +125,7 @@ export default function HomeworkInbox() {
                       onClick={() => api.downloadTeacherFile(active.id, f.filename, f.original_name)}
                       className="text-xs px-2.5 py-1 bg-grad text-white rounded-lg flex-shrink-0 ml-2"
                     >
-                      Descargar
+                      Download
                     </button>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function HomeworkInbox() {
               rows={4}
               value={feedbackText}
               onChange={(e) => setFeedbackText(e.target.value)}
-              placeholder="Escribí tu feedback para el alumno…"
+              placeholder="Write your feedback for the student…"
               className="w-full border border-gray-200 rounded-xl p-3 text-sm mb-3"
             />
             <button
@@ -145,7 +145,7 @@ export default function HomeworkInbox() {
               disabled={saving}
               className="w-full py-3 bg-grad rounded-xl text-white font-semibold text-sm disabled:opacity-60"
             >
-              {saving ? 'Enviando…' : 'Enviar feedback'}
+              {saving ? 'Sending…' : 'Send feedback'}
             </button>
           </div>
         </div>

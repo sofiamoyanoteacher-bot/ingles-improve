@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { UNITS, MONTHS } from '../../data/units';
 import { useProgress } from '../../hooks/useProgress.js';
 
-const STATUS_LABEL = { done: 'Completada', current: 'En curso', locked: 'Por comenzar' };
+const STATUS_LABEL = { done: 'Completed', current: 'In progress', locked: 'Not started' };
 const STATUS_DOT = { done: 'bg-green-500', current: 'bg-sky', locked: 'bg-gray-200' };
 
 export default function Program() {
@@ -12,8 +12,8 @@ export default function Program() {
   return (
     <div className="max-w-[1100px] mx-auto px-6 py-8 md:pt-8 pt-16">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">Programa completo</h1>
-        <p className="text-sm text-gray-500 mt-1">5 meses · 11 unidades · Seleccioná una unidad para comenzar</p>
+        <h1 className="text-2xl font-bold">Full program</h1>
+        <p className="text-sm text-gray-500 mt-1">5 months · 11 units · Pick a unit to get started</p>
       </div>
 
       {!loading && MONTHS.map((m, mi) => {

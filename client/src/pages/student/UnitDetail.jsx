@@ -54,7 +54,7 @@ export default function UnitDetail() {
   return (
     <div className="max-w-[1100px] mx-auto px-6 py-8 md:pt-8 pt-16">
       <button onClick={() => navigate('/program')} className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-sky mb-5">
-        ← Volver al programa
+        ← Back to program
       </button>
 
       <div className="card relative overflow-hidden p-7 mb-5">
@@ -96,14 +96,14 @@ export default function UnitDetail() {
 
       <div className="mt-6">
         {done ? (
-          <div className="text-center text-sm text-green-600 font-semibold">✅ Clase {activeClass} completada</div>
+          <div className="text-center text-sm text-green-600 font-semibold">✅ Class {activeClass} completed</div>
         ) : (
           <button
             onClick={markComplete}
             disabled={marking}
             className="w-full sm:w-auto px-8 py-3 bg-grad rounded-xl text-white font-semibold text-sm hover:opacity-90 disabled:opacity-60"
           >
-            {marking ? 'Guardando…' : `Marcar Clase ${activeClass} como completada`}
+            {marking ? 'Saving…' : `Mark Class ${activeClass} as completed`}
           </button>
         )}
       </div>

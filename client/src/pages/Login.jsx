@@ -19,7 +19,7 @@ export default function Login() {
       const user = await login(email, password);
       navigate(user.role === 'teacher' ? '/teacher' : '/', { replace: true });
     } catch (err) {
-      setError(err.message || 'No se pudo iniciar sesión');
+      setError(err.message || 'Could not sign in');
     } finally {
       setLoading(false);
     }
@@ -39,8 +39,8 @@ export default function Login() {
         <div className="flex justify-center mb-6">
           <Logo size="lg" />
         </div>
-        <h1 className="text-lg font-bold text-center mb-1">Bienvenido</h1>
-        <p className="text-sm text-gray-500 text-center mb-6">Ingresá con tu email y contraseña</p>
+        <h1 className="text-lg font-bold text-center mb-1">Welcome</h1>
+        <p className="text-sm text-gray-500 text-center mb-6">Sign in with your email and password</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -55,7 +55,7 @@ export default function Login() {
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Contraseña</label>
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Password</label>
             <input
               type="password"
               required
@@ -75,7 +75,7 @@ export default function Login() {
             disabled={loading}
             className="w-full py-3 bg-grad rounded-xl text-white font-semibold text-sm disabled:opacity-60 hover:opacity-90 transition-opacity"
           >
-            {loading ? 'Ingresando…' : 'Entrar'}
+            {loading ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
       </div>

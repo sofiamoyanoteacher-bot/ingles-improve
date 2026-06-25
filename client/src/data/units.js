@@ -29,7 +29,7 @@ export const UNITS = [
     grammarWatch:"Don't forget the -s in he/she/it: she <strong>works</strong>, not she <em>work</em>. Negatives use <strong>don't / doesn't</strong> and questions use <strong>do / does</strong>.",
     grammarTip:"Use it with <strong>always, never, usually, sometimes,</strong> and <strong>every day</strong>.",
     listeningTitle:"Morning at the café",
-    listeningDesc:"Escuchá la descripción de la mañana de Tomás y respondé las preguntas.",
+    listeningDesc:"Listen to the description of Tomás's morning and answer the questions.",
     listeningQ:[
       {q:"What time does Tomás wake up every morning?",opts:["At 6 AM","At 5 AM","At 7 AM","At 4 AM"],correct:1},
       {q:"Where does Tomás work?",opts:["In a bakery","In an office","In a café","At home"],correct:2},
@@ -44,7 +44,7 @@ export const UNITS = [
       'Some people say "a job is just a job." Do you agree? What makes work feel alive instead of empty?'
     ],
     talkTip:"Model: \"I wake up at seven. In the morning I take my kids to school. Then I work until six. I usually cook dinner, and at night I watch a series with my wife.\"",
-    hwTask:"Mini-presentación: Describí un día típico en tu vida en 6-8 oraciones usando el simple present. Podés grabarlo en audio o video.",
+    hwTask:"Mini-presentation: Describe a typical day in your life in 6-8 sentences using the simple present. You can record it as audio or video.",
     gameType:"wordsearch",
     unitImageSeed:"barista",
     warmupQuestions:[
@@ -111,7 +111,7 @@ export const UNITS = [
     grammarWatch:"Some verbs don't use -ing: <strong>want, know, like, need, believe</strong>. These are state verbs. Say <em>\"I want\"</em>, never <em>\"I am wanting\"</em>.",
     grammarTip:"Use it with <strong>right now, at the moment, today,</strong> and <strong>these days</strong>.",
     listeningTitle:"Live from Ezeiza",
-    listeningDesc:"Escuchá el relato del aeropuerto y respondé.",
+    listeningDesc:"Listen to the airport story and answer.",
     listeningQ:[
       {q:"Where is the narrator?",opts:["On a plane","At a bus station","At Ezeiza airport","In a café"],correct:2},
       {q:"What is the businessman doing?",opts:["Eating","Walking in circles and talking on his phone","Sleeping","Reading a book"],correct:1},
@@ -126,7 +126,7 @@ export const UNITS = [
       "Tell us about a goodbye or a reunion at an airport or station that you'll never forget."
     ],
     talkTip:"Model: \"Okay, I'm standing in a café. A man is reading the news. Two women are laughing loudly. The waiter is running between tables, and someone is taking a photo of their food.\"",
-    hwTask:"Live commentary: Mirá a tu alrededor y describí lo que están haciendo 5 personas distintas. Grabá un audio o video de 1 minuto.",
+    hwTask:"Live commentary: Look around you and describe what 5 different people are doing. Record a 1-minute audio or video.",
     gameType:"matching",
     unitImageSeed:"airport",
     warmupQuestions:[
@@ -169,7 +169,7 @@ export const UNITS = [
     grammarWatch:"For negatives and questions use <strong>didn't / did + base verb</strong>: <em>\"Did you go?\"</em> — never <em>\"Did you went?\"</em>",
     grammarTip:"Use it with <strong>yesterday, last night, three years ago,</strong> and <strong>in 2019</strong>.",
     listeningTitle:"The night in Lima",
-    listeningDesc:"Escuchá la historia y poné a prueba tu comprensión.",
+    listeningDesc:"Listen to the story and test your comprehension.",
     listeningQ:[
       {q:"Where did the story happen?",opts:["Buenos Aires","Bogotá","Lima","Santiago"],correct:2},
       {q:"Why did the narrator miss the flight?",opts:["He slept in","He was reading and lost track of time","The taxi was late","He forgot his passport"],correct:1},
@@ -184,7 +184,7 @@ export const UNITS = [
       "Is there a story from your past that you love to tell again and again? Why that one?"
     ],
     talkTip:"Structure: First… → Then… → Suddenly… → Finally…",
-    hwTask:"Storytelling: Contá una historia corta y verdadera sobre algo que salió mal en un viaje. Usá simple past. Audio o video de 2-3 minutos.",
+    hwTask:"Storytelling: Tell a short, true story about something that went wrong on a trip. Use simple past. Audio or video, 2-3 minutes.",
     gameType:"crossword",
     unitImageSeed:"flight",
     warmupQuestions:[
@@ -238,11 +238,11 @@ export const UNITS = [
     grammarWatch:"Mix it with simple past for a sudden event: <em>\"When France scored (quick), my cousin was crying (in progress).\"</em>",
     grammarTip:"Use <strong>while</strong> + past continuous · <strong>when</strong> + simple past.",
     listeningTitle:"December 18, 2022",
-    listeningDesc:"Escuchá el relato del Mundial y respondé.",
+    listeningDesc:"Listen to the World Cup story and answer.",
     listeningQ:[{q:"What was the narrator doing when the game started?",opts:["Standing outside","Sitting on his abuela's sofa","Walking around the kitchen","Watching from a bar"],correct:1},{q:"What was the narrator's uncle doing?",opts:["Praying","Crying","Walking around the kitchen","Screaming at the TV"],correct:2},{q:"What were the neighbours doing when Argentina scored?",opts:["Driving home","Sleeping","Banging pots from their windows","Watching in silence"],correct:2},{q:"What was the narrator's father doing at the end?",opts:["Calling someone","Hugging the narrator while crying","Laughing loudly","Leaving the room"],correct:1}],
     talkQ:["What was the narrator's family doing during the game?","Where were you during a big national or world event? What were you doing at that exact moment?","Do you prefer living big moments alone or surrounded by people? Why?","The narrator says some moments are 'too big for words.' Have you lived one? Describe the scene around you.","Why do you think we remember exactly where we were during important moments, even years later?"],
     talkTip:"Model: \"It was raining hard. I was waiting at the bus stop. A woman next to me was singing quietly, and a child was jumping in the puddles. Then my phone rang…\"",
-    hwTask:"Elegí un momento que nunca vas a olvidar y describí la escena. ¿Qué estaban haciendo las personas a tu alrededor? Audio o video de 2 minutos.",
+    hwTask:"Pick a moment you'll never forget and describe the scene. What were the people around you doing? Audio or video, 2 minutes.",
     gameType:"wordsearch",
     unitImageSeed:"football",
     warmupQuestions:[
@@ -265,11 +265,11 @@ export const UNITS = [
     grammarWatch:"In speech, will usually shrinks to 'll: <strong>I'll, you'll, we'll, it'll</strong>.",
     grammarTip:"<strong>going to</strong> = decided before now · <strong>will</strong> = predicting or deciding right now.",
     listeningTitle:"Plans for 2026",
-    listeningDesc:"Escuchá y respondé sobre los planes del narrador.",
+    listeningDesc:"Listen and answer about the narrator's plans.",
     listeningQ:[{q:"What is the narrator going to learn this year?",opts:["To cook","To swim","To drive","To play guitar"],correct:1},{q:"How many books does the narrator plan to read per month?",opts:["Two","Three","One","Four"],correct:2},{q:"What does the narrator say about small changes?",opts:["They don't matter","They are impossible","They are the ones that last","They are boring"],correct:2},{q:"What does the narrator want to say 'yes' to?",opts:["More money","Things that scare him a little","Going to the gym","Working more hours"],correct:1}],
     talkQ:["What three changes does the narrator want to make this year?","Do you usually make New Year's resolutions? Do you keep them?","What is one small change you are going to make this year — starting soon?","The narrator believes small changes matter most. Do you agree, or do big leaps work better?","Where do you see yourself in five years, and what will you have to do to get there?"],
     talkTip:"Model: \"This year I'm going to walk every morning, and I'm going to cook at home more. I think I will feel healthier, and I'll probably save some money too.\"",
-    hwTask:"Mini-presentación: Contá tu desafío personal para este año. ¿Qué vas a hacer? ¿Qué crees que va a pasar? Usá going to y will. Audio o video de 2 minutos.",
+    hwTask:"Mini-presentation: Tell us about your personal challenge for this year. What are you going to do? What do you think will happen? Use going to and will. Audio or video, 2 minutes.",
     gameType:"matching",
     unitImageSeed:"goals2026",
     warmupQuestions:[
@@ -292,11 +292,11 @@ export const UNITS = [
     grammarWatch:"Big trap: <strong>mustn't = forbidden</strong>, but <strong>don't have to = optional</strong>. They look similar but mean opposite things.",
     grammarTip:"modal + base verb — no 'to', no -s: <strong>\"She can swim\"</strong>, never \"She cans swim.\"",
     listeningTitle:"Advice to your past self",
-    listeningDesc:"Escuchá la carta y respondé.",
+    listeningDesc:"Listen to the letter and answer.",
     listeningQ:[{q:"What does the writer say about fear before speaking?",opts:["You should avoid it","Everyone has it and you should talk anyway","It means you're not ready","Only beginners feel it"],correct:1},{q:"According to the letter, what should you do on Sunday?",opts:["Rest and don't work","Study","Call your grandmother","Go to a party"],correct:2},{q:"What does 'you can't pour from an empty cup' mean?",opts:["You shouldn't drink too much coffee","You need to take care of yourself first","Cups are fragile","Money runs out quickly"],correct:1},{q:"What should you do after making a big mistake?",opts:["Ignore it","Never forgive yourself","Learn and then move on","Tell everyone about it"],correct:2}],
     talkQ:["What does the writer say about fear and speaking up?","If you could send one message to your sixteen-year-old self, what would it be?","What is something young people today should do — and something they shouldn't?","Is there a rule in your life you have to follow but secretly disagree with?","The letter says 'you can't pour from an empty cup.' What does that line mean to you?"],
     talkTip:"Model: \"You should travel while you're young. You should save a little money every month. You have to call your mom — she misses you. But you mustn't compare your life to people on the internet.\"",
-    hwTask:"Role-play: Imaginá que un amigo más joven te pide consejos de vida. Dale 3 consejos con should, 2 cosas que tiene que hacer, y 1 cosa que no debe hacer. Grabá el audio.",
+    hwTask:"Role-play: Imagine a younger friend asks you for life advice. Give them 3 pieces of advice with should, 2 things they have to do, and 1 thing they shouldn't do. Record the audio.",
     gameType:"crossword",
     unitImageSeed:"letter",
     warmupQuestions:[
@@ -319,11 +319,11 @@ export const UNITS = [
     grammarWatch:"Don't use it with a finished time word. <em>\"I've been to Peru\"</em> (experience) vs. <em>\"I went to Peru in 2019\"</em> (specific time).",
     grammarTip:"Signal words: <strong>ever, never, already, yet, just, for, since</strong>.",
     listeningTitle:"Life surprises",
-    listeningDesc:"Escuchá y respondé sobre las experiencias del narrador.",
+    listeningDesc:"Listen and answer about the narrator's experiences.",
     listeningQ:[{q:"What do ants taste like, according to the narrator?",opts:["Chocolate","Lemon","Garlic","Nothing"],correct:1},{q:"How many countries has the narrator travelled to?",opts:["Ten","Eight","Twelve","Fifteen"],correct:2},{q:"Which country has the narrator NEVER visited?",opts:["Chile","Colombia","Brazil","Paraguay"],correct:2},{q:"How long has the narrator been practising guitar this time?",opts:["Two weeks","One month","Six months","Two months every day"],correct:3}],
     talkQ:["What are some of the surprising things the narrator has done?","What is something surprising you've done that people wouldn't expect?","Have you ever forgiven someone you were sure you never could?","Is there a place you've never visited but really want to see? Why that one?","What's still on your personal list — something you haven't done yet but plan to?"],
     talkTip:"Model: \"I've never eaten sushi, I've never broken a bone, and I've never seen the sea. But I've already run a 10k, I've already learned to drive, and I've already forgiven my brother — that's the big one.\"",
-    hwTask:"Compartí 3 'I've never…' y 3 'I've already…' sobre tu vida. Después elegí el más sorprendente y contá la historia completa. Audio o video de 2-3 minutos.",
+    hwTask:"Share 3 'I've never…' and 3 'I've already…' statements about your life. Then pick the most surprising one and tell the full story. Audio or video, 2-3 minutes.",
     gameType:"wordsearch",
     unitImageSeed:"travel",
     warmupQuestions:[
@@ -420,7 +420,7 @@ export const UNITS = [
     grammarWatch:"<strong>Common uncountable nouns:</strong> advice, bread, coffee, furniture, hair, homework, information, knowledge, luggage, money, music, news, progress, rain, research, rice, sugar, time, traffic, travel, water, weather, work.<br/>✗ <em>\"I need an information.\"</em> → ✓ <strong>\"I need some information.\"</strong><br/>✗ <em>\"She gave me an advice.\"</em> → ✓ <strong>\"She gave me some advice.\"</strong><br/>✗ <em>\"How many money?\"</em> → ✓ <strong>\"How much money?\"</strong>",
     grammarTip:"\"News\" looks plural but it's always singular and uncountable: <strong>\"The news IS bad today,\"</strong> never \"the news ARE bad.\" Same with information, advice, furniture, and homework.",
     listeningTitle:"Sunday in Palermo",
-    listeningDesc:"Escuchá el paseo por Palermo y respondé las preguntas.",
+    listeningDesc:"Listen to the walk around Palermo and answer the questions.",
     listeningQ:[
       {q:"What does the narrator buy at the market?",opts:["Vegetables and bread","Mangoes, strawberries, figs and coffee beans","Books and water","Clothes and shoes"],correct:1},
       {q:"Why can't you say \"a coffee\" to mean the substance?",opts:["Because coffee is too expensive","Because coffee is an uncountable noun","Because you always order two","Because it's always in a cup"],correct:1},
@@ -435,7 +435,7 @@ export const UNITS = [
       '"I have a lot of happiness but not enough money." Do you agree that some of the most important things in life are uncountable?'
     ],
     talkTip:"Model: \"In my kitchen there is a lot of food. There are a few apples and some bread. There isn't much sugar, but there are enough cups for everyone.\"",
-    hwTask:"Grabá un audio o video de 2 minutos describiendo tu cocina, tu mochila o tu cuarto usando sustantivos contables e incontables. Usá: there is/are, a lot of, a few, a little, how much/many, enough.",
+    hwTask:"Record a 2-minute audio or video describing your kitchen, your backpack, or your room using countable and uncountable nouns. Use: there is/are, a lot of, a few, a little, how much/many, enough.",
     gameType:"matching",
     unitImageSeed:"market",
     warmupQuestions:[
@@ -458,11 +458,11 @@ export const UNITS = [
     grammarWatch:"Never say <strong>\"more better\"</strong> or <strong>\"most biggest\"</strong> — that's a double comparison. Choose one: either the ending OR more/most.",
     grammarTip:"<strong>A is -er than B</strong> · <strong>A is the -est of all</strong>.",
     listeningTitle:"City comparison",
-    listeningDesc:"Escuchá y respondé sobre las ciudades.",
+    listeningDesc:"Listen and answer about the cities.",
     listeningQ:[{q:"Which city does the narrator describe as the most relaxed?",opts:["Buenos Aires","Mendoza","Córdoba","Montevideo"],correct:3},{q:"What is Mendoza known for, according to the text?",opts:["Nightlife and culture","Cheaper wine and calmer lifestyle","The biggest airport","The best football"],correct:1},{q:"What is the 'worst' thing about Córdoba?",opts:["The food","The people","The traffic","The weather"],correct:2},{q:"What makes a city 'the best', according to the narrator?",opts:["Size and population","Famous landmarks","Where you sleep well, laugh, and feel less alone","The economy"],correct:3}],
     talkQ:["Which cities has the narrator lived in, and how does he compare them?","What's the best city or town you've ever visited? What made it special?","Is your city better or worse than it was ten years ago? In what way?","The narrator says the best city 'feels like yours.' Do you agree? Where feels like yours?","If you could live anywhere in the world, where would it be — and why would it be better than where you are now?"],
     talkTip:"Model: \"My city is greener than yours, and the food is cheaper. We have the friendliest people in the country. Your city is more exciting, sure — but it's also more dangerous and much louder.\"",
-    hwTask:"Debate: Defendé tu ciudad favorita comparándola con otra. Usá al menos 5 comparativos y 2 superlativos. Audio o video de 2 minutos.",
+    hwTask:"Debate: Defend your favorite city by comparing it to another one. Use at least 5 comparatives and 2 superlatives. Audio or video, 2 minutes.",
     gameType:"crossword",
     unitImageSeed:"citylife",
     warmupQuestions:[
@@ -485,11 +485,11 @@ export const UNITS = [
     grammarWatch:"<strong>\"Good\"</strong> is an adjective; <strong>\"well\"</strong> is its adverb. Say <em>\"She's a good cook\"</em> but <em>\"She cooks well.\"</em>",
     grammarTip:"Adjective <strong>before a noun</strong> (a deep voice) or after be (the voice is deep). Adverb usually <strong>after the verb</strong> (she sings beautifully).",
     listeningTitle:"The restaurant in Salta",
-    listeningDesc:"Escuchá la descripción y respondé.",
+    listeningDesc:"Listen to the description and answer.",
     listeningQ:[{q:"How did the restaurant look from the outside?",opts:["Modern and bright","Small, ugly, and dim","Big and colourful","Clean and expensive"],correct:1},{q:"Who chose the food for the visitors?",opts:["The waiter","The narrator","The old woman owner","Their friend"],correct:2},{q:"How did the empanadas taste?",opts:["Soft and sweet","Spicy and salty","Perfectly crispy","Too salty"],correct:2},{q:"What does the narrator mean by 'feeding something deeper'?",opts:["The food was very filling","The experience touched them emotionally","The portions were large","They were very hungry"],correct:1}],
     talkQ:["Why was the restaurant unforgettable, even though it looked ugly?","Describe the best meal you've ever had. Where were you, and who were you with?","Do you prefer fancy restaurants or simple, hidden places? Why?","The owner chose the food for them. Would you trust a cook to decide for you? Why or why not?","The narrator says some places 'feed something deeper.' Tell us about a place that did that for you."],
     talkTip:"Model: \"It was a noisy, colourful market. People walked quickly and shouted cheerfully. An old man played the guitar softly in the corner. The fruit smelled sweet, and everything felt wonderfully alive.\"",
-    hwTask:"Describí un lugar memorable (un restaurante, una casa, un mercado). Usá al menos 5 adjetivos y 5 adverbios. Audio o video de 2 minutos.",
+    hwTask:"Describe a memorable place (a restaurant, a house, a market). Use at least 5 adjectives and 5 adverbs. Audio or video, 2 minutes.",
     gameType:"matching",
     unitImageSeed:"restaurant",
     warmupQuestions:[
@@ -512,11 +512,11 @@ export const UNITS = [
     grammarWatch:"Choose your tense by asking: <strong>when did it happen?</strong> and <strong>is it still connected to now?</strong>",
     grammarTip:"<strong>One idea, one tense — then keep moving.</strong> Fluency is choosing, not freezing.",
     listeningTitle:"Student success stories",
-    listeningDesc:"Escuchá las historias de los tres estudiantes y respondé.",
+    listeningDesc:"Listen to the three students' stories and answer.",
     listeningQ:[{q:"What does Marcela do today?",opts:["She's a teacher","She works as a tour guide in Cartagena","She lives in Canada","She's a translator"],correct:1},{q:"How old was Diego when he started learning English?",opts:["Thirty","Forty","Fifty-two","Sixty-five"],correct:2},{q:"What changed everything for Sofía?",opts:["A new app","Moving to another country","Meeting a teacher who made her laugh","Watching movies in English"],correct:2},{q:"What is the main message of the text?",opts:["English is only for young people","You need a talent for languages","Everyone starts at zero; keep going","Grammar is the most important thing"],correct:2}],
     talkQ:["Which of the three stories do you connect with most, and why?","Diego ignored people who said he was 'too old.' Were they wrong? Is there a right age to start?","What made the difference for Sofía? Have you ever had a teacher who changed everything?","Where are you right now in your own English journey — and where do you want to be?","The text says 'nobody is born speaking English.' What advice would you give a beginner who feels like giving up?"],
     talkTip:"Model: \"Two years ago I couldn't understand a song in English. Now I watch series with subtitles, and I'm practising every week. I've already learned so much. Next year I'm going to travel and order food in English — without my phone.\"",
-    hwTask:"Proyecto final: Contá TU historia de aprendizaje. Usá el pasado (cómo empezaste), el presente (qué hacés ahora) y el futuro (qué vas a hacer). Audio o video de 3-5 minutos.",
+    hwTask:"Final project: Tell YOUR learning story. Use the past (how you started), the present (what you do now), and the future (what you're going to do). Audio or video, 3-5 minutes.",
     gameType:"crossword",
     unitImageSeed:"students",
     warmupQuestions:[
@@ -534,11 +534,11 @@ export const UNITS = [
 ];
 
 export const MONTHS = [
-  {label:"Mes 1 — My everyday life"},
-  {label:"Mes 2 — Stories from the past"},
-  {label:"Mes 3 — Looking ahead"},
-  {label:"Mes 4 — Experience & change"},
-  {label:"Mes 5 — Express yourself"}
+  {label:"Month 1 — My everyday life"},
+  {label:"Month 2 — Stories from the past"},
+  {label:"Month 3 — Looking ahead"},
+  {label:"Month 4 — Experience & change"},
+  {label:"Month 5 — Express yourself"}
 ];
 
 // Narrator gender per unit index (11 units): male (0,2,4,6,8,10) / female (1,3,5,7,9)

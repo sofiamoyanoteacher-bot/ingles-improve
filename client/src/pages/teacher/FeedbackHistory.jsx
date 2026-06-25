@@ -25,7 +25,7 @@ export default function FeedbackHistory() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Historial de Feedback</h1>
+      <h1 className="text-2xl font-bold mb-6">Feedback History</h1>
 
       <div className="flex flex-col gap-3">
         {submissions.map((s) => (
@@ -43,19 +43,19 @@ export default function FeedbackHistory() {
                 <textarea rows={3} value={editText} onChange={(e) => setEditText(e.target.value)}
                   className="w-full border border-gray-200 rounded-xl p-3 text-sm mb-2" />
                 <div className="flex gap-2">
-                  <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 border border-gray-200 rounded-lg">Cancelar</button>
-                  <button onClick={saveEdit} className="text-xs px-3 py-1.5 bg-grad text-white rounded-lg">Guardar</button>
+                  <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 border border-gray-200 rounded-lg">Cancel</button>
+                  <button onClick={saveEdit} className="text-xs px-3 py-1.5 bg-grad text-white rounded-lg">Save</button>
                 </div>
               </div>
             ) : (
               <>
                 <p className="text-sm text-gray-600 line-clamp-2">{s.feedback_text}</p>
-                <button onClick={() => startEdit(s)} className="text-xs text-sky mt-2 hover:underline">Editar</button>
+                <button onClick={() => startEdit(s)} className="text-xs text-sky mt-2 hover:underline">Edit</button>
               </>
             )}
           </div>
         ))}
-        {submissions.length === 0 && <p className="text-sm text-gray-400">Todavía no enviaste ningún feedback.</p>}
+        {submissions.length === 0 && <p className="text-sm text-gray-400">You haven't sent any feedback yet.</p>}
       </div>
     </div>
   );
