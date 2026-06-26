@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
+const db = require('./db');
 const authRoutes = require('./routes/auth');
 const studentRoutes = require('./routes/student');
 const homeworkRoutes = require('./routes/homework');
@@ -10,6 +11,17 @@ const teacherRoutes = require('./routes/teacher');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Self-heal: if the users table is empty at boot (e.g. the DB volume came up
+// empty after a Railway restart), seed it automatically so nobody gets
+// permanently locked out. This does NOT recover any real data that was lost —
+// it only guarantees the teacher + demo student accounts always exist.
+const userCount = db.prepare('SELECT COUNT(*) c FROM users').get().c;
+console.log(`[boot] DB_DIR=${process.env.DB_DIR || '(default)'} users=${userCount}`);
+if (userCount === 0) {
+  console.warn('[boot] users table is empty — running seed automatically');
+  require('./seed');
+}
 
 app.use(cors());
 app.use(express.json());
