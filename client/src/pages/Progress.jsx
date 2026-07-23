@@ -1,7 +1,12 @@
-import { UNITS, MONTHS } from '../data/units';
+import { useAuth } from '../context/AuthContext.jsx';
+import { UNITS as UNITS_BASIC, MONTHS as MONTHS_BASIC } from '../data/units';
+import { UNITS as UNITS_STARTER, MONTHS as MONTHS_STARTER } from '../data/units_starter';
 import { useProgress } from '../hooks/useProgress.js';
 
 export default function Progress() {
+  const { user } = useAuth();
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
+  const MONTHS = user?.program === 'starter' ? MONTHS_STARTER : MONTHS_BASIC;
   const { loading, classesDoneCount, totalClassesDone, isClassDone } = useProgress();
   const totalClasses = UNITS.length * 4;
   const done = totalClassesDone();

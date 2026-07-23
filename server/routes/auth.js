@@ -14,6 +14,7 @@ function publicUser(u) {
     age: u.age,
     profession: u.profession,
     role: u.role,
+    program: u.program || 'basic',
   };
 }
 

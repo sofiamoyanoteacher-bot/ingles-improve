@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { NARRATOR_GENDER } from '../../../data/units';
+import { useAuth } from '../../../context/AuthContext.jsx';
+import { NARRATOR_GENDER as NARRATOR_GENDER_BASIC } from '../../../data/units';
+import { NARRATOR_GENDER as NARRATOR_GENDER_STARTER } from '../../../data/units_starter';
 
 function stripHtml(html) {
   return html
@@ -47,6 +49,8 @@ function pickVoice(availableVoices, gender) {
 }
 
 export default function Listening({ unit, unitIndex, onComplete }) {
+  const { user } = useAuth();
+  const NARRATOR_GENDER = user?.program === 'starter' ? NARRATOR_GENDER_STARTER : NARRATOR_GENDER_BASIC;
   const gender = NARRATOR_GENDER[unitIndex];
   const genderLabel = gender === 'female' ? '👩 female voice' : '👨 male voice';
 

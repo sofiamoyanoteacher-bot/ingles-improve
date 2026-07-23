@@ -14,7 +14,7 @@ const UPLOADS_DIR = process.env.UPLOADS_DIR
 
 router.get('/students', (req, res) => {
   const students = db.prepare(`
-    SELECT u.id, u.email, u.name, u.last_name, u.age, u.profession, u.active, u.created_at,
+    SELECT u.id, u.email, u.name, u.last_name, u.age, u.profession, u.active, u.program, u.created_at,
       (SELECT COUNT(*) FROM homework_submissions s WHERE s.user_id = u.id) AS total_submissions,
       (SELECT COUNT(*) FROM homework_submissions s WHERE s.user_id = u.id AND s.status = 'pending') AS pending_submissions,
       (SELECT MAX(submitted_at) FROM homework_submissions s WHERE s.user_id = u.id) AS last_activity
@@ -24,15 +24,16 @@ router.get('/students', (req, res) => {
 });
 
 router.post('/students', (req, res) => {
-  const { name, last_name, email, password } = req.body || {};
+  const { name, last_name, email, password, program } = req.body || {};
   if (!name || !email || !password) return res.status(400).json({ error: 'Faltan campos' });
   const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
   if (existing) return res.status(409).json({ error: 'Ese email ya existe' });
   const hash = bcrypt.hashSync(password, 10);
+  const prog = program === 'starter' ? 'starter' : 'basic';
   const info = db.prepare(
-    'INSERT INTO users (email, password_hash, name, last_name, role) VALUES (?,?,?,?,?)'
-  ).run(email, hash, name, last_name || '', 'student');
-  const student = db.prepare('SELECT id, email, name, last_name, role, active FROM users WHERE id = ?')
+    'INSERT INTO users (email, password_hash, name, last_name, role, program) VALUES (?,?,?,?,?,?)'
+  ).run(email, hash, name, last_name || '', 'student', prog);
+  const student = db.prepare('SELECT id, email, name, last_name, role, active, program FROM users WHERE id = ?')
     .get(info.lastInsertRowid);
   res.status(201).json({ student });
 });

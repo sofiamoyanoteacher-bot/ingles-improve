@@ -1,23 +1,33 @@
 import { useState } from 'react';
-import { WORD_SEARCH_WORDS, MATCHING_PAIRS, CROSSWORD_DATA } from '../../../data/games';
+import { useAuth } from '../../../context/AuthContext.jsx';
+import {
+  WORD_SEARCH_WORDS, MATCHING_PAIRS, CROSSWORD_DATA,
+  WORD_SEARCH_WORDS_STARTER, MATCHING_PAIRS_STARTER, CROSSWORD_DATA_STARTER,
+} from '../../../data/games';
 import WordSearch from '../../../components/games/WordSearch.jsx';
 import MatchingGame from '../../../components/games/MatchingGame.jsx';
 import Crossword from '../../../components/games/Crossword.jsx';
 import Homework from './Homework.jsx';
 
 function GameByType({ unit, unitIndex, onGameComplete }) {
+  const { user } = useAuth();
+  const isStarter = user?.program === 'starter';
+  const words = isStarter ? WORD_SEARCH_WORDS_STARTER : WORD_SEARCH_WORDS;
+  const pairs = isStarter ? MATCHING_PAIRS_STARTER : MATCHING_PAIRS;
+  const crosswords = isStarter ? CROSSWORD_DATA_STARTER : CROSSWORD_DATA;
+
   if (unit.gameType === 'wordsearch') {
-    const words = WORD_SEARCH_WORDS[unitIndex];
-    if (!words) return null;
-    return <WordSearch words={words} onComplete={onGameComplete} />;
+    const data = words[unitIndex];
+    if (!data) return null;
+    return <WordSearch words={data} onComplete={onGameComplete} />;
   }
   if (unit.gameType === 'matching') {
-    const pairs = MATCHING_PAIRS[unitIndex];
-    if (!pairs) return null;
-    return <MatchingGame pairs={pairs} onComplete={onGameComplete} />;
+    const data = pairs[unitIndex];
+    if (!data) return null;
+    return <MatchingGame pairs={data} onComplete={onGameComplete} />;
   }
   if (unit.gameType === 'crossword') {
-    const data = CROSSWORD_DATA[unitIndex];
+    const data = crosswords[unitIndex];
     if (!data) return null;
     return <Crossword data={data} onComplete={onGameComplete} />;
   }

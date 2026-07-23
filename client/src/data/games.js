@@ -1,4 +1,6 @@
-// Game content per unit index, keyed by unit.gameType (see units.js).
+// Game content per unit index, keyed by unit.gameType.
+// BASIC program (B1-B2): WORD_SEARCH_WORDS, MATCHING_PAIRS, CROSSWORD_DATA
+// STARTER program (A1-A2): WORD_SEARCH_WORDS_STARTER, MATCHING_PAIRS_STARTER, CROSSWORD_DATA_STARTER
 
 export const WORD_SEARCH_WORDS = {
   0: ['BARISTA', 'GRIND', 'CUSTOMER', 'NEIGHBOUR', 'EXCUSE', 'ROUTINE', 'MORNING', 'COFFEE'],
@@ -107,6 +109,112 @@ export const CROSSWORD_DATA = {
       { num: 4, clue: 'Present perfect signal: "I haven\'t done it ___"', answer: 'YET' },
       { num: 6, clue: 'Past continuous uses was + verb + ___', answer: 'ING' },
       { num: 8, clue: '"She ___ lives here" = still true', answer: 'STILL' },
+    ],
+  },
+};
+
+// ─── STARTER PROGRAM (A1-A2) game content ────────────────────────────────────
+
+export const MATCHING_PAIRS_STARTER = {
+  // Unit 01 — Greetings vocabulary
+  0: [
+    { word: 'hello', match: 'a friendly greeting when you meet someone' },
+    { word: 'goodbye', match: 'what you say when you leave' },
+    { word: 'nice to meet you', match: 'a polite phrase for first meetings' },
+    { word: 'please', match: 'a polite word when asking for something' },
+    { word: 'thank you', match: 'what you say when someone helps you' },
+    { word: 'sorry', match: 'what you say when you make a mistake' },
+    { word: 'I am from', match: 'used to say where you were born or grew up' },
+    { word: 'my name is', match: 'how you introduce yourself' },
+  ],
+  // Unit 02 — Family + possessives
+  1: [
+    { word: 'my', match: 'belonging to me' },
+    { word: 'his', match: 'belonging to him' },
+    { word: 'her', match: 'belonging to her' },
+    { word: 'their', match: 'belonging to them' },
+    { word: 'this', match: 'one thing near you' },
+    { word: 'that', match: 'one thing far from you' },
+    { word: 'these', match: 'more than one thing near you' },
+    { word: 'those', match: 'more than one thing far from you' },
+  ],
+  // Unit 05 — Food likes/dislikes
+  4: [
+    { word: 'Do you like coffee?', match: 'a question asking about preference' },
+    { word: 'Yes, I do.', match: 'a short positive answer' },
+    { word: 'No, I don\'t.', match: 'a short negative answer' },
+    { word: 'She doesn\'t eat meat.', match: 'negative form with he/she/it' },
+    { word: 'Does he like tea?', match: 'question form with he/she/it' },
+    { word: 'I love spicy food.', match: 'to like something very very much' },
+    { word: 'I hate getting up early.', match: 'to dislike something very strongly' },
+    { word: 'She prefers tea.', match: 'to like one thing more than another' },
+  ],
+  // Unit 07 — Time expressions
+  6: [
+    { word: 'o\'clock', match: 'exactly on the hour — e.g. nine o\'clock' },
+    { word: 'quarter past', match: '15 minutes after the hour — e.g. 9:15' },
+    { word: 'half past', match: '30 minutes after the hour — e.g. 9:30' },
+    { word: 'quarter to', match: '15 minutes before the hour — e.g. 8:45' },
+    { word: 'at', match: 'preposition for specific times — at 9 o\'clock' },
+    { word: 'on', match: 'preposition for days — on Monday' },
+    { word: 'in the morning', match: 'the early part of the day' },
+    { word: 'at night', match: 'the dark hours after the evening' },
+  ],
+  // Unit 08 — Can for ability
+  7: [
+    { word: 'can swim', match: 'has the ability to move through water' },
+    { word: 'can\'t drive', match: 'does not have the ability to operate a car' },
+    { word: 'Can you cook?', match: 'a question asking about someone\'s ability' },
+    { word: 'Yes, I can.', match: 'a short positive answer to a can question' },
+    { word: 'No, I can\'t.', match: 'a short negative answer to a can question' },
+    { word: 'She can speak three languages.', match: 'ability with he/she — no -s on can' },
+    { word: 'He can\'t bake.', match: 'negative ability — can + not = can\'t' },
+    { word: 'Can I open the window?', match: 'using can to ask for permission' },
+  ],
+};
+
+export const WORD_SEARCH_WORDS_STARTER = {
+  // Unit 03 — Daily routine
+  2: ['WAKEUP', 'BREAKFAST', 'LUNCH', 'DINNER', 'WORK', 'HOME', 'ROUTINE', 'ALWAYS', 'USUALLY', 'NEVER'],
+  // Unit 04 — Jobs
+  3: ['TEACHER', 'DOCTOR', 'NURSE', 'CHEF', 'OFFICE', 'HOSPITAL', 'SCHOOL', 'WORK', 'JOB', 'SHIFT'],
+  // Unit 06 — House
+  5: ['BEDROOM', 'KITCHEN', 'SOFA', 'TABLE', 'WINDOW', 'DOOR', 'CHAIR', 'WARDROBE', 'UNDER', 'NEXT'],
+  // Unit 09 — Adjectives for comparison
+  8: ['BIGGER', 'FASTER', 'NOISY', 'QUIET', 'CLEAN', 'SAFE', 'FRIENDLY', 'MODERN', 'CHEAP', 'CROWDED'],
+};
+
+export const CROSSWORD_DATA_STARTER = {
+  // Unit 10 — Market / countable-uncountable
+  9: {
+    across: [
+      { num: 1, clue: 'You use this to ask about countable things: How ___ apples?', answer: 'MANY' },
+      { num: 3, clue: 'You use this to ask about uncountable things: How ___ milk?', answer: 'MUCH' },
+      { num: 5, clue: 'A whole piece of baked bread', answer: 'LOAF' },
+      { num: 7, clue: 'A group of twelve — usually eggs', answer: 'DOZEN' },
+      { num: 9, clue: 'A unit of weight equal to 1000 grams', answer: 'KILO' },
+    ],
+    down: [
+      { num: 2, clue: 'The opposite of countable', answer: 'UNCOUNTABLE' },
+      { num: 4, clue: 'A place where you buy fresh food from sellers', answer: 'MARKET' },
+      { num: 6, clue: 'A small number of (used with countable nouns)', answer: 'FEW' },
+      { num: 8, clue: 'Milk comes in this container', answer: 'CARTON' },
+    ],
+  },
+  // Unit 11 — Going to / future plans
+  10: {
+    across: [
+      { num: 1, clue: '"I am ___ to visit my family" — future plan', answer: 'GOING' },
+      { num: 3, clue: 'The base form after "going to": "I am going to ___"', answer: 'SLEEP' },
+      { num: 5, clue: '"She ___ going to cook dinner."', answer: 'IS' },
+      { num: 7, clue: 'The opposite of "going to go out"', answer: 'STAY' },
+      { num: 9, clue: 'Future time expression: "We are going to travel ___ year."', answer: 'NEXT' },
+    ],
+    down: [
+      { num: 2, clue: '"They ___ going to come." — negative helper', answer: 'ARE' },
+      { num: 4, clue: '"___ you going to cook?" — question helper', answer: 'ARE' },
+      { num: 6, clue: 'Going to expresses plans and ___', answer: 'INTENTIONS' },
+      { num: 8, clue: 'A plan for fun activities: "I have lots of ___"', answer: 'PLANS' },
     ],
   },
 };

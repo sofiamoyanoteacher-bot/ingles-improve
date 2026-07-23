@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS users (
   profession TEXT,
   role TEXT NOT NULL DEFAULT 'student',
   active INTEGER NOT NULL DEFAULT 1,
+  program TEXT NOT NULL DEFAULT 'basic',
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -60,6 +61,13 @@ CREATE TABLE IF NOT EXISTS homework_files (
   uploaded_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 `);
+
+// Migration: add program column to users (for existing DBs that pre-date this column)
+const hasProgram = db.prepare("PRAGMA table_info(users)").all()
+  .some((col) => col.name === 'program');
+if (!hasProgram) {
+  db.exec(`ALTER TABLE users ADD COLUMN program TEXT NOT NULL DEFAULT 'basic'`);
+}
 
 // Migration: class_progress tracks completion of the 4 classes per unit independently
 // from the existing tab-level flags. Guarded because SQLite has no ADD COLUMN IF NOT EXISTS.

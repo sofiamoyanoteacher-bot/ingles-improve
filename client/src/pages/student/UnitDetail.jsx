@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { UNITS } from '../../data/units';
+import { useAuth } from '../../context/AuthContext.jsx';
+import { UNITS as UNITS_BASIC } from '../../data/units';
+import { UNITS as UNITS_STARTER } from '../../data/units_starter';
 import { api } from '../../api';
 import { useProgress } from '../../hooks/useProgress.js';
 import Class1Reading from './tabs/Class1Reading.jsx';
@@ -13,6 +15,8 @@ const CLASS_LABELS = { 1: 'Reading', 2: 'Grammar', 3: 'Listening', 4: 'Game' };
 export default function UnitDetail() {
   const { unitIndex } = useParams();
   const idx = Number(unitIndex);
+  const { user } = useAuth();
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
   const unit = UNITS[idx];
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();

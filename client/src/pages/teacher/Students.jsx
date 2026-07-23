@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { api } from '../../api';
-import { UNITS } from '../../data/units';
+import { UNITS as UNITS_BASIC } from '../../data/units';
+import { UNITS as UNITS_STARTER } from '../../data/units_starter';
+
+const PROGRAM_LABEL = { basic: 'Improve Basic (B1–B2)', starter: 'Improve Starter (A1–A2)' };
 
 export default function Students() {
   const [students, setStudents] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [form, setForm] = useState({ name: '', last_name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: '', last_name: '', email: '', password: '', program: 'basic' });
   const [error, setError] = useState('');
   const [expandedId, setExpandedId] = useState(null);
   const [progressByUser, setProgressByUser] = useState({});
@@ -21,7 +24,7 @@ export default function Students() {
     try {
       await api.teacherCreateStudent(form);
       setModalOpen(false);
-      setForm({ name: '', last_name: '', email: '', password: '' });
+      setForm({ name: '', last_name: '', email: '', password: '', program: 'basic' });
       load();
     } catch (err) {
       setError(err.message);
@@ -63,6 +66,7 @@ export default function Students() {
                 <div className="flex-1">
                   <div className="font-semibold text-sm">{s.name} {s.last_name}</div>
                   <div className="text-xs text-gray-500">{s.email}</div>
+                  <div className="text-[10px] text-sky font-semibold mt-0.5">{PROGRAM_LABEL[s.program] || 'Improve Basic (B1–B2)'}</div>
                 </div>
                 <div className="text-xs text-gray-500">Submissions: {s.total_submissions}</div>
                 <div className="text-xs">
@@ -83,7 +87,7 @@ export default function Students() {
                 <div className="border-t border-gray-100 p-4">
                   <h4 className="text-xs font-semibold text-gray-400 uppercase mb-3">Progress per unit</h4>
                   <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                    {UNITS.map((u, i) => {
+                    {(s.program === 'starter' ? UNITS_STARTER : UNITS_BASIC).map((u, i) => {
                       const row = progress.find((p) => p.unit_index === i);
                       const done = row && row.reading_done && row.grammar_done && row.listening_done && row.letstalk_done;
                       return (
@@ -115,6 +119,11 @@ export default function Students() {
                 className="w-full px-3.5 py-2.5 border border-gray-200 rounded-xl text-sm" />
               <input required type="text" placeholder="Temporary password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })}
                 className="w-full px-3.5 py-2.5 border border-gray-200 rounded-xl text-sm" />
+              <select value={form.program} onChange={(e) => setForm({ ...form, program: e.target.value })}
+                className="w-full px-3.5 py-2.5 border border-gray-200 rounded-xl text-sm">
+                <option value="basic">Improve Basic (B1–B2)</option>
+                <option value="starter">Improve Starter (A1–A2)</option>
+              </select>
               {error && <div className="text-sm text-red-600">{error}</div>}
               <div className="flex gap-2 pt-2">
                 <button type="button" onClick={() => setModalOpen(false)} className="flex-1 py-2.5 border border-gray-200 rounded-xl text-sm">Cancel</button>

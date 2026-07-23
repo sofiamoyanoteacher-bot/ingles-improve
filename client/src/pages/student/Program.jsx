@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { UNITS, MONTHS } from '../../data/units';
+import { useAuth } from '../../context/AuthContext.jsx';
+import { UNITS as UNITS_BASIC, MONTHS as MONTHS_BASIC } from '../../data/units';
+import { UNITS as UNITS_STARTER, MONTHS as MONTHS_STARTER } from '../../data/units_starter';
 import { useProgress } from '../../hooks/useProgress.js';
 
 const STATUS_LABEL = { done: 'Completed', current: 'In progress', locked: 'Not started' };
@@ -7,13 +9,16 @@ const STATUS_DOT = { done: 'bg-green-500', current: 'bg-sky', locked: 'bg-gray-2
 
 export default function Program() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
+  const MONTHS = user?.program === 'starter' ? MONTHS_STARTER : MONTHS_BASIC;
   const { statusFor, loading } = useProgress();
 
   return (
     <div className="max-w-[1100px] mx-auto px-6 py-8 md:pt-8 pt-16">
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Full program</h1>
-        <p className="text-sm text-gray-500 mt-1">5 months · 11 units · Pick a unit to get started</p>
+        <p className="text-sm text-gray-500 mt-1">5 months · 11 units · {user?.program === 'starter' ? 'Improve Starter (A1–A2)' : 'Improve Basic (B1–B2)'}</p>
       </div>
 
       {!loading && MONTHS.map((m, mi) => {

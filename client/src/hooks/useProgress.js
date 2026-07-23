@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { api } from '../api';
-import { UNITS } from '../data/units';
+import { useAuth } from '../context/AuthContext.jsx';
+import { UNITS as UNITS_BASIC } from '../data/units';
+import { UNITS as UNITS_STARTER } from '../data/units_starter';
 
 export function useProgress() {
+  const { user } = useAuth();
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
   const [progress, setProgress] = useState([]);
   const [loading, setLoading] = useState(true);
 

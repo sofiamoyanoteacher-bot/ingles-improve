@@ -1,8 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useProgress } from '../hooks/useProgress.js';
-import { UNITS } from '../data/units';
+import { UNITS as UNITS_BASIC } from '../data/units';
+import { UNITS as UNITS_STARTER } from '../data/units_starter';
 import Logo from '../components/Logo.jsx';
+
+const PROGRAM_BADGE = {
+  starter: { label: '⭐ Improve Starter — A1–A2', bg: 'bg-sky/10 text-sky' },
+  basic:   { label: '⚡ Improve Basic — B1–B2',   bg: 'bg-mag/10 text-mag' },
+};
 
 const CLASS_LABELS = { 1: 'Reading & Vocabulary', 2: 'Grammar', 3: 'Listening & Talk', 4: 'Game & Homework' };
 
@@ -30,6 +36,8 @@ export default function Home() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { progress, loading, totalClassesDone, findNextClass } = useProgress();
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
+  const badge = PROGRAM_BADGE[user?.program] || PROGRAM_BADGE.basic;
 
   const totalClasses = UNITS.length * 4;
   const done = totalClassesDone();
@@ -45,7 +53,8 @@ export default function Home() {
 
         <div className="relative z-10 flex-1">
           <Logo size="lg" />
-          <h1 className="text-[26px] font-bold mt-5 mb-3 leading-snug">Hello, {user?.name}! 👋</h1>
+          <span className={`inline-block text-[11px] font-bold px-2.5 py-1 rounded-full mt-4 mb-2 ${badge.bg}`}>{badge.label}</span>
+          <h1 className="text-[26px] font-bold mb-3 leading-snug">Hello, {user?.name}! 👋</h1>
           <p className="text-base text-gray-700 leading-relaxed italic mb-6 max-w-md">
             "Every expert was once a beginner.<br />Your English journey starts here,<br />one conversation at a time."
           </p>
