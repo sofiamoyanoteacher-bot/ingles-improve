@@ -462,7 +462,7 @@ export const UNITS = [
       {word:"to crystallise",trans:"cristalizarse, tomar forma",ex:'"The idea crystallised after a long walk in the rain."'},
       {word:"constraint",trans:"restricción, limitación",ex:'"Creative constraints often produce more original work."'},
       {word:"to flourish",trans:"florecer, prosperar",ex:'"Collaboration flourishes when people feel psychologically safe."'},
-      {word:"resistance",trans:"resistencia",ex:'"Steven Pressfield calls creative resistance 'The War of Art.'"'},
+      {word:"resistance",trans:"resistencia",ex:"\"Steven Pressfield calls creative resistance 'The War of Art.'\""},
       {word:"vividly",trans:"vívidamente",ex:'"I remember that conversation vividly."'},
     ],
     grammarExamples:[
@@ -972,7 +972,7 @@ export const UNITS = [
 <p>Had they known this earlier, several told me, they would have spent less time building the structure and more time inside it — more present with the people already there. Were we to define success not by what we accumulate but by what we enable in others, the entire grammar of professional life would shift.</p>
 <p>What remains, ultimately, is not what you built — it is how people felt in your presence. It is not the achievements that survivors cite at memorials — it is the specific moment, the exact words, the precise quality of being truly seen. Little does ambition know that the smallest acts of genuine attention are, in the long run, the most durable legacy of all.</p>`,
     vocab:[
-      {word:"to colonise",trans:"colonizar (en sentido figurado, apoderarse de)",ex:'"The word 'innovation' has been colonised by marketing language."'},
+      {word:"to colonise",trans:"colonizar (en sentido figurado, apoderarse de)",ex:"\"The word 'innovation' has been colonised by marketing language.\""},
       {word:"to endure",trans:"perdurar, resistir el tiempo",ex:'"The ideas that endure are those that address something true about human nature."'},
       {word:"to erect",trans:"erigir, construir",ex:'"They erected a statue in the founder\'s honour."'},
       {word:"reach",trans:"alcance, influencia",ex:'"Her reach on social media exceeded her expectations."'},
