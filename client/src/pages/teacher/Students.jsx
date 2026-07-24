@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { api } from '../../api';
 import { UNITS as UNITS_BASIC } from '../../data/units';
 import { UNITS as UNITS_STARTER } from '../../data/units_starter';
+import { UNITS as UNITS_NATIVE } from '../../data/units_native';
 
-const PROGRAM_LABEL = { basic: 'Improve Basic (B1–B2)', starter: 'Improve Starter (A1–A2)' };
+const PROGRAM_LABEL = { basic: 'Improve Basic (B1–B2)', starter: 'Improve Starter (A1–A2)', native: 'Improve Native (C1–C2)' };
 
 export default function Students() {
   const [students, setStudents] = useState([]);
@@ -87,7 +88,7 @@ export default function Students() {
                 <div className="border-t border-gray-100 p-4">
                   <h4 className="text-xs font-semibold text-gray-400 uppercase mb-3">Progress per unit</h4>
                   <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                    {(s.program === 'starter' ? UNITS_STARTER : UNITS_BASIC).map((u, i) => {
+                    {(s.program === 'native' ? UNITS_NATIVE : s.program === 'starter' ? UNITS_STARTER : UNITS_BASIC).map((u, i) => {
                       const row = progress.find((p) => p.unit_index === i);
                       const done = row && row.reading_done && row.grammar_done && row.listening_done && row.letstalk_done;
                       return (
@@ -123,6 +124,7 @@ export default function Students() {
                 className="w-full px-3.5 py-2.5 border border-gray-200 rounded-xl text-sm">
                 <option value="basic">Improve Basic (B1–B2)</option>
                 <option value="starter">Improve Starter (A1–A2)</option>
+                <option value="native">Improve Native (C1–C2)</option>
               </select>
               {error && <div className="text-sm text-red-600">{error}</div>}
               <div className="flex gap-2 pt-2">

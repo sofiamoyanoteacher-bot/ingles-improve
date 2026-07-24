@@ -29,7 +29,7 @@ router.post('/students', (req, res) => {
   const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
   if (existing) return res.status(409).json({ error: 'Ese email ya existe' });
   const hash = bcrypt.hashSync(password, 10);
-  const prog = program === 'starter' ? 'starter' : 'basic';
+  const prog = ['starter', 'native'].includes(program) ? program : 'basic';
   const info = db.prepare(
     'INSERT INTO users (email, password_hash, name, last_name, role, program) VALUES (?,?,?,?,?,?)'
   ).run(email, hash, name, last_name || '', 'student', prog);

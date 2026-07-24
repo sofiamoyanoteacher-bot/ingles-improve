@@ -3,6 +3,7 @@ import { useAuth } from '../../../context/AuthContext.jsx';
 import {
   WORD_SEARCH_WORDS, MATCHING_PAIRS, CROSSWORD_DATA,
   WORD_SEARCH_WORDS_STARTER, MATCHING_PAIRS_STARTER, CROSSWORD_DATA_STARTER,
+  WORD_SEARCH_WORDS_NATIVE, MATCHING_PAIRS_NATIVE, CROSSWORD_DATA_NATIVE,
 } from '../../../data/games';
 import WordSearch from '../../../components/games/WordSearch.jsx';
 import MatchingGame from '../../../components/games/MatchingGame.jsx';
@@ -11,10 +12,10 @@ import Homework from './Homework.jsx';
 
 function GameByType({ unit, unitIndex, onGameComplete }) {
   const { user } = useAuth();
-  const isStarter = user?.program === 'starter';
-  const words = isStarter ? WORD_SEARCH_WORDS_STARTER : WORD_SEARCH_WORDS;
-  const pairs = isStarter ? MATCHING_PAIRS_STARTER : MATCHING_PAIRS;
-  const crosswords = isStarter ? CROSSWORD_DATA_STARTER : CROSSWORD_DATA;
+  const prog = user?.program;
+  const words = prog === 'native' ? WORD_SEARCH_WORDS_NATIVE : prog === 'starter' ? WORD_SEARCH_WORDS_STARTER : WORD_SEARCH_WORDS;
+  const pairs = prog === 'native' ? MATCHING_PAIRS_NATIVE : prog === 'starter' ? MATCHING_PAIRS_STARTER : MATCHING_PAIRS;
+  const crosswords = prog === 'native' ? CROSSWORD_DATA_NATIVE : prog === 'starter' ? CROSSWORD_DATA_STARTER : CROSSWORD_DATA;
 
   if (unit.gameType === 'wordsearch') {
     const data = words[unitIndex];

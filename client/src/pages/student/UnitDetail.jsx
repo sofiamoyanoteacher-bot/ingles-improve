@@ -3,20 +3,23 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { UNITS as UNITS_BASIC } from '../../data/units';
 import { UNITS as UNITS_STARTER } from '../../data/units_starter';
+import { UNITS as UNITS_NATIVE } from '../../data/units_native';
 import { api } from '../../api';
 import { useProgress } from '../../hooks/useProgress.js';
 import Class1Reading from './tabs/Class1Reading.jsx';
 import Class2Grammar from './tabs/Class2Grammar.jsx';
 import Class3Listening from './tabs/Class3Listening.jsx';
 import Class4Game from './tabs/Class4Game.jsx';
+import Class5Idioms from './tabs/Class5Idioms.jsx';
 
-const CLASS_LABELS = { 1: 'Reading', 2: 'Grammar', 3: 'Listening', 4: 'Game' };
+const CLASS_LABELS = { 1: 'Reading', 2: 'Grammar', 3: 'Listening', 4: 'Game', 5: 'Idioms' };
 
 export default function UnitDetail() {
   const { unitIndex } = useParams();
   const idx = Number(unitIndex);
   const { user } = useAuth();
-  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : user?.program === 'native' ? UNITS_NATIVE : UNITS_BASIC;
+  const isNative = user?.program === 'native';
   const unit = UNITS[idx];
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -69,7 +72,7 @@ export default function UnitDetail() {
       </div>
 
       <div className="flex items-center gap-2 mb-6">
-        {[1, 2, 3, 4].map((n) => {
+        {[1, 2, 3, 4, ...(isNative ? [5] : [])].map((n) => {
           const unlocked = isClassUnlocked(idx, n);
           const classDone = isClassDone(idx, n);
           const isActive = activeClass === n;
@@ -87,7 +90,7 @@ export default function UnitDetail() {
                 <span>{classDone ? '✅' : unlocked ? '●' : '🔒'} C{n}</span>
                 <span className="text-[10px] font-normal hidden sm:inline">{CLASS_LABELS[n]}</span>
               </button>
-              {n < 4 && <div className={`h-0.5 w-3 flex-shrink-0 ${isClassDone(idx, n) ? 'bg-grad' : 'bg-gray-200'}`} />}
+              {n < (isNative ? 5 : 4) && <div className={`h-0.5 w-3 flex-shrink-0 ${isClassDone(idx, n) ? 'bg-grad' : 'bg-gray-200'}`} />}
             </div>
           );
         })}
@@ -97,9 +100,10 @@ export default function UnitDetail() {
       {activeClass === 2 && <Class2Grammar unit={unit} />}
       {activeClass === 3 && <Class3Listening unit={unit} unitIndex={idx} onListeningComplete={handleListeningComplete} />}
       {activeClass === 4 && <Class4Game unit={unit} unitIndex={idx} />}
+      {activeClass === 5 && isNative && <Class5Idioms unit={unit} />}
 
       <div className="mt-6">
-        {done ? (
+        {activeClass === 5 ? null : done ? (
           <div className="text-center text-sm text-green-600 font-semibold">✅ Class {activeClass} completed</div>
         ) : (
           <button

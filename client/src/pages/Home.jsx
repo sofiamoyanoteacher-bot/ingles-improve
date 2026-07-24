@@ -3,11 +3,13 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { useProgress } from '../hooks/useProgress.js';
 import { UNITS as UNITS_BASIC } from '../data/units';
 import { UNITS as UNITS_STARTER } from '../data/units_starter';
+import { UNITS as UNITS_NATIVE } from '../data/units_native';
 import Logo from '../components/Logo.jsx';
 
 const PROGRAM_BADGE = {
   starter: { label: '⭐ Improve Starter — A1–A2', bg: 'bg-sky/10 text-sky' },
   basic:   { label: '⚡ Improve Basic — B1–B2',   bg: 'bg-mag/10 text-mag' },
+  native:  { label: '🔥 Improve Native — C1–C2',  bg: 'bg-red-500/10 text-red-600' },
 };
 
 const CLASS_LABELS = { 1: 'Reading & Vocabulary', 2: 'Grammar', 3: 'Listening & Talk', 4: 'Game & Homework' };
@@ -36,7 +38,7 @@ export default function Home() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { progress, loading, totalClassesDone, findNextClass } = useProgress();
-  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : user?.program === 'native' ? UNITS_NATIVE : UNITS_BASIC;
   const badge = PROGRAM_BADGE[user?.program] || PROGRAM_BADGE.basic;
 
   const totalClasses = UNITS.length * 4;

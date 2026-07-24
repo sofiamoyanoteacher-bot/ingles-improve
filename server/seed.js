@@ -36,6 +36,9 @@ const students = [
   // Improve Starter (A1-A2)
   { email: 'starter1@improve.com', password: 'Alumno2026!', name: 'Diego', last_name: 'Fernández', age: 35, profession: 'Ingeniero', program: 'starter' },
   { email: 'starter2@improve.com', password: 'Alumno2026!', name: 'Camila', last_name: 'Torres', age: 27, profession: 'Abogada', program: 'starter' },
+  // Improve Native (C1-C2)
+  { email: 'native1@improve.com', password: 'Alumno2026!', name: 'Lucía', last_name: 'Moreno', age: 38, profession: 'Abogada', program: 'native' },
+  { email: 'native2@improve.com', password: 'Alumno2026!', name: 'Martín', last_name: 'Gutiérrez', age: 42, profession: 'Director', program: 'native' },
 ];
 
 for (const s of students) {

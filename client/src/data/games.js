@@ -113,6 +113,144 @@ export const CROSSWORD_DATA = {
   },
 };
 
+// ─── NATIVE PROGRAM (C1-C2) game content ─────────────────────────────────────
+
+export const MATCHING_PAIRS_NATIVE = {
+  // Unit 01 — pitch / business idioms vocab
+  0: [
+    { word: 'to pitch an idea', match: 'to present a concept and try to get buy-in' },
+    { word: 'venture capitalist', match: 'an investor who funds start-ups for equity' },
+    { word: 'to dazzle', match: 'to impress strongly, to overwhelm with brilliance' },
+    { word: 'to read the room', match: 'to sense the mood of the people around you' },
+    { word: 'to reshape', match: 'to fundamentally change the form of something' },
+    { word: 'follow-up', match: 'a subsequent meeting or contact after the first' },
+    { word: 'projections', match: 'estimated future financial figures' },
+    { word: 'conceivable', match: 'capable of being imagined or considered' },
+  ],
+  // Unit 03 — cross-cultural communication / discourse markers
+  2: [
+    { word: 'Furthermore', match: 'used to add another point to an argument' },
+    { word: 'Nevertheless', match: 'despite what was just said; a strong contrast' },
+    { word: 'Consequently', match: 'as a result; used to introduce a consequence' },
+    { word: 'In other words', match: 'used to reformulate and clarify a point' },
+    { word: 'Admittedly', match: 'used to concede a point before countering it' },
+    { word: 'tatemae', match: 'the public face presented in Japanese culture' },
+    { word: 'culturally fluent', match: 'able to operate competently across cultures' },
+    { word: 'to misread', match: 'to interpret a signal or situation incorrectly' },
+  ],
+  // Unit 06 — AI ethics / nominalisation
+  5: [
+    { word: 'development', match: 'nominalised form of "to develop"' },
+    { word: 'optimisation', match: 'nominalised form of "to optimise"' },
+    { word: 'polarisation', match: 'nominalised form of "to polarise"' },
+    { word: 'regulation', match: 'nominalised form of "to regulate"' },
+    { word: 'attribution', match: 'nominalised form of "to attribute"' },
+    { word: 'stewardship', match: 'responsible management and care of something' },
+    { word: 'epistemic', match: 'relating to knowledge and how we come to know things' },
+    { word: 'indifferent', match: 'showing no interest or concern; uncaring' },
+  ],
+  // Unit 09 — mind at work / mind idioms
+  8: [
+    { word: 'to have a lot on your plate', match: 'to have many tasks or problems to deal with' },
+    { word: 'to be in two minds', match: 'to be undecided between two options' },
+    { word: 'to put your mind to something', match: 'to focus your full effort on achieving something' },
+    { word: 'to bear in mind', match: 'to remember or consider something important' },
+    { word: 'cognitive flexibility', match: 'the ability to adapt thinking across different contexts' },
+    { word: 'asynchronous', match: 'not happening at the same time; delayed communication' },
+    { word: 'to fragment', match: 'to break into disconnected parts' },
+    { word: 'inertia', match: 'resistance to change; tendency to stay in the current state' },
+  ],
+  // Unit 11 — media and truth / media idioms
+  10: [
+    { word: 'to take with a grain of salt', match: 'to be sceptical; not believe completely' },
+    { word: 'to spin a story', match: 'to present facts to favour a particular interpretation' },
+    { word: 'off the record', match: 'said in confidence; not to be published' },
+    { word: 'to go viral', match: 'to spread rapidly and widely across the internet' },
+    { word: 'epistemic poverty', match: 'difficulty distinguishing what is true amid abundant content' },
+    { word: 'to rationalise', match: 'to construct reasons to justify a conclusion already reached' },
+    { word: 'misinformation', match: 'false or inaccurate information spread unintentionally' },
+    { word: 'propaganda', match: 'biased information used to promote a political cause' },
+  ],
+};
+
+export const WORD_SEARCH_WORDS_NATIVE = {
+  // Unit 02 — managing up
+  1: ['DELEGATE', 'INFLUENCE', 'BRIEFING', 'CONSENSUS', 'INERTIA', 'GROUNDWORK', 'INSTINCT', 'PROPOSAL', 'FEEDBACK', 'OUTCOME'],
+  // Unit 04 — the bilingual mind
+  3: ['TRANSLATE', 'NUANCE', 'BILINGUAL', 'ACQUIRE', 'CULTURE', 'LANGUAGE', 'MEANING', 'SILENCE', 'INTERPRET', 'WORLDVIEW'],
+  // Unit 07 — creative thinking
+  6: ['CONSTRAINT', 'ITERATION', 'AMBIGUITY', 'RESISTANCE', 'FLOURISH', 'CREATIVE', 'DISCARD', 'OBSTACLE', 'PRACTICE', 'DISCIPLINE'],
+  // Unit 10 — difficult conversations
+  9: ['MEDIATE', 'BOUNDARY', 'DREAD', 'DEFENSIVE', 'DISSOLVE', 'RESTORE', 'HONEST', 'CLARITY', 'BACKPEDAL', 'CONTACT'],
+  // Unit 13 — future of work
+  12: ['AUTOMATE', 'COGNITIVE', 'RETRAINING', 'OBSOLETE', 'PIPELINE', 'FLEXIBLE', 'UNLEARN', 'PLATFORM', 'LADDERS', 'THRIVE'],
+};
+
+export const CROSSWORD_DATA_NATIVE = {
+  // Unit 05 — negotiation / advanced modals
+  4: {
+    across: [
+      { num: 1, clue: 'Abbreviation for Best Alternative To a Negotiated Agreement', answer: 'BATNA' },
+      { num: 3, clue: 'A small compromise given to reach an agreement', answer: 'CONCESSION' },
+      { num: 5, clue: '"You ___ have told me" — criticism of a past action', answer: 'SHOULD' },
+      { num: 7, clue: 'Active ___ means knowing when silence is strategic', answer: 'PATIENCE' },
+    ],
+    down: [
+      { num: 2, clue: 'The person on the other side of the table', answer: 'COUNTERPART' },
+      { num: 4, clue: '"They ___ have agreed earlier" — past possibility', answer: 'COULD' },
+      { num: 6, clue: 'To make an offer more attractive: "sweeten the ___"', answer: 'DEAL' },
+    ],
+  },
+  // Unit 08 — living abroad
+  7: {
+    across: [
+      { num: 1, clue: 'Never ___ I feel fully at home in any one country', answer: 'HAVE' },
+      { num: 3, clue: 'A person living in a country other than their own', answer: 'EXPAT' },
+      { num: 5, clue: '"No sooner had I arrived ___ I felt homesick"', answer: 'THAN' },
+      { num: 7, clue: 'Feeling of being accepted and part of a group (to ___ in)', answer: 'FIT' },
+      { num: 9, clue: 'To establish a home and community in a new place (put down ___)', answer: 'ROOTS' },
+    ],
+    down: [
+      { num: 2, clue: '"___ did I know" — inversion expressing retrospective surprise', answer: 'LITTLE' },
+      { num: 4, clue: '"Not ___ I left did I truly understand" — negative adverbial', answer: 'UNTIL' },
+      { num: 6, clue: 'Slowly and permanently: "irre___ably"', answer: 'VOCABLY' },
+      { num: 8, clue: 'The feeling of missing your home country', answer: 'NOSTALGIA' },
+    ],
+  },
+  // Unit 12 — money and power / subjunctive
+  11: {
+    across: [
+      { num: 1, clue: '"It is essential that he ___ the meeting" — subjunctive', answer: 'ATTEND' },
+      { num: 3, clue: '"___ she to resign, the project would collapse" — formal conditional', answer: 'WERE' },
+      { num: 5, clue: 'To continue growing over time: wealth tends to ___ and ___', answer: 'COMPOUND' },
+      { num: 7, clue: '"We recommend that the clause ___" — passive subjunctive', answer: 'BE' },
+      { num: 9, clue: 'Money passed from one generation to the next', answer: 'INHERITANCE' },
+    ],
+    down: [
+      { num: 2, clue: '"___ you need further information, please contact us" — formal conditional', answer: 'SHOULD' },
+      { num: 4, clue: 'To maintain and continue into the future (to ___tuate)', answer: 'PERPE' },
+      { num: 6, clue: 'The opposite of income (what you own, not what you earn)', answer: 'WEALTH' },
+      { num: 8, clue: 'Unequal distribution of resources (economic ___)', answer: 'INEQUALITY' },
+    ],
+  },
+  // Unit 14 — legacy / synthesis
+  13: {
+    across: [
+      { num: 1, clue: '"___ did ambition know what endures" — inversion', answer: 'LITTLE' },
+      { num: 3, clue: 'To remain valuable across time: to stand the test of ___', answer: 'TIME' },
+      { num: 5, clue: '"It is not what you built — it is how people ___ in your presence"', answer: 'FELT' },
+      { num: 7, clue: 'Something built to honour someone (to erect a ___)', answer: 'MONUMENT' },
+      { num: 9, clue: '"To turn over a new ___" — idiom for making a fresh start', answer: 'LEAF' },
+    ],
+    down: [
+      { num: 2, clue: 'The quality of being genuinely present and listening', answer: 'ATTENTION' },
+      { num: 4, clue: '"Had they known, they would ___ spent less time building."', answer: 'HAVE' },
+      { num: 6, clue: 'To make possible for others (to ___ someone to succeed)', answer: 'ENABLE' },
+      { num: 8, clue: 'Lasting a long time without deteriorating (a ___ legacy)', answer: 'DURABLE' },
+    ],
+  },
+};
+
 // ─── STARTER PROGRAM (A1-A2) game content ────────────────────────────────────
 
 export const MATCHING_PAIRS_STARTER = {

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { UNITS as UNITS_BASIC, MONTHS as MONTHS_BASIC } from '../../data/units';
 import { UNITS as UNITS_STARTER, MONTHS as MONTHS_STARTER } from '../../data/units_starter';
+import { UNITS as UNITS_NATIVE, MONTHS as MONTHS_NATIVE } from '../../data/units_native';
 import { useProgress } from '../../hooks/useProgress.js';
 
 const STATUS_LABEL = { done: 'Completed', current: 'In progress', locked: 'Not started' };
@@ -10,8 +11,8 @@ const STATUS_DOT = { done: 'bg-green-500', current: 'bg-sky', locked: 'bg-gray-2
 export default function Program() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
-  const MONTHS = user?.program === 'starter' ? MONTHS_STARTER : MONTHS_BASIC;
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : user?.program === 'native' ? UNITS_NATIVE : UNITS_BASIC;
+  const MONTHS = user?.program === 'starter' ? MONTHS_STARTER : user?.program === 'native' ? MONTHS_NATIVE : MONTHS_BASIC;
   const { statusFor, loading } = useProgress();
 
   return (
