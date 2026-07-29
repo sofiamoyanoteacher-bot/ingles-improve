@@ -20,6 +20,7 @@ export default function Billing() {
   const [year, setYear]       = useState(now.getFullYear());
   const [month, setMonth]     = useState(now.getMonth() + 1);
   const [students, setStudents] = useState([]);
+  const [tab, setTab]         = useState('active'); // 'active' | 'inactive'
   const [payments, setPayments] = useState({});   // { userId: paid }
   const [modal, setModal]     = useState(null);   // student obj being edited
   const [form, setForm]       = useState({});
@@ -75,9 +76,10 @@ export default function Billing() {
     }
   }
 
-  const paidCount    = students.filter((s) => payments[s.id]).length;
-  const pendingCount = students.filter((s) => !payments[s.id]).length;
-  const totalFee     = students.reduce((acc, s) => acc + (Number(s.monthly_fee) || 0), 0);
+  const visible     = students.filter((s) => tab === 'active' ? s.active : !s.active);
+  const paidCount   = visible.filter((s) => payments[s.id]).length;
+  const pendingCount = visible.filter((s) => !payments[s.id]).length;
+  const totalFee    = visible.reduce((acc, s) => acc + (Number(s.monthly_fee) || 0), 0);
 
   return (
     <div>
@@ -102,6 +104,24 @@ export default function Billing() {
             {[2024, 2025, 2026, 2027].map((y) => <option key={y}>{y}</option>)}
           </select>
         </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 mb-5 bg-gray-100 p-1 rounded-xl w-fit">
+        {[{ key: 'active', label: 'Activos' }, { key: 'inactive', label: 'Inactivos' }].map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setTab(key)}
+            className={`px-5 py-2 rounded-lg text-sm font-semibold transition-colors ${
+              tab === key ? 'bg-white shadow text-gray-800' : 'text-gray-400 hover:text-gray-600'
+            }`}
+          >
+            {label}
+            <span className={`ml-1.5 text-[11px] px-1.5 py-0.5 rounded-full ${tab === key ? 'bg-gray-100' : 'bg-gray-200/60'}`}>
+              {students.filter((s) => key === 'active' ? s.active : !s.active).length}
+            </span>
+          </button>
+        ))}
       </div>
 
       {/* Summary cards */}
@@ -138,7 +158,7 @@ export default function Billing() {
               </tr>
             </thead>
             <tbody>
-              {students.map((s) => {
+              {visible.map((s) => {
                 const paid = !!payments[s.id];
                 return (
                   <tr key={s.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
@@ -184,9 +204,11 @@ export default function Billing() {
                   </tr>
                 );
               })}
-              {students.length === 0 && (
+              {visible.length === 0 && (
                 <tr>
-                  <td colSpan={9} className="text-center py-10 text-gray-400 text-sm">No students yet.</td>
+                  <td colSpan={9} className="text-center py-10 text-gray-400 text-sm">
+                    {tab === 'active' ? 'No hay alumnos activos.' : 'No hay alumnos inactivos.'}
+                  </td>
                 </tr>
               )}
             </tbody>
