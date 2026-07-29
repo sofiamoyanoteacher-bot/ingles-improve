@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext.jsx';
 const NAV = [
   { to: '/teacher', label: '📊 Dashboard', end: true },
   { to: '/teacher/students', label: '👥 Students' },
+  { to: '/teacher/billing', label: '💰 Billing' },
   { to: '/teacher/homework', label: '📤 Homework' },
   { to: '/teacher/feedback', label: '💬 Feedback' },
   { to: '/teacher/settings', label: '⚙️ Settings' },

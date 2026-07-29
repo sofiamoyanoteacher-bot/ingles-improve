@@ -15,6 +15,7 @@ const UPLOADS_DIR = process.env.UPLOADS_DIR
 router.get('/students', (req, res) => {
   const students = db.prepare(`
     SELECT u.id, u.email, u.name, u.last_name, u.age, u.profession, u.active, u.program, u.created_at,
+      u.schedule, u.monthly_fee, u.start_date, u.end_date,
       (SELECT COUNT(*) FROM homework_submissions s WHERE s.user_id = u.id) AS total_submissions,
       (SELECT COUNT(*) FROM homework_submissions s WHERE s.user_id = u.id AND s.status = 'pending') AS pending_submissions,
       (SELECT MAX(submitted_at) FROM homework_submissions s WHERE s.user_id = u.id) AS last_activity
@@ -53,6 +54,43 @@ router.put('/students/:id', (req, res) => {
   const updated = db.prepare('SELECT id, email, name, last_name, age, profession, active FROM users WHERE id = ?')
     .get(student.id);
   res.json({ student: updated });
+});
+
+router.put('/students/:id/billing', (req, res) => {
+  const { schedule, monthly_fee, start_date, end_date } = req.body || {};
+  const student = db.prepare('SELECT id FROM users WHERE id = ? AND role = ?').get(req.params.id, 'student');
+  if (!student) return res.status(404).json({ error: 'Alumno no encontrado' });
+  db.prepare(`UPDATE users SET
+    schedule = COALESCE(?, schedule),
+    monthly_fee = COALESCE(?, monthly_fee),
+    start_date = COALESCE(?, start_date),
+    end_date = COALESCE(?, end_date)
+    WHERE id = ?`).run(
+    schedule ?? null, monthly_fee != null ? Number(monthly_fee) : null,
+    start_date ?? null, end_date ?? null, student.id
+  );
+  const updated = db.prepare('SELECT id, schedule, monthly_fee, start_date, end_date FROM users WHERE id = ?').get(student.id);
+  res.json({ student: updated });
+});
+
+router.get('/payments', (req, res) => {
+  const { year, month } = req.query;
+  const y = Number(year) || new Date().getFullYear();
+  const m = Number(month) || new Date().getMonth() + 1;
+  const rows = db.prepare('SELECT user_id, paid FROM monthly_payments WHERE year = ? AND month = ?').all(y, m);
+  res.json({ payments: rows, year: y, month: m });
+});
+
+router.put('/payments/:userId', (req, res) => {
+  const { year, month, paid } = req.body || {};
+  const y = Number(year) || new Date().getFullYear();
+  const m = Number(month) || new Date().getMonth() + 1;
+  const student = db.prepare('SELECT id FROM users WHERE id = ? AND role = ?').get(req.params.userId, 'student');
+  if (!student) return res.status(404).json({ error: 'Alumno no encontrado' });
+  db.prepare(`INSERT INTO monthly_payments (user_id, year, month, paid) VALUES (?,?,?,?)
+    ON CONFLICT(user_id, year, month) DO UPDATE SET paid = excluded.paid`)
+    .run(student.id, y, m, paid ? 1 : 0);
+  res.json({ user_id: student.id, year: y, month: m, paid: paid ? 1 : 0 });
 });
 
 router.get('/students/:id/progress', (req, res) => {

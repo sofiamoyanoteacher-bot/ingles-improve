@@ -62,12 +62,31 @@ CREATE TABLE IF NOT EXISTS homework_files (
 );
 `);
 
+// Billing table: tracks monthly payments per student
+db.exec(`
+CREATE TABLE IF NOT EXISTS monthly_payments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL REFERENCES users(id),
+  year INTEGER NOT NULL,
+  month INTEGER NOT NULL,
+  paid INTEGER NOT NULL DEFAULT 0,
+  UNIQUE(user_id, year, month)
+);
+`);
+
 // Migration: add program column to users (for existing DBs that pre-date this column)
 const hasProgram = db.prepare("PRAGMA table_info(users)").all()
   .some((col) => col.name === 'program');
 if (!hasProgram) {
   db.exec(`ALTER TABLE users ADD COLUMN program TEXT NOT NULL DEFAULT 'basic'`);
 }
+
+// Migration: billing fields on users
+const userCols = db.prepare("PRAGMA table_info(users)").all().map((c) => c.name);
+if (!userCols.includes('schedule'))    db.exec(`ALTER TABLE users ADD COLUMN schedule TEXT DEFAULT ''`);
+if (!userCols.includes('monthly_fee')) db.exec(`ALTER TABLE users ADD COLUMN monthly_fee REAL DEFAULT 0`);
+if (!userCols.includes('start_date'))  db.exec(`ALTER TABLE users ADD COLUMN start_date TEXT DEFAULT ''`);
+if (!userCols.includes('end_date'))    db.exec(`ALTER TABLE users ADD COLUMN end_date TEXT DEFAULT ''`);
 
 // Migration: class_progress tracks completion of the 4 classes per unit independently
 // from the existing tab-level flags. Guarded because SQLite has no ADD COLUMN IF NOT EXISTS.

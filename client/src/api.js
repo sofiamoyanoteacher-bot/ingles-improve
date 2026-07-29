@@ -52,6 +52,10 @@ export const api = {
     request(`/teacher/homework/${id}/feedback`, { method: 'POST', body: { feedback_text } }),
   teacherEditFeedback: (id, feedback_text) =>
     request(`/teacher/homework/${id}/feedback`, { method: 'PUT', body: { feedback_text } }),
+  teacherUpdateBilling: (id, payload) => request(`/teacher/students/${id}/billing`, { method: 'PUT', body: payload }),
+  teacherGetPayments: (year, month) => request(`/teacher/payments?year=${year}&month=${month}`),
+  teacherTogglePayment: (userId, year, month, paid) =>
+    request(`/teacher/payments/${userId}`, { method: 'PUT', body: { year, month, paid } }),
   teacherStats: () => request('/teacher/stats'),
   async downloadTeacherFile(submissionId, filename, originalName) {
     const token = getToken();
