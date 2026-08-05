@@ -30,7 +30,8 @@ router.post('/students', (req, res) => {
   const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
   if (existing) return res.status(409).json({ error: 'Ese email ya existe' });
   const hash = bcrypt.hashSync(password, 10);
-  const prog = ['starter', 'native'].includes(program) ? program : 'basic';
+  const VALID_PROGRAMS = ['basic', 'starter', 'native', 'conversation', 'highpro'];
+  const prog = VALID_PROGRAMS.includes(program) ? program : 'basic';
   const info = db.prepare(
     'INSERT INTO users (email, password_hash, name, last_name, role, program) VALUES (?,?,?,?,?,?)'
   ).run(email, hash, name, last_name || '', 'student', prog);
@@ -40,20 +41,40 @@ router.post('/students', (req, res) => {
 });
 
 router.put('/students/:id', (req, res) => {
-  const { name, last_name, age, profession, email, active } = req.body || {};
+  const { name, last_name, age, profession, email, active, program, password } = req.body || {};
   const student = db.prepare('SELECT * FROM users WHERE id = ? AND role = ?').get(req.params.id, 'student');
   if (!student) return res.status(404).json({ error: 'Alumno no encontrado' });
+  if (email && email !== student.email) {
+    const conflict = db.prepare('SELECT id FROM users WHERE email = ? AND id != ?').get(email, student.id);
+    if (conflict) return res.status(409).json({ error: 'Ese email ya existe' });
+  }
+  const VALID_PROGRAMS = ['basic', 'starter', 'native', 'conversation', 'highpro'];
+  const prog = program ? (VALID_PROGRAMS.includes(program) ? program : 'basic') : null;
+  const hash = password ? bcrypt.hashSync(password, 10) : null;
   db.prepare(`UPDATE users SET
       name = COALESCE(?, name), last_name = COALESCE(?, last_name),
       age = COALESCE(?, age), profession = COALESCE(?, profession),
-      email = COALESCE(?, email), active = COALESCE(?, active)
+      email = COALESCE(?, email), active = COALESCE(?, active),
+      program = COALESCE(?, program),
+      password_hash = CASE WHEN ? IS NOT NULL THEN ? ELSE password_hash END
       WHERE id = ?`).run(
     name ?? null, last_name ?? null, age != null ? Number(age) : null,
-    profession ?? null, email ?? null, active != null ? Number(active) : null, student.id
+    profession ?? null, email ?? null, active != null ? Number(active) : null,
+    prog, hash, hash, student.id
   );
-  const updated = db.prepare('SELECT id, email, name, last_name, age, profession, active FROM users WHERE id = ?')
+  const updated = db.prepare('SELECT id, email, name, last_name, age, profession, active, program FROM users WHERE id = ?')
     .get(student.id);
   res.json({ student: updated });
+});
+
+router.delete('/students/:id', (req, res) => {
+  const student = db.prepare('SELECT id FROM users WHERE id = ? AND role = ?').get(req.params.id, 'student');
+  if (!student) return res.status(404).json({ error: 'Alumno no encontrado' });
+  db.prepare('DELETE FROM progress WHERE user_id = ?').run(student.id);
+  db.prepare('DELETE FROM homework_submissions WHERE user_id = ?').run(student.id);
+  db.prepare('DELETE FROM monthly_payments WHERE user_id = ?').run(student.id);
+  db.prepare('DELETE FROM users WHERE id = ?').run(student.id);
+  res.json({ ok: true });
 });
 
 router.put('/students/:id/billing', (req, res) => {

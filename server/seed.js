@@ -34,6 +34,12 @@ const students = [
   { email: 'alumno2@improve.com', password: 'Alumno2026!', name: 'Marcos', last_name: 'Rodríguez', age: 31, profession: 'Contador', program: 'basic' },
   { email: 'alumno3@improve.com', password: 'Alumno2026!', name: 'Sofía', last_name: 'Medina', age: 24, profession: 'Marketing', program: 'basic' },
   { email: 'mauro.zuppone@gmail.com', password: 'Student123', name: 'Mauro', last_name: 'Zuppone', program: 'basic' },
+  { email: 'alexispiovano@gmail.com', password: 'Student123', name: 'Alexis', last_name: 'Piovano', program: 'basic' },
+  { email: 'Martinezrosaa2908@gmail.com', password: 'Student123', name: 'Angela', last_name: 'Martinez', program: 'starter' },
+  { email: 'arielolmosm@gmail.com', password: 'Student123', name: 'Ariel', last_name: 'Olmos', program: 'basic' },
+  { email: 'gabriel.cantera15@gmail.com', password: 'Student123', name: 'Gabriel', last_name: 'Cantera', program: 'starter' },
+  { email: 'nacho.garciax@gmail.com', password: 'Student123', name: 'Ignacio', last_name: 'Garcia', program: 'basic' },
+  { email: 'leanlestani@gmail.com', password: 'Student123', name: 'Leandro', last_name: 'Lestani', program: 'basic' },
   // Improve Starter (A1-A2)
   { email: 'starter1@improve.com', password: 'Alumno2026!', name: 'Diego', last_name: 'Fernández', age: 35, profession: 'Ingeniero', program: 'starter' },
   { email: 'starter2@improve.com', password: 'Alumno2026!', name: 'Camila', last_name: 'Torres', age: 27, profession: 'Abogada', program: 'starter' },

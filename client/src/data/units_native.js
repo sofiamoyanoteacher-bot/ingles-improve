@@ -1040,6 +1040,232 @@ export const UNITS = [
       {expression:"to go out with a bang",meaning:"to end something in an impressive or memorable way",example:'"Her last presentation before retirement went out with a bang — a standing ovation."',whenToUse:"When something ends impressively rather than quietly fading away."},
     ],
   },
+  // ── UNIT 15 ──────────────────────────────────────────────────────────────────
+  {
+    num:"15", title:"The grammar of description", grammar:"Compound Adjectives (past/present participle) · Adjectives vs Adverbs", month:6,
+    reading:`<p>There are places on this planet that resist description — not because language fails us, but because the experience arrives before the words do. You stand at the edge of the Grand Canyon, a wind-swept plateau falling away into a copper-coloured abyss, and the mind goes quiet before the mouth can open.</p>
+<p>The world's wonders — both ancient and natural — share this quality of scale that temporarily displaces the self. The Colosseum in Rome, a battle-worn structure that once hosted fifty thousand spectators, now hosts millions of visitors who stand in its shadow and feel, briefly, the weight of centuries pressing down. Angkor Wat in Cambodia, a moss-covered temple complex stretching across two hundred hectares, appears not built but grown — as if the jungle and the architecture made an agreement long ago.</p>
+<p>What strikes most travellers is not the size. It's the combination of human ambition and natural time working together. A hand-carved stone, a wind-eroded cliff, a painstakingly assembled arch — these are not just objects. They are arguments. Arguments that something mattered enough to build, to maintain, to survive.</p>
+<p>The most awe-inspiring places are rarely the most photographed. They are the ones where you put the camera down and simply stand there, a slightly stunned witness to something that preceded you by a thousand years and will, in all likelihood, outlast you by a thousand more.</p>`,
+    vocab:[
+      {word:"abyss",trans:"abismo, vacío insondable",ex:'"A copper-coloured abyss fell away below their feet."'},
+      {word:"displace",trans:"desplazar, sustituir",ex:'"Scale temporarily displaces the self."'},
+      {word:"hectare",trans:"hectárea (10,000 m²)",ex:'"Two hundred hectares of temple complex."'},
+      {word:"ambition",trans:"ambición",ex:'"Human ambition carved these structures into existence."'},
+      {word:"awe-inspiring",trans:"que inspira asombro",ex:'"The most awe-inspiring places are rarely the most photographed."'},
+      {word:"painstakingly",trans:"meticulosamente, con gran esfuerzo",ex:'"Painstakingly assembled over decades."'},
+      {word:"outlast",trans:"durar más que",ex:'"It will outlast you by a thousand years."'},
+      {word:"precede",trans:"preceder, anteceder",ex:'"Something that preceded you by a millennium."'},
+    ],
+    grammarExamples:[
+      '"a wind-swept plateau" — wind + swept (past participle compound)',
+      '"a battle-worn structure" — battle + worn (past participle compound)',
+      '"a moss-covered temple" — moss + covered (past participle compound)',
+      '"awe-inspiring places" — awe + inspiring (present participle compound)',
+      '"a slightly stunned witness" — adverb + past participle adjective',
+    ],
+    grammarRule:"Compound adjectives combine two words (often with a past or present participle) into a single modifier. They are hyphenated before a noun but not after a linking verb. The choice of past vs. present participle changes meaning: past participle = acted upon; present participle = actively doing.",
+    grammarTable:[
+      ["Structure","Example (before noun)","Example (after verb)"],
+      ["word + past participle","a hand-carved stone","The stone is hand carved."],
+      ["word + past participle","a moss-covered temple","The temple is moss covered."],
+      ["word + past participle","a well-preserved ruin","The ruin is well preserved."],
+      ["word + present participle","an awe-inspiring view","The view is awe inspiring."],
+      ["word + present participle","a thought-provoking idea","The idea was thought provoking."],
+      ["word + present participle","a record-breaking athlete","The athlete is record breaking."],
+      ["Tricky pair","The tour was boring. (cause)","The tourist was bored. (effect)"],
+      ["Adverb vs adjective","She is a careful observer.","She observed carefully."],
+    ],
+    grammarWatch:"Hyphens are required BEFORE a noun: 'a well-preserved ruin.' After a linking verb, no hyphen: 'The ruin is well preserved.' For numbers: 'a two-hundred-year-old temple' (hyphens) but 'The temple is two hundred years old' (no hyphens).",
+    grammarTip:"The adjective/adverb distinction matters more at C1–C2 because errors become visible the more fluent you sound. If it describes a noun or follows a linking verb (be, seem, feel, look) → adjective. If it describes a verb, adjective, or another adverb → adverb (usually -ly). Common traps: hard/hardly, late/lately, near/nearly, high/highly.",
+    listeningTitle:"Seven wonders, seven stories",
+    listeningDesc:"Listen to a travel journalist describe three world wonders and what struck her most about each. Answer the questions.",
+    listeningQ:[
+      {q:"Which wonder does the speaker describe as 'more grown than built'?",opts:["The Great Wall","Machu Picchu","Angkor Wat","The Colosseum"],correct:2},
+      {q:"What does the speaker say about photography at world wonders?",opts:["She always photographs everything","Some places make you put the camera down","Photography is banned at most wonders","Photos never capture the real experience"],correct:1},
+      {q:"How does the speaker describe the feeling of standing in the Colosseum?",opts:["Exciting and energetic","Cold and uncomfortable","The weight of centuries pressing down","Lonely and overwhelming"],correct:2},
+      {q:"What is the speaker's main argument about the world's wonders?",opts:["They are overrated","They are best visited in winter","They are arguments that something mattered enough to survive","They are all equally impressive"],correct:2},
+    ],
+    talkQ:[
+      "Have you visited a wonder of the world — natural or man-made? Describe it using compound adjectives.",
+      "'The most awe-inspiring places are rarely the most photographed.' Do you agree? Why?",
+      "Describe a place using 3 compound adjectives with past participles and 2 with present participles.",
+      "Is there a wonder you would travel specifically to see? What draws you to it?",
+      "'They are arguments that something mattered.' What do you think the ancient builders were arguing?",
+    ],
+    hwTask:"Write a 300-word travel piece about a real or imagined wonder of the world. Requirements: at least 4 compound adjectives (mix of past and present participle), adjectives and adverbs used with precision, at least 2 idioms from this unit, one paragraph describing the place, one how it makes you feel, one arguing why it matters.",
+    gameType:"matching",
+    unitImageSeed:"world-wonders",
+    warmupQuestions:[
+      "'The temple is well preserved.' → make it a compound adjective before a noun.",
+      "'The athlete ran incredible fast.' → correct the error.",
+      "Explain the difference: 'The documentary was tiring.' vs 'The filmmaker was tired.'",
+    ],
+    quickCheck:[
+      {statement:"The author says the best wonders are always the most photographed.",answer:false},
+      {statement:"Angkor Wat covers approximately two hundred hectares.",answer:true},
+      {statement:"The Colosseum once held around fifty thousand spectators.",answer:true},
+    ],
+    speakingChallenge:"'The wonder I'd save': If only one world wonder could be preserved for future generations, which would you choose and why? Make your case in 2 minutes using compound adjectives, at least 2 idioms, and one adjective/adverb pair used correctly. The class votes after each argument.",
+    idioms:[
+      {expression:"a sight to behold",meaning:"something visually impressive or remarkable",example:'"The view from Machu Picchu is truly a sight to behold."',whenToUse:"When describing something visually stunning."},
+      {expression:"off the beaten track",meaning:"away from tourist areas; uncommon or remote",example:'"We found a café completely off the beaten track — no tourists, perfect coffee."',whenToUse:"When talking about travel or finding unusual, non-touristy experiences."},
+      {expression:"leave no stone unturned",meaning:"to try every possible option",example:'"The archaeologists left no stone unturned searching for the ruins."',whenToUse:"When describing thorough investigation or exhaustive effort."},
+      {expression:"stand the test of time",meaning:"to remain valuable or relevant over many years",example:'"The Great Wall has stood the test of time — physically and culturally."',whenToUse:"When describing things that have proved their lasting value."},
+      {expression:"broaden your horizons",meaning:"to expand your experience and understanding",example:'"Travelling to Japan completely broadened her horizons."',whenToUse:"When talking about learning, travel, or personal growth."},
+    ],
+  },
+  // ── UNIT 16 ──────────────────────────────────────────────────────────────────
+  {
+    num:"16", title:"The art of connection", grammar:"Connectors & Discourse Markers (advanced — full system)", month:6,
+    reading:`<p>Nobody tells you that immigration is a grammar problem.</p>
+<p>Not the paperwork, although there is plenty of that. Not the bureaucracy, although it will test your patience in ways that feel almost personal. The grammar problem is this: you arrive knowing how to express yourself in one language, and you find that the version of you that exists in your second language is — for now — a simplified draft. Nuance bleeds out. Humour is the first casualty. Irony takes years to come back.</p>
+<p>And yet, despite this compression of self, immigrants adapt. Not only do they adapt — they often become remarkable communicators precisely because they have had to think consciously about what native speakers do automatically. They know where the edges of the language are because they have bumped into them.</p>
+<p>The research on bilingual and multilingual communities consistently shows that people who operate in more than one language develop stronger capacities for perspective-taking. Having once been a stranger in a language, they are better at imagining the stranger's position. They have walked the mile in uncomfortable shoes. They know what it feels like to have something important to say and the wrong words to say it with.</p>
+<p>What is lost in the immigrant experience is real and should not be minimised. However, what is gained — the doubled vision, the cultural flexibility, the hard-won fluency — is equally real. In the end, belonging is not about speaking without an accent. It is about having something to say and the courage to say it.</p>`,
+    vocab:[
+      {word:"bureaucracy",trans:"burocracia",ex:'"The bureaucracy tested her patience at every step."'},
+      {word:"nuance",trans:"matiz, sutileza",ex:'"Nuance bleeds out when you speak in your second language."'},
+      {word:"casualty",trans:"víctima, baja",ex:'"Humour is the first casualty of speaking a new language."'},
+      {word:"compression",trans:"compresión, reducción",ex:'"A compression of self happens in a new language."'},
+      {word:"perspective-taking",trans:"capacidad de ponerse en el lugar del otro",ex:'"Bilinguals develop stronger perspective-taking capacity."'},
+      {word:"minimise",trans:"minimizar, restar importancia",ex:'"The losses should not be minimised."'},
+      {word:"fluency",trans:"fluidez",ex:'"Hard-won fluency is the result of years of effort."'},
+      {word:"belonging",trans:"sentido de pertenencia",ex:'"Belonging is not about speaking without an accent."'},
+    ],
+    grammarExamples:[
+      '"Not only do they adapt — they become remarkable communicators." (inversion for emphasis)',
+      '"However, what is gained is equally real." (contrast connector)',
+      '"What is lost should not be minimised. However, what is gained is real." (concession + contrast)',
+      '"Admittedly, the first year is brutal." (concession connector)',
+      '"In the end, belonging is about having something to say." (summary connector)',
+    ],
+    grammarRule:"Connectors (discourse markers) are the architecture of argument. At C1–C2 the question is not whether to use them — it is which one, and where. The system covers 8 functions: addition, contrast, cause/result, concession, exemplification, condition, purpose, and summary.",
+    grammarTable:[
+      ["Function","Key connectors","Example"],
+      ["Addition","furthermore, moreover, what's more","Furthermore, the research is growing."],
+      ["Contrast","however, nevertheless, that said, and yet","However, she stayed."],
+      ["Contrast","whereas, despite, in spite of","Whereas some struggle, others thrive."],
+      ["Cause/Result","therefore, consequently, as a result, hence","Consequently, she missed the semester."],
+      ["Concession","admittedly, granted, to be fair","Admittedly, the first year was brutal."],
+      ["Exemplification","for example, for instance, such as","Such as empathy and perspective-taking."],
+      ["Purpose","in order to, so as to, with a view to","In order to belong, accept discomfort."],
+      ["Summary","in short, all in all, ultimately","Ultimately, home is where you decide."],
+    ],
+    grammarWatch:"NEVER combine 'although' and 'but' in the same clause: ✗ 'Although she was tired, but she continued.' → ✓ 'Although she was tired, she continued.' NEVER use 'Despite of' → ✓ 'Despite this' / 'Despite the difficulty'. Placement: 'However,' at sentence start (comma after); 'however' mid-sentence (commas around).",
+    grammarTip:"The most powerful move is the concessive connector: 'Admittedly,' 'That said,' 'Granted,' — these signal intellectual honesty. They tell your reader: I've considered the other side. This builds credibility in a way that pure assertion never can. Master the concessive connector and your arguments immediately become more persuasive.",
+    listeningTitle:"What nobody tells you about living abroad",
+    listeningDesc:"A woman reflects on five years of living in a country that isn't hers.",
+    listeningQ:[
+      {q:"What does she describe as 'the first casualty' of living in another language?",opts:["Grammar","Vocabulary","Humour","Formality"],correct:2},
+      {q:"What positive quality does she say immigrants often develop?",opts:["Speed in a new language","A stronger ability to take others' perspectives","An ability to forget their culture","Perfect pronunciation"],correct:1},
+      {q:"How long did it take her to feel she truly fit in?",opts:["Six months","One year","Two years","Five years"],correct:2},
+      {q:"What is her final definition of belonging?",opts:["Speaking without an accent","Having a passport","Having something to say and the courage to say it","Understanding all the cultural references"],correct:2},
+    ],
+    talkQ:[
+      "Have you ever lived abroad, or do you know someone who has? What was the hardest part?",
+      "'Nuance bleeds out in a second language.' Has this happened to you in English?",
+      "The author says humour is the first casualty. When was the last time something funny in English didn't land?",
+      "'Belonging is not about speaking without an accent.' Do you agree? What IS it about?",
+      "Use a connector from today's class to link two ideas about immigration or language learning.",
+    ],
+    hwTask:"Write a 350-word personal essay on one of these prompts: 'What living in (or learning) another language has taught me' / 'What I think people misunderstand about immigration' / 'What being a foreigner — in a country or in a language — actually feels like.' Requirements: use at least 8 connectors from at least 5 different categories. Underline each connector and label its category. Use at least 2 idioms from this unit and 2 compound adjectives from Unit 15.",
+    gameType:"wordsearch",
+    unitImageSeed:"immigration-city",
+    warmupQuestions:[
+      "Replace 'but' with a more sophisticated connector: 'The language was hard, but she stayed.'",
+      "What's wrong? 'Although she was tired, but she kept going.' Fix it.",
+      "Use 'not only... but also' to combine: 'She learned the language.' + 'She learned the culture.'",
+    ],
+    quickCheck:[
+      {statement:"The author says immigrants are poor communicators because of language barriers.",answer:false},
+      {statement:"Humour is described as one of the first things lost in a new language.",answer:true},
+      {statement:"The author argues that belonging requires speaking without an accent.",answer:false},
+    ],
+    speakingChallenge:"'The letter to new immigrants': Write and then deliver a 2-minute spoken letter to someone who has just arrived in a new country. Give them real, honest advice. Use at least 5 different connector categories (contrast, concession, addition, cause/result, summary). The class identifies which connectors were used after each speaker.",
+    idioms:[
+      {expression:"find common ground",meaning:"to discover shared interests or beliefs with someone",example:'"Despite their differences, they managed to find common ground."',whenToUse:"When resolving conflict or building relationships across difference."},
+      {expression:"bridge the gap",meaning:"to reduce the difference between two things or people",example:'"Education can bridge the gap between cultures."',whenToUse:"When talking about cultural, social, or economic differences."},
+      {expression:"in the same boat",meaning:"in the same difficult situation as someone else",example:'"All immigrants feel lost at first — we\'re all in the same boat."',whenToUse:"When sharing a difficult experience with others."},
+      {expression:"walk a mile in someone's shoes",meaning:"to understand someone's experience by imagining yourself in their position",example:'"Before judging an immigrant\'s choices, walk a mile in their shoes."',whenToUse:"When calling for empathy and perspective-taking."},
+      {expression:"fit in",meaning:"to be accepted as part of a group or feel comfortable in a situation",example:'"It took her two years to feel like she truly fit in."',whenToUse:"When talking about social belonging and adaptation."},
+    ],
+  },
+  // ── UNIT 17 ──────────────────────────────────────────────────────────────────
+  {
+    num:"17", title:"Tying it all together", grammar:"Modals in the Past · Passive Voice Consolidation · Full C1-C2 Integration", month:6,
+    reading:`<p>The question is no longer whether artificial intelligence will change the nature of work. It already has. The question that is being avoided in most boardrooms — the elephant in the room at every technology conference — is simpler and more uncomfortable: whose work, exactly, is being changed, and who bears the cost of that change?</p>
+<p>Tasks that were once considered uniquely human — writing, analysis, coding, design, medical diagnosis, legal research — are now being performed, or at least assisted, by systems that were trained on the collective output of human labour, without compensation to those whose work provided the training data. This is not a small ethical detail. It is the central tension of the current moment.</p>
+<p>What should have been done — and wasn't — was the development of regulatory frameworks before the technology was deployed at scale. Instead, the technology was built, released, and adopted with remarkable speed, and the governance conversation has been playing catch-up ever since. Had policymakers acted earlier, the transition might have been more equitable. Had workers been consulted, the tools might have been designed differently.</p>
+<p>None of this means AI should be rejected. However, it does mean that the brave new world being built deserves more honest conversation than it is currently getting. The writing may well be on the wall for some roles. But new roles are being created, new skills are being valued, and the workers who will thrive are not those who resist the change — they are those who learn to direct it.</p>`,
+    vocab:[
+      {word:"boardroom",trans:"sala de directorio",ex:'"The elephant in the room in every boardroom."'},
+      {word:"compensation",trans:"compensación, remuneración",ex:'"Without compensation for those whose work trained the model."'},
+      {word:"regulatory framework",trans:"marco regulatorio",ex:'"Frameworks before deployment could have prevented this."'},
+      {word:"governance",trans:"gobernanza, sistema de supervisión",ex:'"The governance conversation has been playing catch-up."'},
+      {word:"equitable",trans:"equitativo, justo",ex:'"The transition might have been more equitable."'},
+      {word:"deploy",trans:"desplegar, implementar a escala",ex:'"Deployed before governance was ready."'},
+      {word:"thrive",trans:"prosperar, florecer",ex:'"Workers who will thrive are those who learn to direct the change."'},
+      {word:"tension",trans:"tensión, conflicto latente",ex:'"This is the central tension of the current moment."'},
+    ],
+    grammarExamples:[
+      '"What should have been done — and wasn\'t." (modal past + passive)',
+      '"Had policymakers acted earlier, the transition might have been more equitable." (mixed conditional)',
+      '"The technology was built, released, and adopted." (simple past passive)',
+      '"Tasks are now being performed by AI systems." (present continuous passive)',
+      '"The governance conversation has been playing catch-up." (present perfect continuous)',
+    ],
+    grammarRule:"The modal past + passive combination ('should have been consulted,' 'could have been prevented,' 'ought to have been tested') is the single structure that most reliably signals C1 written fluency. It combines two complex systems into one elegant form. Structure: modal + have + been + past participle.",
+    grammarTable:[
+      ["Modal past structure","Meaning","Example"],
+      ["should have + pp","right action not taken","Regulators should have acted sooner."],
+      ["could have + pp","past possibility not used","The transition could have been fairer."],
+      ["would have + pp","past conditional consequence","It would have been designed differently."],
+      ["must have + pp","certain past deduction","They must have known the risks."],
+      ["can't have + pp","impossible past deduction","They can't have anticipated this."],
+      ["might/may have + pp","uncertain past possibility","It might have been smoother."],
+      ["Modal past + passive","combined C1 structure","Workers should have been consulted."],
+      ["Advanced passive","present continuous passive","Tasks are being performed by AI."],
+    ],
+    grammarWatch:"The modal past + passive always ends in a past participle: ✗ 'Should have been consult.' → ✓ 'Should have been consulted.' ✗ 'Could have been deploy.' → ✓ 'Could have been deployed.' Every element matters: modal + have + been + past participle.",
+    grammarTip:"Combining inversion + modal past + passive in one sentence is a hallmark of C1-C2 sophistication: 'Had the framework been established earlier, the current situation might have been more equitable.' If you can produce this naturally, in speaking and writing, you have crossed the threshold.",
+    listeningTitle:"AI and the future of your job",
+    listeningDesc:"A technology ethicist discusses the real impact of AI on the workforce and what individuals and organisations should do.",
+    listeningQ:[
+      {q:"What does the speaker say is the 'central tension' of the AI moment?",opts:["Speed vs quality","Who benefits vs who bears the cost","Creativity vs automation","Public vs private development"],correct:1},
+      {q:"Which tasks does the speaker say AI is beginning to perform?",opts:["Only physical tasks","Only repetitive tasks","Writing, analysis, design, diagnosis, legal research","All human tasks without exception"],correct:2},
+      {q:"What does the speaker say workers who will thrive have in common?",opts:["They resist AI","They work in creative fields only","They learn to direct the change","They work in companies that banned AI"],correct:2},
+      {q:"What does 'the writing is on the wall' mean in the context of this talk?",opts:["A motivational quote","A reference to graffiti","Clear signs that major change is coming","A legal warning"],correct:2},
+    ],
+    talkQ:[
+      "Has AI already changed your work or study in any way? How?",
+      "'Tasks once considered uniquely human are being performed by AI.' Which tasks surprise you most?",
+      "Use a modal in the past: 'Companies should have / could have / ought to have...'",
+      "Is the writing on the wall for any profession you know? Which one, and why?",
+      "Integrate at least 3 grammar structures from the C1-C2 program in one answer: inversion + cleft sentence + modal past + connector.",
+    ],
+    hwTask:"FINAL HOMEWORK — Improve Native Capstone: Write a 400-word essay OR record a 5-minute spoken essay: 'AI is transforming work faster than society can adapt. Who is responsible, and what should have been done differently?' Must include naturally: at least 3 modals in the past (including one modal past + passive), at least 2 passive structures (different tenses), at least one mixed or third conditional, at least 5 connectors from at least 3 categories, at least 2 compound adjectives, at least 3 idioms from any unit. This is your Improve Native final.",
+    gameType:"crossword",
+    unitImageSeed:"ai-workplace",
+    warmupQuestions:[
+      "'The framework should have been built before the technology was deployed.' → Identify: what type of structure is this? Explain each part.",
+      "Correct: 'The workers could have been consult before the decision was made.'",
+      "Write one sentence using inversion + modal past + passive.",
+    ],
+    quickCheck:[
+      {statement:"The author argues that AI has not yet changed the nature of work.",answer:false},
+      {statement:"The author says workers were consulted in the design of most AI tools.",answer:false},
+      {statement:"The author believes AI should be completely rejected.",answer:false},
+    ],
+    speakingChallenge:"Capstone debate — Motion: 'The benefits of AI in the workplace outweigh the risks.' Rules: 3 minutes per side. Must use: modal in the past, passive voice, at least one connector from Unit 16, one compound adjective from Unit 15, and two idioms from any unit. The class votes, then discusses: whose English was most sophisticated?",
+    idioms:[
+      {expression:"the writing is on the wall",meaning:"the signs of something (usually negative) are clear",example:'"For workers in routine jobs, the writing is on the wall — AI is coming."',whenToUse:"When clear signs point to future change or trouble."},
+      {expression:"keep up with the times",meaning:"to stay current with modern developments",example:'"Companies that don\'t invest in AI won\'t keep up with the times."',whenToUse:"When talking about technology, culture, or generational change."},
+      {expression:"a brave new world",meaning:"a new situation that is both exciting and uncertain",example:'"Generative AI has opened a brave new world for creative professionals."',whenToUse:"When describing significant change with mixed implications."},
+      {expression:"ahead of the curve",meaning:"in advance of current trends or developments",example:'"Teams using AI tools are significantly ahead of the curve."',whenToUse:"When someone is more advanced than others in adopting change."},
+      {expression:"the elephant in the room",meaning:"an obvious problem that nobody wants to discuss",example:'"Job displacement is the elephant in the room in every AI conference."',whenToUse:"When pointing to an uncomfortable truth that is being avoided."},
+    ],
+  },
 ];
 
 export const MONTHS = [
@@ -1048,9 +1274,11 @@ export const MONTHS = [
   { num: 3, units: [6, 7, 8] },
   { num: 4, units: [9, 10, 11] },
   { num: 5, units: [12, 13] },
+  { num: 6, units: [14, 15, 16] },
 ];
 
 export const NARRATOR_GENDER = [
   'female','male','female','female','male','female','male',
   'female','male','female','male','female','male','female',
+  'female','male','female',
 ];

@@ -5,7 +5,10 @@
 export const WORD_SEARCH_WORDS = {
   0: ['BARISTA', 'GRIND', 'CUSTOMER', 'NEIGHBOUR', 'EXCUSE', 'ROUTINE', 'MORNING', 'COFFEE'],
   3: ['SCREAM', 'STADIUM', 'CELEBRATE', 'VICTORY', 'NERVOUS', 'TOGETHER', 'FAMILY', 'MOMENT'],
-  6: ['EXPERIENCE', 'SURPRISED', 'FORGIVEN', 'CLIMBED', 'AMAZING', 'ALREADY', 'NEVER', 'QUIT'],
+  // index 6 was old unit 07 → now index 7 (unit 08, Present Perfect)
+  7: ['EXPERIENCE', 'SURPRISED', 'FORGIVEN', 'CLIMBED', 'AMAZING', 'ALREADY', 'NEVER', 'QUIT'],
+  // NEW unit 09 (Connectors) → index 8
+  8: ['HOWEVER', 'THEREFORE', 'MOREOVER', 'NEVERTHELESS', 'CONSEQUENTLY', 'DESPITE', 'ALTHOUGH', 'FURTHERMORE', 'WHEREAS', 'ADMITTEDLY'],
 };
 
 export const MATCHING_PAIRS = {
@@ -19,7 +22,19 @@ export const MATCHING_PAIRS = {
     { word: 'to announce', match: 'to make a public statement' },
     { word: 'to beat', match: 'the rhythm of your heart' },
   ],
+  // NEW unit 05 (Like/As/Alike) → index 4
   4: [
+    { word: 'like', match: 'similar to (preposition + noun — comparison)' },
+    { word: 'as', match: 'in the role of / in the way that (conjunction)' },
+    { word: 'alike', match: 'similar (adjective — always after the verb)' },
+    { word: 'similar to', match: 'resembling in quality or appearance' },
+    { word: 'unlike', match: 'in contrast to; different from' },
+    { word: 'as if / as though', match: 'used for hypothetical comparison (+ clause)' },
+    { word: 'resemble', match: 'to look or seem like someone or something' },
+    { word: 'the same as', match: 'identical or equal to' },
+  ],
+  // old unit 05 (2026 challenge) → now index 5 (unit 06)
+  5: [
     { word: 'challenge', match: 'a difficult but exciting goal' },
     { word: 'to break a promise', match: 'to not do what you said you would' },
     { word: 'embarrassing', match: 'making you feel ashamed or awkward' },
@@ -29,7 +44,8 @@ export const MATCHING_PAIRS = {
     { word: 'to scare', match: 'to make someone feel afraid' },
     { word: 'promise', match: 'a commitment to do something' },
   ],
-  7: [
+  // old unit 08 (Palermo shopping) → now index 9 (unit 10)
+  9: [
     { word: 'countable', match: 'a noun you can count (book, apple, chair)' },
     { word: 'uncountable', match: 'a noun you cannot count (water, music, money)' },
     { word: 'a few', match: 'a small number of (used with countable)' },
@@ -39,7 +55,8 @@ export const MATCHING_PAIRS = {
     { word: 'how much', match: 'question for uncountable nouns' },
     { word: 'enough', match: 'the right amount, not too little' },
   ],
-  9: [
+  // old unit 10 (restaurant) → now index 12 (unit 13)
+  12: [
     { word: 'quietly', match: 'in a silent or soft way' },
     { word: 'perfectly', match: 'in a complete or ideal way' },
     { word: 'nervously', match: 'in an anxious or worried way' },
@@ -68,7 +85,8 @@ export const CROSSWORD_DATA = {
       { num: 8, clue: 'Past of "go"', answer: 'WENT' },
     ],
   },
-  5: {
+  // old unit 06 (letter to younger self) → now index 6 (unit 07)
+  6: {
     across: [
       { num: 1, clue: 'Ability modal', answer: 'CAN' },
       { num: 3, clue: 'Advice modal', answer: 'SHOULD' },
@@ -81,7 +99,8 @@ export const CROSSWORD_DATA = {
       { num: 6, clue: 'Possibility modal', answer: 'MIGHT' },
     ],
   },
-  8: {
+  // old unit 09 (best city) → now index 10 (unit 11)
+  10: {
     across: [
       { num: 1, clue: 'Better than good', answer: 'BEST' },
       { num: 3, clue: 'More than "old"', answer: 'OLDER' },
@@ -96,7 +115,26 @@ export const CROSSWORD_DATA = {
       { num: 6, clue: 'Opposite of "better"', answer: 'WORSE' },
     ],
   },
-  10: {
+  // NEW unit 12 (Adj/Adv + Time Words) → index 11
+  11: {
+    across: [
+      { num: 1, clue: 'Doing one thing at a time, sequentially (13)', answer: 'MONOCHRONIC' },
+      { num: 4, clue: '"She arrived ___ — not on time." (4)', answer: 'LATE' },
+      { num: 6, clue: '"I\'ve known her ___ 2019." (5)', answer: 'SINCE' },
+      { num: 8, clue: 'Time word for present perfect: "I haven\'t finished ___." (3)', answer: 'YET' },
+      { num: 10, clue: 'Opposite of quickly (6)', answer: 'SLOWLY' },
+      { num: 12, clue: '"She ___ worked." = she barely works (6)', answer: 'HARDLY' },
+    ],
+    down: [
+      { num: 2, clue: 'Handling multiple tasks at the same time (12)', answer: 'POLYCHRONIC' },
+      { num: 3, clue: 'Adverb: with great attention to detail (12)', answer: 'METICULOUSLY' },
+      { num: 5, clue: '"I\'ve been here ___ three years." (3)', answer: 'FOR' },
+      { num: 7, clue: '"It happened ___ Monday." (2)', answer: 'ON' },
+      { num: 9, clue: '"She works ___." = she is careful and thorough (4)', answer: 'HARD' },
+    ],
+  },
+  // old unit 11 (student stories) → now index 13 (unit 14)
+  13: {
     across: [
       { num: 1, clue: 'Used with "have" to form present perfect', answer: 'BEEN' },
       { num: 3, clue: '"She ___ working" - past continuous', answer: 'WAS' },
@@ -109,6 +147,25 @@ export const CROSSWORD_DATA = {
       { num: 4, clue: 'Present perfect signal: "I haven\'t done it ___"', answer: 'YET' },
       { num: 6, clue: 'Past continuous uses was + verb + ___', answer: 'ING' },
       { num: 8, clue: '"She ___ lives here" = still true', answer: 'STILL' },
+    ],
+  },
+  // NEW unit 15 (Final consolidation) → index 14
+  14: {
+    across: [
+      { num: 1, clue: '"She speaks ___ a native." = comparison (4)', answer: 'LIKE' },
+      { num: 4, clue: '"She works ___ a manager." = role (2)', answer: 'AS' },
+      { num: 6, clue: 'Time word — present perfect: "I\'ve been here ___ 2022." (5)', answer: 'SINCE' },
+      { num: 8, clue: 'Connector — adding: "She\'s smart. ___, she\'s kind." (10)', answer: 'FURTHERMORE' },
+      { num: 10, clue: '"They are ___." = similar (5)', answer: 'ALIKE' },
+      { num: 12, clue: '"Despite ___ tired, she continued." (5)', answer: 'BEING' },
+    ],
+    down: [
+      { num: 2, clue: '"Curiosity doesn\'t ___." = get worse (8)', answer: 'DEGRADE' },
+      { num: 3, clue: 'Connector — result: "She studied. As ___, she passed." (6)', answer: 'RESULT' },
+      { num: 5, clue: '"___ if it were a motorway." = comparison with clause (2)', answer: 'AS' },
+      { num: 7, clue: 'Time word for simple past: "I did it two days ___." (3)', answer: 'AGO' },
+      { num: 9, clue: 'Adverb from "genuine": "She was ___ curious." (9)', answer: 'GENUINELY' },
+      { num: 11, clue: '"She is a ___ observer." = pays close attention (7)', answer: 'CAREFUL' },
     ],
   },
 };
@@ -160,6 +217,17 @@ export const MATCHING_PAIRS_NATIVE = {
     { word: 'to fragment', match: 'to break into disconnected parts' },
     { word: 'inertia', match: 'resistance to change; tendency to stay in the current state' },
   ],
+  // Unit 15 — the grammar of description / compound adjectives
+  14: [
+    { word: 'hand-carved', match: 'made by human hands (past participle compound)' },
+    { word: 'awe-inspiring', match: 'causing wonder and respect (present participle compound)' },
+    { word: 'well-preserved', match: 'kept in good condition over time' },
+    { word: 'thought-provoking', match: 'making you think deeply' },
+    { word: 'battle-worn', match: 'damaged or aged through conflict' },
+    { word: 'moss-covered', match: 'with moss growing on the surface' },
+    { word: 'eye-opening', match: 'revealing something you did not know before' },
+    { word: 'a sight to behold', match: 'something visually impressive or remarkable' },
+  ],
   // Unit 11 — media and truth / media idioms
   10: [
     { word: 'to take with a grain of salt', match: 'to be sceptical; not believe completely' },
@@ -184,6 +252,8 @@ export const WORD_SEARCH_WORDS_NATIVE = {
   9: ['MEDIATE', 'BOUNDARY', 'DREAD', 'DEFENSIVE', 'DISSOLVE', 'RESTORE', 'HONEST', 'CLARITY', 'BACKPEDAL', 'CONTACT'],
   // Unit 13 — future of work
   12: ['AUTOMATE', 'COGNITIVE', 'RETRAINING', 'OBSOLETE', 'PIPELINE', 'FLEXIBLE', 'UNLEARN', 'PLATFORM', 'LADDERS', 'THRIVE'],
+  // Unit 16 — the art of connection / connectors & discourse markers
+  15: ['FURTHERMORE', 'NEVERTHELESS', 'CONSEQUENTLY', 'ADMITTEDLY', 'CONCESSION', 'CONTRAST', 'CONNECTOR', 'HOWEVER', 'THEREFORE', 'BELONGING', 'NUANCE', 'PERSPECTIVE'],
 };
 
 export const CROSSWORD_DATA_NATIVE = {
@@ -231,6 +301,23 @@ export const CROSSWORD_DATA_NATIVE = {
       { num: 4, clue: 'To maintain and continue into the future (to ___tuate)', answer: 'PERPE' },
       { num: 6, clue: 'The opposite of income (what you own, not what you earn)', answer: 'WEALTH' },
       { num: 8, clue: 'Unequal distribution of resources (economic ___)', answer: 'INEQUALITY' },
+    ],
+  },
+  // Unit 17 — tying it all together / modals in the past + passive
+  16: {
+    across: [
+      { num: 1, clue: 'Modal past: "It ___ have been prevented." (6)', answer: 'SHOULD' },
+      { num: 3, clue: '"The writing is on ___" = bad signs are clear (3,4)', answer: 'THEWALL' },
+      { num: 5, clue: 'Past participle of "deploy" (8)', answer: 'DEPLOYED' },
+      { num: 7, clue: 'Connector for logical result (11)', answer: 'CONSEQUENTLY' },
+      { num: 9, clue: '"Had they consulted workers, the outcome ___ have been different." (5)', answer: 'WOULD' },
+    ],
+    down: [
+      { num: 2, clue: 'The feeling of fitting in (9)', answer: 'BELONGING' },
+      { num: 4, clue: '"Not only... but ___" (4)', answer: 'ALSO' },
+      { num: 6, clue: 'Compound adj: causing wonder (13)', answer: 'AWEINSPIRING' },
+      { num: 8, clue: 'Connector meaning "despite this" (13)', answer: 'NEVERTHELESS' },
+      { num: 10, clue: '"AI ___ being used to screen applications." (2)', answer: 'IS' },
     ],
   },
   // Unit 14 — legacy / synthesis

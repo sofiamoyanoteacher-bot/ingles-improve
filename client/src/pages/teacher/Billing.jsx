@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
 import { api } from '../../api';
 
-const PROGRAM_LABEL = { basic: 'Basic B1–B2', starter: 'Starter A1–A2', native: 'Native C1–C2' };
+const PROGRAM_LABEL = {
+  basic:        'Basic B1–B2',
+  starter:      'Starter A1–A2',
+  native:       'Native C1–C2',
+  conversation: 'Conversation',
+  highpro:      'High Professional Value',
+};
 const PROGRAM_COLOR = {
-  basic:   'bg-mag/10 text-mag',
-  starter: 'bg-sky/10 text-sky',
-  native:  'bg-red-500/10 text-red-600',
+  basic:        'bg-mag/10 text-mag',
+  starter:      'bg-sky/10 text-sky',
+  native:       'bg-red-500/10 text-red-600',
+  conversation: 'bg-purple-100 text-purple-700',
+  highpro:      'bg-amber-100 text-amber-700',
 };
 const MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 

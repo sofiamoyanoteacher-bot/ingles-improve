@@ -257,7 +257,74 @@ export const UNITS = [
     ],
     speakingChallenge:'"Where were you?" game: The teacher names a famous event. Each student describes where they were and what they were doing when it happened.'
   },
-  {num:"05",title:"My 2026 challenge",grammar:"Will / Going to",month:3,reading:`<p>This year I am going to change my life — for real this time. Every January I make promises and break them by February. But 2026 will be different. I can feel it.</p><p>First, I am going to learn to swim. I am thirty-four and I still can't swim, and that's embarrassing. I already paid for the classes, so I will not run away this time.</p><p>I am also going to call my father more often. He is getting older, and one day the phone will ring and it will be too late. I don't want that.</p><p>Will I become a millionaire? No. Will I run a marathon? Probably not. But I am going to read one book a month, and I am going to say "yes" to things that scare me a little.</p><p>People say small changes don't matter. I disagree. I think the small ones are the only ones that last. By December, I will be a slightly better version of myself. And honestly, that's enough.</p>`,
+  // ── UNIT 05 (NEW) ────────────────────────────────────────────────────────────
+  {
+    num:"05", title:"Like and alike — as vs like", grammar:"Like / Alike / As · Similarity and comparison structures", month:2,
+    reading:`<p>Sport is one of the few arenas where human beings are content to be judged entirely on what they do, not who they are. A footballer from a village in Argentina and a tennis player from a suburb of Tokyo share something fundamental: they have both spent thousands of hours doing something most people would find tedious — practising the same movement, the same shot, the same pass — until it became effortless.</p>
+<p>Serena Williams played tennis like no one before her — powerful, precise, and utterly fearless. Her sister Venus was alike in many ways: the same physical gifts, the same determination, a game built on force rather than finesse. And yet, as sisters and as players, they remained distinct. Alike in origin, different in execution.</p>
+<p>As a spectator, you don't need to understand the technique to feel the emotion. Sport works like a language everyone already speaks. Unlike politics or economics, it delivers its meaning in real time — the goal, the point, the finish line. The result is immediate. The feeling is shared. The rest, as they say, is commentary.</p>`,
+    vocab:[
+      {word:"arena",trans:"arena, ámbito",ex:'"Sport is a unique arena where results are immediate."'},
+      {word:"tedious",trans:"tedioso, aburrido",ex:'"Practising the same movement is tedious but necessary."'},
+      {word:"effortless",trans:"sin esfuerzo aparente",ex:'"After thousands of hours, the skill becomes effortless."'},
+      {word:"finesse",trans:"fineza, elegancia técnica",ex:'"Her game was built on force rather than finesse."'},
+      {word:"spectator",trans:"espectador",ex:'"As a spectator, you feel the emotion without understanding the technique."'},
+      {word:"distinct",trans:"distinto, diferente",ex:'"As sisters and as players, they remained distinct."'},
+      {word:"execution",trans:"ejecución, realización",ex:'"Alike in origin, different in execution."'},
+      {word:"immediate",trans:"inmediato",ex:'"The result is immediate — no waiting for the verdict."'},
+    ],
+    grammarExamples:[
+      '"She plays like a professional." (like = preposition + noun — comparison)',
+      '"She works as a coach." (as = in the role of)',
+      '"Do as I say, not as I do." (as = conjunction + clause)',
+      '"They are alike in many ways." (alike = adjective after verb)',
+      '"Unlike politics, sport delivers meaning immediately." (unlike = contrast)',
+    ],
+    grammarRule:"LIKE = similar to (preposition — followed by noun or pronoun). AS = in the role of / in the way that (conjunction or preposition — followed by a clause or role). ALIKE = similar (adjective — always used after the verb, never before a noun). The key distinction: 'She acted like a leader' (comparison) vs 'She acted as a leader' (she is the leader).",
+    grammarTable:[
+      ["Word","Function","Example"],
+      ["like","comparison (preposition + noun)","She runs like the wind."],
+      ["as","role (preposition)","She works as a coach."],
+      ["as","clause (conjunction)","Do as I say."],
+      ["alike","similar (adjective — after verb)","They are remarkably alike."],
+      ["as if / as though","hypothetical comparison","He plays as if he has nothing to lose."],
+      ["similar to","resemblance","His style is similar to Federer's."],
+      ["unlike","contrast","Unlike politics, sport is immediate."],
+      ["the same as","equality","The result was the same as last year."],
+    ],
+    grammarWatch:"ALIKE is always after the verb: ✓ 'They are alike.' ✗ 'They are alike sisters.' → ✓ 'They are like sisters.' In formal writing, use 'as though' + clause instead of 'like' + clause: ✓ 'She played as though she had nothing to lose.'",
+    grammarTip:"'Like' is one of the most overused words in informal English. In formal writing: use 'as' for roles and clauses. In vivid description: use 'like' for comparisons. Both have their place — avoid 'like' as a filler ('She was, like, amazing').",
+    listeningTitle:"What sport teaches you that school doesn't",
+    listeningDesc:"A former athlete reflects on the life lessons from competitive sport.",
+    listeningQ:[
+      {q:"What does the speaker say elite athletes have in common?",opts:["Natural talent","Thousands of hours of tedious practice","Support from wealthy families","Access to the best coaches"],correct:1},
+      {q:"How does the speaker use 'alike' in the context of the Williams sisters?",opts:["They are completely identical","They are alike in gifts but different in execution","Serena is better","Venus is more consistent"],correct:1},
+      {q:"What does the speaker say sport is 'like'?",opts:["War","Chess","A language everyone already speaks","A religion"],correct:2},
+      {q:"What makes sport unique according to the speaker?",opts:["The money involved","The immediate, shared result","The global reach","The physical challenge"],correct:1},
+    ],
+    talkQ:[
+      "Do you play or follow a sport? Describe it using 'like,' 'as,' and 'alike.'",
+      "'Sport works like a language everyone already speaks.' Can you think of a moment when this was true for you?",
+      "Compare two athletes or sports using the similarity structures from today's class.",
+      "Unlike politics or economics, sport delivers meaning immediately. Do you agree?",
+      "What is your own 'tedious practice' — the repetitive thing you do to get better at something?",
+    ],
+    hwTask:"Choose a sport or athlete you know well and write or record a 2-minute description. Use: like (comparison), as (role), alike, as if / as though, similar to, unlike. Describe the sport, compare it to something else, and explain what makes it unique.",
+    gameType:"matching",
+    unitImageSeed:"sports-competition",
+    warmupQuestions:[
+      "'She played like she was born to do it.' → rewrite using 'as though.'",
+      "'He works as a machine.' → what does this mean? Is it the same as 'like a machine'?",
+      "Use 'alike' correctly in a sentence about two people you know.",
+    ],
+    quickCheck:[
+      {statement:"Venus and Serena Williams played tennis in exactly the same style.",answer:false},
+      {statement:"The author says sport works like a language.",answer:true},
+      {statement:"The author says you need to understand technique to enjoy sport.",answer:false},
+    ],
+    speakingChallenge:"Sports commentary: Describe a sport or an athletic moment — a match, a race, a game — without naming the sport. Use as many similarity structures as possible ('It's like a chess match but with bodies.' / 'The players move as if they share one mind.'). The class guesses the sport.",
+  },
+  {num:"06",title:"My 2026 challenge",grammar:"Will / Going to",month:3,reading:`<p>This year I am going to change my life — for real this time. Every January I make promises and break them by February. But 2026 will be different. I can feel it.</p><p>First, I am going to learn to swim. I am thirty-four and I still can't swim, and that's embarrassing. I already paid for the classes, so I will not run away this time.</p><p>I am also going to call my father more often. He is getting older, and one day the phone will ring and it will be too late. I don't want that.</p><p>Will I become a millionaire? No. Will I run a marathon? Probably not. But I am going to read one book a month, and I am going to say "yes" to things that scare me a little.</p><p>People say small changes don't matter. I disagree. I think the small ones are the only ones that last. By December, I will be a slightly better version of myself. And honestly, that's enough.</p>`,
     vocab:[{word:"challenge",trans:"desafío, reto",ex:'"Learning a language is a beautiful challenge."'},{word:"promise",trans:"promesa",ex:'"He made a promise and he kept it."'},{word:"to break (a promise)",trans:"romper, incumplir",ex:'"Don\'t make plans you know you\'ll break."'},{word:"embarrassing",trans:"vergonzoso",ex:'"Forgetting his name was so embarrassing."'},{word:"to run away",trans:"escaparse, huir",ex:'"When things get hard, don\'t run away."'},{word:"to scare",trans:"asustar",ex:'"Big decisions always scare me a little."'},{word:"slightly",trans:"un poco, ligeramente",ex:'"The soup is slightly too salty."'},{word:"to last",trans:"durar",ex:'"Good habits are hard to build, but they last."'}],
     grammarExamples:['"This year I am going to change my life."','"2026 will be different."','"I am going to learn to swim."','"I will not run away this time."','"One day the phone will ring."'],
     grammarRule:"English has two main ways to talk about the future. Use going to for plans already decided; use will for predictions, promises, and decisions made in the moment.",
@@ -284,7 +351,7 @@ export const UNITS = [
     ],
     speakingChallenge:"Vision board in words: Describe your life in 5 years using will and going to. Be as specific and ambitious as possible."
   },
-  {num:"06",title:"A letter to my younger self",grammar:"Modal Verbs",month:3,reading:`<p>Dear sixteen-year-old me, I have to tell you a few things, and you must listen carefully — even though you never listen to anyone.</p><p>First: you can do more than you think. That fear in your stomach before you speak? Everyone has it. You should talk anyway. You don't have to be perfect; you just have to start.</p><p>You should call your grandmother this Sunday. I won't tell you why, but trust me — you must not wait.</p><p>You can say "no" to people. Really. You don't have to go to every party, and you mustn't spend money you don't have just to look cool. Nobody remembers the shoes.</p><p>You should study, yes, but you must also rest. You can't pour from an empty cup. And please — you have to forgive yourself faster. You will make mistakes, big ones. That's fine. You should learn, and then you should move on.</p><p>You can't see it yet, but everything will be okay. With love, your older, calmer self.</p>`,
+  {num:"07",title:"A letter to my younger self",grammar:"Modal Verbs",month:3,reading:`<p>Dear sixteen-year-old me, I have to tell you a few things, and you must listen carefully — even though you never listen to anyone.</p><p>First: you can do more than you think. That fear in your stomach before you speak? Everyone has it. You should talk anyway. You don't have to be perfect; you just have to start.</p><p>You should call your grandmother this Sunday. I won't tell you why, but trust me — you must not wait.</p><p>You can say "no" to people. Really. You don't have to go to every party, and you mustn't spend money you don't have just to look cool. Nobody remembers the shoes.</p><p>You should study, yes, but you must also rest. You can't pour from an empty cup. And please — you have to forgive yourself faster. You will make mistakes, big ones. That's fine. You should learn, and then you should move on.</p><p>You can't see it yet, but everything will be okay. With love, your older, calmer self.</p>`,
     vocab:[{word:"to forgive",trans:"perdonar",ex:'"It took years, but she finally forgave him."'},{word:"fear",trans:"miedo",ex:'"Fear is normal; let it sit next to you."'},{word:"to trust",trans:"confiar",ex:'"I trust my best friend completely."'},{word:"perfect",trans:"perfecto",ex:'"Don\'t wait for the perfect moment; it won\'t come."'},{word:"to rest",trans:"descansar",ex:'"You worked all week; you should rest now."'},{word:"mistake",trans:"error",ex:'"Everyone makes mistakes at the start."'},{word:"to move on",trans:"seguir adelante",ex:'"After the breakup, it took time to move on."'},{word:"calm",trans:"tranquilo",ex:'"Take a breath and try to stay calm."'}],
     grammarExamples:['"You can do more than you think."','"You should call your grandmother this Sunday."','"You must listen carefully."','"You don\'t have to be perfect."','"You mustn\'t spend money you don\'t have."'],
     grammarRule:"Modal verbs (can, should, must, have to) add meaning — ability, advice, or obligation. They are followed by the base verb, with no -s.",
@@ -311,7 +378,7 @@ export const UNITS = [
     ],
     speakingChallenge:"Advice column: A friend has these problems — give them advice using can, should, must, and don't have to: (a) they can't sleep / (b) they're spending too much money / (c) they want to learn English faster."
   },
-  {num:"07",title:"Things I've done that surprised me",grammar:"Present Perfect",month:4,reading:`<p>I've lived for forty years, and I've learned one thing: I don't really know myself.</p><p>I've done things I never expected. I've eaten ants in the north of Argentina (they taste like lemon, believe it or not). I've cried during a cartoon. I've forgiven people I swore I would hate forever.</p><p>I've travelled to twelve countries, but I've never been to Brazil — our neighbour! Isn't that strange? I've climbed a small mountain, and I've fainted at the sight of my own blood.</p><p>I've started learning the guitar four times and I've quit four times. But this year feels different. I've already practised every day for two months.</p><p>I've made big mistakes. I've hurt people I love, and some of them have forgiven me. That still amazes me.</p><p>The truth is, life is long enough to surprise you and short enough to matter. I haven't done everything I want yet. I still have a list. But I've already lived more than I ever planned — and that's a good problem to have.</p>`,
+  {num:"08",title:"Things I've done that surprised me",grammar:"Present Perfect",month:4,reading:`<p>I've lived for forty years, and I've learned one thing: I don't really know myself.</p><p>I've done things I never expected. I've eaten ants in the north of Argentina (they taste like lemon, believe it or not). I've cried during a cartoon. I've forgiven people I swore I would hate forever.</p><p>I've travelled to twelve countries, but I've never been to Brazil — our neighbour! Isn't that strange? I've climbed a small mountain, and I've fainted at the sight of my own blood.</p><p>I've started learning the guitar four times and I've quit four times. But this year feels different. I've already practised every day for two months.</p><p>I've made big mistakes. I've hurt people I love, and some of them have forgiven me. That still amazes me.</p><p>The truth is, life is long enough to surprise you and short enough to matter. I haven't done everything I want yet. I still have a list. But I've already lived more than I ever planned — and that's a good problem to have.</p>`,
     vocab:[{word:"to expect",trans:"esperar (anticipar)",ex:'"I didn\'t expect such a warm welcome."'},{word:"to forgive",trans:"perdonar",ex:'"Have you ever forgiven someone who hurt you?"'},{word:"to faint",trans:"desmayarse",ex:'"She faints at the sight of needles."'},{word:"to quit",trans:"abandonar, dejar",ex:'"He quit smoking last year."'},{word:"to hurt",trans:"lastimar, herir",ex:'"I never meant to hurt you."'},{word:"to amaze",trans:"asombrar",ex:'"The view from the top amazed us."'},{word:"already",trans:"ya",ex:'"We\'ve already finished the first chapter."'},{word:"yet",trans:"todavía, aún",ex:'"I haven\'t read it yet."'}],
     grammarExamples:['"I\'ve lived for forty years."','"I\'ve never been to Brazil."','"I\'ve climbed a small mountain."','"I\'ve already practised every day for two months."','"I haven\'t done everything I want yet."'],
     grammarRule:"We form the present perfect with have / has + past participle. We use it for life experiences with no specific time, and for past actions that still matter now.",
@@ -380,8 +447,76 @@ export const UNITS = [
       ]
     }
   },
+  // ── UNIT 09 (NEW) ────────────────────────────────────────────────────────────
   {
-    num:"08", title:"Shopping in Palermo — how much and how many?", grammar:"Countable & Uncountable Nouns", month:4,
+    num:"09", title:"Why we travel — the science of unfamiliarity", grammar:"Connectors (B1-B2 — contrast, addition, result, concession)", month:3,
+    reading:`<p>People travel for many reasons. Some go to escape. Others go to find something — though they often cannot name what it is until they find it. However, almost everyone who travels seriously comes back changed in ways they didn't expect and can't fully explain.</p>
+<p>Travel doesn't teach you about other cultures as much as it teaches you about your own. You don't notice the water until you leave it. In spite of the discomfort — the language barriers, the wrong buses, the food that doesn't agree with you — most travellers describe their most difficult trip as their most valuable one.</p>
+<p>Moreover, travel has been shown to increase creativity. A study published in the Journal of Personality and Social Psychology found that people who had lived abroad were significantly better at problem-solving tasks that required creative thinking. The reason, the researchers argued, is not that foreign places are inherently inspiring, but that navigating unfamiliarity forces the brain to make new connections.</p>
+<p>Nevertheless, not everyone has the means to travel internationally. And yet, the same cognitive benefits have been linked to any experience of genuine unfamiliarity — a new neighbourhood, a new language, a new community. In other words, the destination is less important than the willingness to be uncomfortable. As a result, the most transformative journey may not require a passport at all.</p>`,
+    vocab:[
+      {word:"inherently",trans:"de manera inherente, por naturaleza",ex:'"Foreign places are not inherently inspiring — it\'s the unfamiliarity."'},
+      {word:"navigate",trans:"navegar, orientarse",ex:'"Navigating unfamiliarity forces the brain to make new connections."'},
+      {word:"cognitive",trans:"cognitivo",ex:'"The cognitive benefits of travel extend beyond borders."'},
+      {word:"transformative",trans:"transformador",ex:'"The most transformative journey may not require a passport."'},
+      {word:"unfamiliarity",trans:"falta de familiaridad",ex:'"Genuine unfamiliarity is the ingredient, not the destination."'},
+      {word:"willingness",trans:"disposición, buena voluntad",ex:'"The willingness to be uncomfortable is what drives growth."'},
+      {word:"means",trans:"medios, recursos",ex:'"Not everyone has the means to travel internationally."'},
+      {word:"connection",trans:"conexión, vínculo",ex:'"The brain makes new connections when navigating unfamiliarity."'},
+    ],
+    grammarExamples:[
+      '"However, almost everyone comes back changed." (contrast)',
+      '"Moreover, travel has been shown to increase creativity." (addition)',
+      '"Nevertheless, not everyone has the means to travel." (concession)',
+      '"As a result, the most transformative journey may not require a passport." (result)',
+      '"In other words, the destination is less important than the mindset." (reformulation)',
+    ],
+    grammarRule:"Connectors organise ideas and guide the reader. At B1-B2, use them correctly across 6 functions: addition (moreover, furthermore), contrast (however, despite, although), result (therefore, as a result), concession (nevertheless, admittedly), purpose (in order to, so that), and summary (in short, all in all).",
+    grammarTable:[
+      ["Function","Key connectors","Placement note"],
+      ["Addition","moreover, furthermore, in addition, as well as","Start of sentence + comma"],
+      ["Contrast","however, on the other hand, whereas","Start or mid-sentence"],
+      ["Contrast","despite, in spite of","+ noun or -ing (NOT + clause)"],
+      ["Contrast","although, even though","+ full clause (no 'but' after)"],
+      ["Result","therefore, as a result, consequently","Start of sentence + comma"],
+      ["Concession","nevertheless, admittedly, that said","Start of sentence + comma"],
+      ["Example","for example, for instance, such as","Before specific example"],
+      ["Summary","in short, all in all, in other words","To conclude or reformulate"],
+    ],
+    grammarWatch:"'Despite' and 'in spite of' are followed by a NOUN or -ing — NOT a clause: ✗ 'Despite she was tired...' → ✓ 'Despite her tiredness...' / 'Despite being tired...'. NEVER combine 'although' and 'but': ✗ 'Although she was tired, but she continued.' → ✓ 'Although she was tired, she continued.'",
+    grammarTip:"The most important connector skill at B1-B2 is knowing when NOT to use one. Over-connecting is as much a problem as under-connecting. Not every sentence needs a link word. Sometimes a full stop and a fresh start is more powerful than 'furthermore.'",
+    listeningTitle:"Why we really travel",
+    listeningDesc:"Listen to a speaker discuss the science of travel and unfamiliarity, then answer the questions.",
+    listeningQ:[
+      {q:"What does the speaker say travel teaches you more than anything?",opts:["Foreign cultures","Your own culture","History","Languages"],correct:1},
+      {q:"What was found in the creativity study?",opts:["Travellers are naturally more creative","Living abroad improved creative problem-solving","Travel reduces stress","Short trips are better than long ones"],correct:1},
+      {q:"What does the speaker say about people who can't travel internationally?",opts:["They miss out on the benefits","They should save money","Similar benefits come from any new experience","Online travel is a good substitute"],correct:2},
+      {q:"What is the speaker's conclusion about the 'most transformative journey'?",opts:["It always involves a long flight","It requires discomfort, not necessarily a passport","It must last at least three months","It should be done alone"],correct:1},
+    ],
+    talkQ:[
+      "What was the most transformative trip or new experience you've had? Why?",
+      "'You don't notice the water until you leave it.' What does this mean? Can you give an example from your life?",
+      "Use 3 different connectors to talk about travel: one contrast, one result, one addition.",
+      "Do you agree that discomfort is the ingredient — not the destination itself?",
+      "What's the nearest you've come to 'genuine unfamiliarity' without leaving your city?",
+    ],
+    hwTask:"Write or record a 250-word piece about a real journey or experience that changed your perspective. Use at least 6 connectors from at least 4 different categories. Underline each connector. Make the story real — invented travel stories are always flat.",
+    gameType:"wordsearch",
+    unitImageSeed:"travel-adventure",
+    warmupQuestions:[
+      "Name 3 connectors for contrast and 3 for addition.",
+      "'Despite she was tired, she continued.' What's wrong? Fix it.",
+      "Connect these two ideas with a result connector: 'She practised every day.' / 'Her confidence improved dramatically.'",
+    ],
+    quickCheck:[
+      {statement:"The author says travel teaches you mainly about other cultures.",answer:false},
+      {statement:"A study found that living abroad improved creative problem-solving.",answer:true},
+      {statement:"The author concludes that only international travel has cognitive benefits.",answer:false},
+    ],
+    speakingChallenge:"'The trip that changed me': Tell the group about a real or imagined journey. Structure your story using connectors deliberately: set the scene → add context (moreover/in addition) → introduce difficulty (however/despite) → show result (as a result/consequently) → conclude (all in all/ultimately). 2 minutes. Class identifies connectors used.",
+  },
+  {
+    num:"10", title:"Shopping in Palermo — how much and how many?", grammar:"Countable & Uncountable Nouns", month:4,
     reading:`<p>My favourite Sunday plan is walking around Palermo Soho and spending money I don't have.</p>
 <p>First stop: the market on Plaza Serrano. There is always a lot of fruit — mangoes, strawberries, figs. How many mangoes do I need? Probably three. How much money do I have? Not enough.</p>
 <p>I buy some coffee beans too. Coffee is uncountable, so you can't say "a coffee bean is an uncountable noun" — the bean is countable, but the coffee inside it is not. Language is strange.</p>
@@ -450,7 +585,7 @@ export const UNITS = [
     ],
     speakingChallenge:"Supermarket challenge: Without using numbers, describe what you need to buy — using some, a lot of, a few, a little, enough. Your partner has to write the shopping list."
   },
-  {num:"09",title:"The best city to live in — is it yours?",grammar:"Comparatives & Superlatives",month:4,reading:`<p>Everybody thinks their city is the best — and everybody is a little bit right. I was born in Córdoba, but I've lived in Buenos Aires, Mendoza, and Montevideo. People always ask me which one is better. Honestly? It's the hardest question in the world.</p><p>Buenos Aires is bigger, louder, and more exciting than anywhere else. But it's also more stressful and more expensive. Mendoza is calmer and cleaner, and the wine is cheaper and better. Montevideo is the most relaxed city I know — slower, friendlier, and safer than the rest.</p><p>Córdoba? It has the funniest people in the country and the worst traffic. But it's home, so for me it will always be the most beautiful.</p><p>The truth is, there is no "best" city. The happiest people aren't in the richest places. The best city is the one where you sleep well, laugh often, and feel less alone. Sometimes that's a huge capital. Sometimes it's a small town nobody has heard of. The best city is the one that feels like yours.</p>`,
+  {num:"11",title:"The best city to live in — is it yours?",grammar:"Comparatives & Superlatives",month:4,reading:`<p>Everybody thinks their city is the best — and everybody is a little bit right. I was born in Córdoba, but I've lived in Buenos Aires, Mendoza, and Montevideo. People always ask me which one is better. Honestly? It's the hardest question in the world.</p><p>Buenos Aires is bigger, louder, and more exciting than anywhere else. But it's also more stressful and more expensive. Mendoza is calmer and cleaner, and the wine is cheaper and better. Montevideo is the most relaxed city I know — slower, friendlier, and safer than the rest.</p><p>Córdoba? It has the funniest people in the country and the worst traffic. But it's home, so for me it will always be the most beautiful.</p><p>The truth is, there is no "best" city. The happiest people aren't in the richest places. The best city is the one where you sleep well, laugh often, and feel less alone. Sometimes that's a huge capital. Sometimes it's a small town nobody has heard of. The best city is the one that feels like yours.</p>`,
     vocab:[{word:"loud / louder",trans:"ruidoso / más ruidoso",ex:'"The party next door is louder than ours."'},{word:"stressful",trans:"estresante",ex:'"December is the most stressful month at work."'},{word:"expensive",trans:"caro",ex:'"Flights are more expensive in summer."'},{word:"calm / calmer",trans:"tranquilo / más tranquilo",ex:'"I feel calmer near the mountains."'},{word:"cheap / cheaper",trans:"barato / más barato",ex:'"The market is cheaper than the supermarket."'},{word:"friendly / friendlier",trans:"amable / más amable",ex:'"Small towns are usually friendlier."'},{word:"traffic",trans:"tráfico",ex:'"The traffic here is a nightmare at six."'},{word:"alone",trans:"solo",ex:'"A good city makes you feel less alone."'}],
     grammarExamples:['"Buenos Aires is bigger and louder than anywhere else."','"Mendoza is calmer and cleaner."','"The wine is cheaper and better."','"Montevideo is the most relaxed city I know."','"It has the funniest people and the worst traffic."'],
     grammarRule:"To compare two things use comparatives (-er or more); to talk about the top of a group use superlatives (the -est or the most).",
@@ -477,7 +612,74 @@ export const UNITS = [
     ],
     speakingChallenge:"City battle: Each student picks a city and has 90 seconds to convince the class it's the best place to live — using comparatives and superlatives only."
   },
-  {num:"10",title:"The restaurant I'll never forget",grammar:"Adjectives & Adverbs",month:5,reading:`<p>It was a small, ugly restaurant on a quiet street in Salta, and it served the best food I've ever eaten.</p><p>We almost didn't go in. The sign was old, the door was heavy, and the lights were dim. But we were terribly hungry, so we walked in slowly and sat down nervously in the corner.</p><p>The owner, an old woman with bright eyes, moved quickly between the tables. She didn't give us a menu. She simply looked at us carefully and said, "I'll decide."</p><p>We laughed nervously and agreed. The food came out hot, fresh, and beautiful. The empanadas were perfectly crispy. The wine was deep and warm. We ate hungrily and talked loudly, like old friends, even though we had just met that morning.</p><p>She cooked everything herself, slowly and lovingly, like it actually mattered. And it did. We finished happily, paid almost nothing, and stepped outside into the cold mountain air.</p><p>Some places feed your stomach. The truly special ones feed something deeper, quietly, when you least expect it.</p>`,
+  // ── UNIT 12 (NEW) ────────────────────────────────────────────────────────────
+  {
+    num:"12", title:"Time and culture — how we see the world", grammar:"Adjectives & Adverbs (B1-B2 precision) · Time Words (comprehensive)", month:4,
+    reading:`<p>Every culture has a relationship with time that is as unique as its cuisine. In Japan, being even one minute late to a meeting is considered deeply disrespectful — an act that communicates carelessness almost as loudly as words could. In Brazil, the same minute is merely the beginning of the negotiation of when the meeting will actually start. Neither approach is wrong. They are just profoundly different.</p>
+<p>These differences run deeper than punctuality. They run into the very structure of how people understand the past, plan the future, and make sense of the present. Some cultures are strongly future-oriented: they plan meticulously, they measure progress consistently, and they speak about the future as though it were already mapped. Others are past-oriented: the weight of history, tradition, and ancestry is felt daily in decisions that might seem, from the outside, inexplicably cautious.</p>
+<p>The anthropologist Edward Hall identified two types of cultures based on their relationship with time: monochronic cultures, which do one thing at a time, highly sequentially, and polychronic cultures, which handle multiple tasks simultaneously and fluidly. Neither is superior. But misunderstandings between them are constant, frequent, and entirely predictable — provided you understand the framework.</p>
+<p>Learning to read cultural attitudes towards time may be the single most practically useful skill for anyone who works internationally. It doesn't require agreement. It requires curiosity.</p>`,
+    vocab:[
+      {word:"punctuality",trans:"puntualidad",ex:'"Punctuality is culturally determined, not universal."'},
+      {word:"meticulously",trans:"meticulosamente",ex:'"Future-oriented cultures plan meticulously."'},
+      {word:"ancestry",trans:"ancestros, linaje",ex:'"The weight of ancestry is felt daily in some cultures."'},
+      {word:"inexplicably",trans:"inexplicablemente",ex:'"Their caution seemed inexplicably excessive to outsiders."'},
+      {word:"monochronic",trans:"monocrónico (una cosa a la vez)",ex:'"Monochronic cultures plan step by step, sequentially."'},
+      {word:"polychronic",trans:"policrónico (varias cosas a la vez)",ex:'"Polychronic cultures handle multiple tasks simultaneously."'},
+      {word:"sequentially",trans:"secuencialmente, en orden",ex:'"Tasks are handled highly sequentially in monochronic cultures."'},
+      {word:"simultaneously",trans:"simultáneamente, al mismo tiempo",ex:'"Multiple conversations happen simultaneously in polychronic meetings."'},
+    ],
+    grammarExamples:[
+      '"deeply disrespectful" — adverb (deeply) modifying adjective (disrespectful)',
+      '"plan meticulously" — adverb (meticulously) describing how they plan',
+      '"profoundly different" — adverb (profoundly) modifying adjective (different)',
+      '"She works hard." vs "She hardly works." — different meanings!',
+      '"I arrived late." vs "I\'ve seen her lately." — late/lately distinction',
+    ],
+    grammarRule:"ADJECTIVES describe nouns or follow linking verbs (be, seem, feel, look). ADVERBS modify verbs, adjectives, or other adverbs. Most adverbs = adjective + -ly. Time words must match their tense: 'yesterday' = simple past; 'recently/already/yet' = present perfect; 'tomorrow/soon' = future.",
+    grammarTable:[
+      ["Category","Word","Correct use","Example"],
+      ["Adj/Adv","hard / hardly","hard = with effort; hardly = barely","She works hard. / She hardly works."],
+      ["Adj/Adv","late / lately","late = not on time; lately = recently","He arrived late. / I've seen her lately."],
+      ["Adj/Adv","high / highly","high = elevated; highly = very","The bar is set high. / It's highly recommended."],
+      ["Adj/Adv","deep / deeply","deep = physical depth; deeply = intensely","She dived deep. / She was deeply affected."],
+      ["Past time words","yesterday, last week, ago, in 2019","→ always simple past","I saw her yesterday."],
+      ["PP time words","ever, already, yet, recently, since, for","→ always present perfect","I've seen her recently."],
+      ["Future time words","tomorrow, soon, next year, by Friday","→ future forms","I'll call you tomorrow."],
+    ],
+    grammarWatch:"Time word + tense agreement is one of the most persistent errors at B1-B2. The shortcut: 'yesterday / last week / ago / in 2019 / when I was…' → ALWAYS simple past. 'Ever / never / already / yet / recently / lately / since / for…' → ALWAYS present perfect. ✗ 'I've seen her yesterday.' → ✓ 'I saw her yesterday.'",
+    grammarTip:"For adjective vs adverb: if it describes a noun or follows a linking verb (be, seem, feel, look, become) → adjective. If it describes a verb, adjective, or another adverb → adverb (usually -ly). The verb 'feel' is linking: 'I feel bad' (not 'badly'). 'Good/well' is the classic irregular pair: 'She's a good cook' / 'She cooks well.'",
+    listeningTitle:"Time is cultural",
+    listeningDesc:"Listen to a speaker explain how different cultures relate to time and punctuality, then answer the questions.",
+    listeningQ:[
+      {q:"What example does the speaker use to show different cultural attitudes to time?",opts:["Japanese vs Brazilian approach to punctuality","American vs European work hours","Ancient vs modern attitudes to planning","City vs rural relationships with time"],correct:0},
+      {q:"How does the speaker describe 'past-oriented' cultures?",opts:["Slow and inefficient","Deeply connected to history, tradition, and ancestry","More creative than future-oriented cultures","Less successful economically"],correct:1},
+      {q:"What is the key difference between monochronic and polychronic cultures?",opts:["One is punctual, one isn't","One plans, one doesn't","One does things sequentially, one handles multiple tasks simultaneously","One values work, one values family"],correct:2},
+      {q:"What skill does the speaker say is most useful for working internationally?",opts:["Speaking multiple languages","Understanding cultural attitudes to time","Adapting your work hours","Avoiding cultural generalisations"],correct:1},
+    ],
+    talkQ:[
+      "Is your culture more monochronic or polychronic in your experience?",
+      "'You don't require agreement — you require curiosity.' Apply this to a cultural difference you've experienced.",
+      "Use time words correctly: something you did last year / something you've been doing recently / something you'll do by next month.",
+      "Describe your relationship with punctuality — and compare it to someone you know.",
+      "What traditions from your culture would be 'inexplicably cautious' to someone from outside?",
+    ],
+    hwTask:"Write or record a reflection on how your culture relates to time and tradition. Use: adjective/adverb distinctions (deep/deeply, hard/hardly, late/lately), time words from all three categories (past, present perfect, future), and at least 4 connectors. 250 words or 2 minutes of audio.",
+    gameType:"crossword",
+    unitImageSeed:"culture-traditions",
+    warmupQuestions:[
+      "What's the difference between 'She works hard' and 'She hardly works'?",
+      "Correct the time word: 'I've seen her yesterday.' / 'I saw her recently.'",
+      "Name 4 time words that go with simple past and 4 that go with present perfect.",
+    ],
+    quickCheck:[
+      {statement:"The author argues that Japanese attitudes to punctuality are correct.",answer:false},
+      {statement:"Hall identified two types of cultures based on their relationship with time.",answer:true},
+      {statement:"The author says monochronic cultures are superior.",answer:false},
+    ],
+    speakingChallenge:"'Cultural time capsule': Imagine someone from 100 years ago waking up in your city today. What would they find most disorienting about how people relate to time now? Use: adjectives and adverbs with precision, time words across multiple tenses, connectors. 2 minutes, no notes.",
+  },
+  {num:"13",title:"The restaurant I'll never forget",grammar:"Adjectives & Adverbs",month:5,reading:`<p>It was a small, ugly restaurant on a quiet street in Salta, and it served the best food I've ever eaten.</p><p>We almost didn't go in. The sign was old, the door was heavy, and the lights were dim. But we were terribly hungry, so we walked in slowly and sat down nervously in the corner.</p><p>The owner, an old woman with bright eyes, moved quickly between the tables. She didn't give us a menu. She simply looked at us carefully and said, "I'll decide."</p><p>We laughed nervously and agreed. The food came out hot, fresh, and beautiful. The empanadas were perfectly crispy. The wine was deep and warm. We ate hungrily and talked loudly, like old friends, even though we had just met that morning.</p><p>She cooked everything herself, slowly and lovingly, like it actually mattered. And it did. We finished happily, paid almost nothing, and stepped outside into the cold mountain air.</p><p>Some places feed your stomach. The truly special ones feed something deeper, quietly, when you least expect it.</p>`,
     vocab:[{word:"ugly",trans:"feo",ex:'"It was an ugly building with a beautiful soul."'},{word:"dim",trans:"tenue (luz)",ex:'"The light was dim and romantic."'},{word:"nervously",trans:"nerviosamente",ex:'"He waited nervously for the results."'},{word:"crispy",trans:"crocante",ex:'"I love crispy fried potatoes."'},{word:"deep",trans:"profundo",ex:'"She has a deep, calm voice."'},{word:"lovingly",trans:"con cariño",ex:'"She wrapped the gift lovingly."'},{word:"quietly",trans:"en silencio, en voz baja",ex:'"He closed the door quietly."'},{word:"to feed",trans:"alimentar",ex:'"Good music feeds the soul."'}],
     grammarExamples:['"It was a small, ugly restaurant on a quiet street."','"The owner moved quickly between the tables."','"We walked in slowly and sat down nervously."','"The empanadas were perfectly crispy."','"She cooked everything slowly and lovingly."'],
     grammarRule:"Adjectives describe nouns (a quiet street). Adverbs describe verbs — how something is done (she moved quickly). Most adverbs = adjective + -ly.",
@@ -504,7 +706,7 @@ export const UNITS = [
     ],
     speakingChallenge:"Sensory description game: Close your eyes. The teacher describes a place using adjectives and adverbs. Students draw what they imagine, then compare."
   },
-  {num:"11",title:"From zero to conversation — student stories",grammar:"All Tenses",month:5,reading:`<p>Three years ago, Marcela couldn't say "hello" in English. Today she works as a tour guide in Cartagena.</p><p>"I was so scared at the beginning," she says. "I am still learning, but now I talk to tourists every single day. Last week I helped a family from Canada find their hotel. They were lost, and I understood everything. I almost cried."</p><p>Diego started later, at fifty-two. "People told me I was too old. I didn't listen. I've studied for two years now, and next month I'm going to give a presentation in English at work. I will probably make mistakes, and that's fine."</p><p>And Sofía? She was failing every class. "I hated English. Then I met a teacher who made me laugh. Everything changed. I've made friends from six countries. I am writing a blog now, and one day I will live abroad."</p><p>Three people. Three stories. One truth: nobody is born speaking English. Everybody starts at zero. The ones who succeed are simply the ones who keep going, one imperfect sentence at a time.</p>`,
+  {num:"14",title:"From zero to conversation — student stories",grammar:"All Tenses",month:5,reading:`<p>Three years ago, Marcela couldn't say "hello" in English. Today she works as a tour guide in Cartagena.</p><p>"I was so scared at the beginning," she says. "I am still learning, but now I talk to tourists every single day. Last week I helped a family from Canada find their hotel. They were lost, and I understood everything. I almost cried."</p><p>Diego started later, at fifty-two. "People told me I was too old. I didn't listen. I've studied for two years now, and next month I'm going to give a presentation in English at work. I will probably make mistakes, and that's fine."</p><p>And Sofía? She was failing every class. "I hated English. Then I met a teacher who made me laugh. Everything changed. I've made friends from six countries. I am writing a blog now, and one day I will live abroad."</p><p>Three people. Three stories. One truth: nobody is born speaking English. Everybody starts at zero. The ones who succeed are simply the ones who keep going, one imperfect sentence at a time.</p>`,
     vocab:[{word:"scared",trans:"asustado",ex:'"I was scared, but I did it anyway."'},{word:"tour guide",trans:"guía turístico",ex:'"Our tour guide knew every street by name."'},{word:"lost",trans:"perdido",ex:'"We got completely lost in the old town."'},{word:"to fail",trans:"reprobar, fracasar",ex:'"I failed the test, then I tried again."'},{word:"to succeed",trans:"tener éxito, lograrlo",ex:'"You succeed by not giving up."'},{word:"abroad",trans:"en el extranjero",ex:'"She has always wanted to live abroad."'},{word:"to keep going",trans:"seguir adelante",ex:'"It\'s hard, but keep going."'},{word:"imperfect",trans:"imperfecto",ex:'"An imperfect sentence is better than silence."'}],
     grammarExamples:['"Simple present — Today she works as a tour guide."','"Simple past — Last week I helped a family from Canada."','"Past continuous — She was failing every class."','"Present continuous — I am writing a blog now."','"Present perfect — I\'ve made friends from six countries."','"Future — Next month I\'m going to give a presentation."'],
     grammarRule:"This unit pulls everything together. Each tense answers a different question about time: is it a habit, happening now, finished, in progress, linked to now, or still ahead?",
@@ -530,6 +732,73 @@ export const UNITS = [
       {statement:"Sofía has made friends from three countries.",answer:false}
     ],
     speakingChallenge:'Full circle: Students present their "English journey story" — where they started, what they\'ve learned, and where they\'re going. Use all tenses. 3 minutes each.'
+  },
+  // ── UNIT 15 (NEW) ────────────────────────────────────────────────────────────
+  {
+    num:"15", title:"The world is stranger than you think", grammar:"Full B1-B2 Consolidation — all tenses · Like/As review · Connectors in extended discourse", month:5,
+    reading:`<p>The world is stranger than we tend to assume. Somewhere in Bolivia, there is a road that feels as though the planet has forgotten it exists — a single-lane path carved into the side of a cliff, with no barriers, used by locals as though it were a motorway. In Norway, the sun doesn't set for two months in summer. In a village in India, it has rained spiders. These are not myths. They are facts.</p>
+<p>Curiosity is, arguably, the most undervalued cognitive skill we have. Unlike memory or analytical thinking, it doesn't degrade with age — if anything, it sharpens. It is the engine behind every significant human discovery, from gravity to germ theory, from language to the internet. And yet, as people grow older, they tend to ask fewer questions, not more. Somewhere between childhood and adulthood, wonder becomes embarrassing.</p>
+<p>The most interesting people I have met are curious in a way that feels almost childlike — not naive, but genuinely open. They ask questions as though they don't already know the answer. They listen as if the information might surprise them. They approach the unfamiliar not with suspicion but with the slightly stunned delight of someone who has just realised the world is larger than they thought.</p>
+<p>As a result of curiosity, you find the road in Bolivia. You notice the spiders in India. You look up at the Norwegian sky and understand, for a brief moment, that the universe operates according to rules that have nothing to do with your schedule.</p>`,
+    vocab:[
+      {word:"cognitive",trans:"cognitivo",ex:'"Curiosity is the most undervalued cognitive skill we have."'},
+      {word:"degrade",trans:"deteriorarse, empeorar",ex:'"Unlike most skills, curiosity doesn\'t degrade with age."'},
+      {word:"germ theory",trans:"teoría de los gérmenes",ex:'"From germ theory to the internet — curiosity drove it all."'},
+      {word:"naive",trans:"ingenuo",ex:'"Not naive, but genuinely open — that\'s the difference."'},
+      {word:"suspicion",trans:"desconfianza, sospecha",ex:'"They approach the unfamiliar not with suspicion but with delight."'},
+      {word:"delight",trans:"deleite, alegría",ex:'"The stunned delight of someone who just realised the world is larger."'},
+      {word:"significant",trans:"significativo, importante",ex:'"Every significant human discovery was driven by curiosity."'},
+      {word:"sharpens",trans:"se agudiza, se afina",ex:'"Curiosity sharpens with age, if you let it."'},
+    ],
+    grammarExamples:[
+      '"The world is stranger than we tend to assume." (simple present — general truth)',
+      '"The most interesting people I have met are genuinely curious." (present perfect — life experience)',
+      '"In a village in India, it rained spiders." (simple past — finished fact)',
+      '"It feels as though the planet has forgotten this road." (as though + clause — formal comparison)',
+      '"They listen as if the information might surprise them." (as if + clause)',
+    ],
+    grammarRule:"Tense review: simple present (habits/facts), present continuous (now/current period), present perfect (experience/recent relevance), simple past (finished actions), future (will/going to). Like/As: use 'like' + noun for comparisons, 'as' + role/clause for function and formal comparisons, 'as if/as though' for hypothetical comparison.",
+    grammarTable:[
+      ["Tense","Signal words","Example from text"],
+      ["Simple present","always, every, tends to","Curiosity doesn't degrade with age."],
+      ["Present continuous","now, currently, these days","People are asking fewer questions."],
+      ["Present perfect","ever, already, since, just","The most interesting people I have met."],
+      ["Simple past","ago, last year, once","In India, it rained spiders."],
+      ["Future (will)","one day, soon, tomorrow","You will find the road in Bolivia."],
+      ["like + noun","comparison (informal/vivid)","It sharpens, like a muscle."],
+      ["as if / as though + clause","hypothetical comparison (formal)","As if the planet had forgotten it."],
+    ],
+    grammarWatch:"The most common B1-B2 tense error: mixing time words with wrong tenses. 'Yesterday / last year / ago' → ALWAYS simple past. 'Ever / already / recently / since / for' → ALWAYS present perfect. For like/as: 'like' before nouns, 'as if/as though' before clauses.",
+    grammarTip:"The difference between a B1 and B2 speaker is not the vocabulary — it's the architecture. B2 speakers link ideas with precision: 'Nevertheless,' 'As a result,' 'In spite of.' They use time words that match tenses automatically. They distinguish 'like' from 'as' without thinking. This unit was about that architecture. You now have it. Use it.",
+    listeningTitle:"The curiosity edge",
+    listeningDesc:"A speaker makes the case for curiosity as the most important undervalued skill in adult life.",
+    listeningQ:[
+      {q:"What example does the speaker give of a genuinely strange fact about the world?",opts:["Snakes in Australia","The Death Road in Bolivia","Volcanoes in Iceland","The Amazon River"],correct:1},
+      {q:"How does the speaker say curiosity changes with age?",opts:["It grows stronger","It stays the same","It tends to decrease","It becomes more focused"],correct:2},
+      {q:"How does the speaker describe curious adults?",opts:["Naive and childish","Childlike but not naive","Anxious and restless","Academic and serious"],correct:1},
+      {q:"What is the speaker's implied argument?",opts:["We should travel more","We should read more science","We should protect and nurture our curiosity","We should ask more questions at school"],correct:2},
+    ],
+    talkQ:[
+      "What is the strangest fact you know about the world? (use: present simple — it's true now)",
+      "When did you last feel genuinely surprised or delighted by something? (simple past)",
+      "Is there something you've always been curious about but never explored? (present perfect)",
+      "'Wonder becomes embarrassing.' Does this match your experience? Why does it happen?",
+      "Use 'as if' or 'as though' to describe how you approach something new: a language, a trip, a conversation.",
+    ],
+    hwTask:"FINAL HOMEWORK — B1-B2 Capstone: Write a 300-word piece OR record a 3-minute audio: 'Something about the world — or about people — that genuinely surprises or fascinates you.' Requirements: use at least 4 different tenses (name which tense in brackets the first time), use like / as / as if or as though at least once each, use at least 5 connectors from at least 3 categories, make it real, end with a question you still don't have the answer to.",
+    gameType:"crossword",
+    unitImageSeed:"world-curious",
+    warmupQuestions:[
+      "Name the 6 tenses studied in the program. What signal word goes with each?",
+      "What's the difference between 'like' and 'as if/as though'? Give an example of each.",
+      "Connect two surprising facts about the world using 3 different connectors.",
+    ],
+    quickCheck:[
+      {statement:"The Death Road in Bolivia has guardrails on both sides.",answer:false},
+      {statement:"The author says curiosity degrades with age like other cognitive skills.",answer:false},
+      {statement:"The author describes the most interesting people as childlike in a negative way.",answer:false},
+    ],
+    speakingChallenge:"B1-B2 Final: 'The thing I find most curious about the world.' Each student gives a 3-minute talk about a genuine curiosity — a fact, a place, a question, a mystery. Rules: use at least 4 different tenses naturally, use 'like' and 'as if/as though' at least once each, use at least 3 connectors from at least 2 categories. No fill-in-the-blank grammar — all structures must emerge from real ideas.",
   }
 ];
 
@@ -541,5 +810,5 @@ export const MONTHS = [
   {label:"Month 5 — Express yourself"}
 ];
 
-// Narrator gender per unit index (11 units): male (0,2,4,6,8,10) / female (1,3,5,7,9)
-export const NARRATOR_GENDER = ['male','female','male','female','male','female','male','female','male','female','male'];
+// Narrator gender per unit index (15 units)
+export const NARRATOR_GENDER = ['male','female','male','female','female','male','female','male','male','female','male','female','female','male','male'];
