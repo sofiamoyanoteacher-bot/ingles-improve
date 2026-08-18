@@ -70,7 +70,12 @@ router.put('/students/:id', (req, res) => {
 router.delete('/students/:id', (req, res) => {
   const student = db.prepare('SELECT id FROM users WHERE id = ? AND role = ?').get(req.params.id, 'student');
   if (!student) return res.status(404).json({ error: 'Alumno no encontrado' });
-  db.prepare('DELETE FROM progress WHERE user_id = ?').run(student.id);
+  db.prepare('DELETE FROM unit_progress WHERE user_id = ?').run(student.id);
+  // delete files linked to submissions first (FK constraint)
+  const subs = db.prepare('SELECT id FROM homework_submissions WHERE user_id = ?').all(student.id);
+  for (const sub of subs) {
+    db.prepare('DELETE FROM homework_files WHERE submission_id = ?').run(sub.id);
+  }
   db.prepare('DELETE FROM homework_submissions WHERE user_id = ?').run(student.id);
   db.prepare('DELETE FROM monthly_payments WHERE user_id = ?').run(student.id);
   db.prepare('DELETE FROM users WHERE id = ?').run(student.id);
