@@ -40,6 +40,7 @@ const students = [
   { email: 'gabriel.cantera15@gmail.com', password: 'Student123', name: 'Gabriel', last_name: 'Cantera', program: 'starter' },
   { email: 'nacho.garciax@gmail.com', password: 'Student123', name: 'Ignacio', last_name: 'Garcia', program: 'basic' },
   { email: 'leanlestani@gmail.com', password: 'Student123', name: 'Leandro', last_name: 'Lestani', program: 'basic' },
+  { email: 'fede@roundwell.com', password: 'Student123', name: 'Federico', last_name: 'Barragan', program: 'basic' },
   // Improve Starter (A1-A2)
   { email: 'starter1@improve.com', password: 'Alumno2026!', name: 'Diego', last_name: 'Fernández', age: 35, profession: 'Ingeniero', program: 'starter' },
   { email: 'starter2@improve.com', password: 'Alumno2026!', name: 'Camila', last_name: 'Torres', age: 27, profession: 'Abogada', program: 'starter' },
