@@ -33,6 +33,7 @@ export const api = {
     request('/auth/change-password', { method: 'PUT', body: { current_password, new_password } }),
 
   getProgress: () => request('/student/progress'),
+  getPaymentStatus: () => request('/student/payment-status'),
   putProgress: (unitIndex, payload) => request(`/student/progress/${unitIndex}`, { method: 'PUT', body: payload }),
   updateProfile: (payload) => request('/student/profile', { method: 'PUT', body: payload }),
 

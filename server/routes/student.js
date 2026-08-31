@@ -92,4 +92,13 @@ router.put('/profile', (req, res) => {
   res.json({ user: { id: user.id, email: user.email, name: user.name, last_name: user.last_name, age: user.age, profession: user.profession, role: user.role } });
 });
 
+router.get('/payment-status', (req, res) => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const row = db.prepare('SELECT paid FROM monthly_payments WHERE user_id = ? AND year = ? AND month = ?')
+    .get(req.user.id, year, month);
+  res.json({ year, month, paid: row ? !!row.paid : false });
+});
+
 module.exports = router;

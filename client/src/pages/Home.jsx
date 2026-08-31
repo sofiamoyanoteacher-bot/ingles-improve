@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useProgress } from '../hooks/useProgress.js';
 import { UNITS as UNITS_BASIC } from '../data/units';
 import { UNITS as UNITS_STARTER } from '../data/units_starter';
 import { UNITS as UNITS_NATIVE } from '../data/units_native';
 import Logo from '../components/Logo.jsx';
+import { api } from '../api';
 
 const PROGRAM_BADGE = {
   starter: { label: '⭐ Improve Starter — A1–A2', bg: 'bg-sky/10 text-sky' },
@@ -34,12 +36,19 @@ function computeStreak(progress) {
   return streak;
 }
 
+const MONTHS_ES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
 export default function Home() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { progress, loading, totalClassesDone, findNextClass } = useProgress();
+  const [paymentStatus, setPaymentStatus] = useState(null);
   const UNITS = user?.program === 'starter' ? UNITS_STARTER : user?.program === 'native' ? UNITS_NATIVE : UNITS_BASIC;
   const badge = PROGRAM_BADGE[user?.program] || PROGRAM_BADGE.basic;
+
+  useEffect(() => {
+    api.getPaymentStatus().then(setPaymentStatus).catch(() => {});
+  }, []);
 
   const totalClasses = UNITS.length * 4;
   const done = totalClassesDone();
@@ -81,6 +90,24 @@ export default function Home() {
         <StatCard icon="✅" label="Classes done" value={`${done}/${totalClasses}`} />
         <StatCard icon="🔥" label="Day streak" value={`${streak} day${streak === 1 ? '' : 's'}`} />
       </div>
+
+      {paymentStatus && (
+        <div className={`rounded-2xl px-5 py-4 mb-4 flex items-start gap-4 ${paymentStatus.paid ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200'}`}>
+          <span className="text-2xl mt-0.5">{paymentStatus.paid ? '✅' : '⚠️'}</span>
+          <div>
+            <p className={`font-semibold text-sm ${paymentStatus.paid ? 'text-green-700' : 'text-amber-700'}`}>
+              {paymentStatus.paid
+                ? `Mes en curso (${MONTHS_ES[paymentStatus.month - 1]}) — Pagado`
+                : `Mes en curso (${MONTHS_ES[paymentStatus.month - 1]}) — Pendiente de pago`}
+            </p>
+            {!paymentStatus.paid && (
+              <p className="text-xs text-amber-600 mt-1">
+                Recuerda realizar el pago de tu arancel mensual entre el 1 y el 6 de cada mes. ¡Gracias!
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       {!loading && (
         <div className="card p-6">
