@@ -50,7 +50,8 @@ export default function Home() {
     api.getPaymentStatus().then(setPaymentStatus).catch(() => {});
   }, []);
 
-  const totalClasses = UNITS.length * 4;
+  const classesPerUnit = user?.program === 'native' ? 13 : 12;
+  const totalClasses = UNITS.length * classesPerUnit;
   const done = totalClassesDone();
   const streak = computeStreak(progress);
   const next = findNextClass();

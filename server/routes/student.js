@@ -64,7 +64,7 @@ router.put('/progress/:unitIndex', (req, res) => {
       listening_done ? 1 : 0,
       letstalk_done ? 1 : 0,
       listening_score != null ? Number(listening_score) : null,
-      classProgressJson || JSON.stringify({ '1': false, '2': false, '3': false, '4': false })
+      classProgressJson || JSON.stringify(Object.fromEntries(Array.from({ length: 12 }, (_, i) => [String(i + 1), false])))
     );
   }
 

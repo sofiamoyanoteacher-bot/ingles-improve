@@ -3,10 +3,17 @@ import { api } from '../api';
 import { useAuth } from '../context/AuthContext.jsx';
 import { UNITS as UNITS_BASIC } from '../data/units';
 import { UNITS as UNITS_STARTER } from '../data/units_starter';
+import { UNITS as UNITS_NATIVE } from '../data/units_native';
+
+// native has an extra Idioms class at position 5 (total 13), all others have 12
+const NON_IDIOMS_CLASSES = 12;
+function maxClasses(isNative) { return isNative ? 13 : NON_IDIOMS_CLASSES; }
+function allClassNums(isNative) { return Array.from({ length: maxClasses(isNative) }, (_, i) => i + 1); }
 
 export function useProgress() {
   const { user } = useAuth();
-  const UNITS = user?.program === 'starter' ? UNITS_STARTER : UNITS_BASIC;
+  const isNative = user?.program === 'native';
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : isNative ? UNITS_NATIVE : UNITS_BASIC;
   const [progress, setProgress] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,38 +24,17 @@ export function useProgress() {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    reload();
-  }, [reload]);
+  useEffect(() => { reload(); }, [reload]);
 
   function rowFor(unitIndex) {
     return progress.find((p) => p.unit_index === unitIndex);
   }
 
-  function isComplete(unitIndex) {
-    const row = rowFor(unitIndex);
-    return !!(row && row.reading_done && row.grammar_done && row.listening_done && row.letstalk_done);
-  }
-
-  function pctFor(unitIndex) {
-    const row = rowFor(unitIndex);
-    if (!row) return 0;
-    const flags = [row.reading_done, row.grammar_done, row.listening_done, row.letstalk_done];
-    const done = flags.filter(Boolean).length;
-    return Math.round((done / 4) * 100);
-  }
-
-  function statusFor(unitIndex) {
-    if (isComplete(unitIndex)) return 'done';
-    const firstIncomplete = UNITS.findIndex((_, i) => !isComplete(i));
-    if (unitIndex === firstIncomplete || (firstIncomplete === -1 && unitIndex === 0)) return 'current';
-    if (unitIndex < firstIncomplete) return 'done';
-    return 'locked';
-  }
-
   function classProgressFor(unitIndex) {
     const row = rowFor(unitIndex);
-    return row?.class_progress || { 1: false, 2: false, 3: false, 4: false };
+    const defaults = {};
+    allClassNums(isNative).forEach((c) => { defaults[String(c)] = false; });
+    return { ...defaults, ...(row?.class_progress || {}) };
   }
 
   function isClassDone(unitIndex, classNum) {
@@ -60,9 +46,26 @@ export function useProgress() {
     return isClassDone(unitIndex, classNum - 1);
   }
 
+  function isComplete(unitIndex) {
+    return allClassNums(isNative).every((c) => isClassDone(unitIndex, c));
+  }
+
+  function pctFor(unitIndex) {
+    const nums = allClassNums(isNative);
+    const done = nums.filter((c) => isClassDone(unitIndex, c)).length;
+    return Math.round((done / nums.length) * 100);
+  }
+
+  function statusFor(unitIndex) {
+    if (isComplete(unitIndex)) return 'done';
+    const firstIncomplete = UNITS.findIndex((_, i) => !isComplete(i));
+    if (unitIndex === firstIncomplete || (firstIncomplete === -1 && unitIndex === 0)) return 'current';
+    if (unitIndex < firstIncomplete) return 'done';
+    return 'locked';
+  }
+
   function classesDoneCount(unitIndex) {
-    const cp = classProgressFor(unitIndex);
-    return [1, 2, 3, 4].filter((c) => cp[String(c)]).length;
+    return allClassNums(isNative).filter((c) => isClassDone(unitIndex, c)).length;
   }
 
   function totalClassesDone() {
@@ -70,16 +73,18 @@ export function useProgress() {
   }
 
   function findNextClass() {
+    const max = maxClasses(isNative);
     for (let u = 0; u < UNITS.length; u++) {
-      for (let c = 1; c <= 4; c++) {
+      for (let c = 1; c <= max; c++) {
         if (!isClassDone(u, c)) return { unitIndex: u, classNum: c };
       }
     }
-    return { unitIndex: UNITS.length - 1, classNum: 4 };
+    return { unitIndex: UNITS.length - 1, classNum: max };
   }
 
   return {
     progress, loading, reload, rowFor, isComplete, pctFor, statusFor,
-    classProgressFor, isClassDone, isClassUnlocked, classesDoneCount, totalClassesDone, findNextClass,
+    classProgressFor, isClassDone, isClassUnlocked, classesDoneCount,
+    totalClassesDone, findNextClass, isNative, maxClasses: maxClasses(isNative),
   };
 }

@@ -12,18 +12,34 @@ import Class3Listening from './tabs/Class3Listening.jsx';
 import Class4Game from './tabs/Class4Game.jsx';
 import Class5Idioms from './tabs/Class5Idioms.jsx';
 
-const CLASS_LABELS = { 1: 'Reading', 2: 'Grammar', 3: 'Listening', 4: 'Game', 5: 'Idioms' };
+// For native: class 5 = Idioms; classes 1-4 and 6-13 follow the 4-type cycle.
+// For others: classes 1-12 follow the 4-type cycle.
+function classType(classNum, isNative) {
+  if (isNative && classNum === 5) return 'idioms';
+  const adj = isNative && classNum > 5 ? classNum - 5 : classNum;
+  return ((adj - 1) % 4) + 1; // 1=Reading 2=Grammar 3=Listening 4=Game
+}
+
+const TYPE_LABEL = { 1: 'Reading', 2: 'Grammar', 3: 'Listening', 4: 'Game', idioms: 'Idioms' };
+const TYPE_ICON  = { 1: '📖', 2: '✏️', 3: '🎧', 4: '🎮', idioms: '💬' };
+
+// Groups of class numbers per cycle
+function buildCycles(isNative) {
+  return isNative
+    ? [[1, 2, 3, 4, 5], [6, 7, 8, 9], [10, 11, 12, 13]]
+    : [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]];
+}
 
 export default function UnitDetail() {
   const { unitIndex } = useParams();
   const idx = Number(unitIndex);
   const { user } = useAuth();
-  const UNITS = user?.program === 'starter' ? UNITS_STARTER : user?.program === 'native' ? UNITS_NATIVE : UNITS_BASIC;
   const isNative = user?.program === 'native';
+  const UNITS = user?.program === 'starter' ? UNITS_STARTER : isNative ? UNITS_NATIVE : UNITS_BASIC;
   const unit = UNITS[idx];
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { isClassDone, isClassUnlocked, reload } = useProgress();
+  const { isClassDone, isClassUnlocked, reload, maxClasses } = useProgress();
   const [activeClass, setActiveClass] = useState(Number(searchParams.get('class')) || 1);
   const [marking, setMarking] = useState(false);
 
@@ -50,13 +66,16 @@ export default function UnitDetail() {
     try {
       await api.putProgress(idx, { class_number: activeClass });
       await reload();
-      if (activeClass < 4) setActiveClass(activeClass + 1);
+      if (activeClass < maxClasses) setActiveClass(activeClass + 1);
     } finally {
       setMarking(false);
     }
   }
 
   const done = isClassDone(idx, activeClass);
+  const cycles = buildCycles(isNative);
+  const type = classType(activeClass, isNative);
+  const isIdiomsActive = type === 'idioms';
 
   return (
     <div className="max-w-[1100px] mx-auto px-6 py-8 md:pt-8 pt-16">
@@ -71,39 +90,49 @@ export default function UnitDetail() {
         <span className="inline-block px-3.5 py-1 rounded-xl bg-grad text-white text-xs font-semibold">{unit.grammar}</span>
       </div>
 
-      <div className="flex items-center gap-2 mb-6">
-        {[1, 2, 3, 4, ...(isNative ? [5] : [])].map((n) => {
-          const unlocked = isClassUnlocked(idx, n);
-          const classDone = isClassDone(idx, n);
-          const isActive = activeClass === n;
-          return (
-            <div key={n} className="flex items-center flex-1">
-              <button
-                onClick={() => goToClass(n)}
-                disabled={!unlocked}
-                className={`flex-1 flex flex-col items-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold transition-colors ${
-                  isActive ? 'bg-grad text-white' :
-                  classDone ? 'bg-green-50 text-green-700' :
-                  unlocked ? 'bg-[#f7f8fc] text-gray-600 hover:bg-gray-100' : 'bg-gray-50 text-gray-300 cursor-not-allowed'
-                }`}
-              >
-                <span>{classDone ? '✅' : unlocked ? '●' : '🔒'} C{n}</span>
-                <span className="text-[10px] font-normal hidden sm:inline">{CLASS_LABELS[n]}</span>
-              </button>
-              {n < (isNative ? 5 : 4) && <div className={`h-0.5 w-3 flex-shrink-0 ${isClassDone(idx, n) ? 'bg-grad' : 'bg-gray-200'}`} />}
+      {/* 3-cycle tab grid */}
+      <div className="space-y-3 mb-6">
+        {cycles.map((cycle, ci) => (
+          <div key={ci} className="card p-3">
+            <div className="text-[10px] font-bold text-gray-400 mb-2 tracking-widest">CICLO {ci + 1}</div>
+            <div className="flex gap-2">
+              {cycle.map((n) => {
+                const t = classType(n, isNative);
+                const unlocked = isClassUnlocked(idx, n);
+                const classDone = isClassDone(idx, n);
+                const isActive = activeClass === n;
+                return (
+                  <button
+                    key={n}
+                    onClick={() => goToClass(n)}
+                    disabled={!unlocked}
+                    className={`flex-1 flex flex-col items-center gap-1 py-2.5 rounded-xl text-xs font-semibold transition-colors ${
+                      isActive       ? 'bg-grad text-white shadow' :
+                      classDone      ? 'bg-green-50 text-green-700' :
+                      unlocked       ? 'bg-[#f7f8fc] text-gray-600 hover:bg-gray-100' :
+                                       'bg-gray-50 text-gray-300 cursor-not-allowed'
+                    }`}
+                  >
+                    <span className="text-base leading-none">{classDone ? '✅' : unlocked ? TYPE_ICON[t] : '🔒'}</span>
+                    <span className="text-[10px] font-normal hidden sm:block">{TYPE_LABEL[t]}</span>
+                    <span className={`text-[9px] font-bold ${isActive ? 'text-white/70' : 'text-gray-300'}`}>C{n}</span>
+                  </button>
+                );
+              })}
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
 
-      {activeClass === 1 && <Class1Reading unit={unit} unitIndex={idx} />}
-      {activeClass === 2 && <Class2Grammar unit={unit} />}
-      {activeClass === 3 && <Class3Listening unit={unit} unitIndex={idx} onListeningComplete={handleListeningComplete} />}
-      {activeClass === 4 && <Class4Game unit={unit} unitIndex={idx} />}
-      {activeClass === 5 && isNative && <Class5Idioms unit={unit} />}
+      {/* Active class content */}
+      {type === 1 && <Class1Reading unit={unit} unitIndex={idx} />}
+      {type === 2 && <Class2Grammar unit={unit} />}
+      {type === 3 && <Class3Listening unit={unit} unitIndex={idx} onListeningComplete={handleListeningComplete} />}
+      {type === 4 && <Class4Game unit={unit} unitIndex={idx} />}
+      {isIdiomsActive && <Class5Idioms unit={unit} />}
 
       <div className="mt-6">
-        {activeClass === 5 ? null : done ? (
+        {isIdiomsActive ? null : done ? (
           <div className="text-center text-sm text-green-600 font-semibold">✅ Class {activeClass} completed</div>
         ) : (
           <button
