@@ -11,6 +11,7 @@ import Class2Grammar from './tabs/Class2Grammar.jsx';
 import Class3Listening from './tabs/Class3Listening.jsx';
 import Class4Game from './tabs/Class4Game.jsx';
 import Class5Idioms from './tabs/Class5Idioms.jsx';
+import { getCycleIndex, getCycleUnit } from '../../utils/cycleData.js';
 
 // For native: class 5 = Idioms; classes 1-4 and 6-13 follow the 4-type cycle.
 // For others: classes 1-12 follow the 4-type cycle.
@@ -76,6 +77,8 @@ export default function UnitDetail() {
   const cycles = buildCycles(isNative);
   const type = classType(activeClass, isNative);
   const isIdiomsActive = type === 'idioms';
+  const cycleIndex = getCycleIndex(activeClass, isNative);
+  const cycleUnit = getCycleUnit(unit, idx, cycleIndex, user?.program);
 
   return (
     <div className="max-w-[1100px] mx-auto px-6 py-8 md:pt-8 pt-16">
@@ -125,9 +128,9 @@ export default function UnitDetail() {
       </div>
 
       {/* Active class content */}
-      {type === 1 && <Class1Reading unit={unit} unitIndex={idx} />}
-      {type === 2 && <Class2Grammar unit={unit} />}
-      {type === 3 && <Class3Listening unit={unit} unitIndex={idx} onListeningComplete={handleListeningComplete} />}
+      {type === 1 && <Class1Reading unit={cycleUnit} unitIndex={idx} />}
+      {type === 2 && <Class2Grammar unit={cycleUnit} />}
+      {type === 3 && <Class3Listening unit={cycleUnit} unitIndex={idx} onListeningComplete={handleListeningComplete} />}
       {type === 4 && <Class4Game unit={unit} unitIndex={idx} />}
       {isIdiomsActive && <Class5Idioms unit={unit} />}
 
