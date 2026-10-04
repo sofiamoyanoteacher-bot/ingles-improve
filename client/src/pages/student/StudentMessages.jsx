@@ -23,7 +23,12 @@ export default function StudentMessages() {
     try {
       const data = await api.studentGetMessages();
       if (data && Array.isArray(data.messages)) {
-        setMessages(data.messages);
+        // Merge: keep any optimistic (tmp_) messages not yet confirmed, add new server ones
+        setMessages(prev => {
+          const serverIds = new Set(data.messages.map(m => String(m.id)));
+          const pending = prev.filter(m => String(m.id).startsWith('tmp_') && !serverIds.has(m.id));
+          return [...data.messages, ...pending];
+        });
       }
     } catch (e) {
       console.error('load messages error', e);
@@ -43,9 +48,10 @@ export default function StudentMessages() {
     setSending(true);
 
     try {
-      await api.studentSendMessage(text);
-      // Replace optimistic with real data from server
-      await load();
+      const data = await api.studentSendMessage(text);
+      // Replace temp with the server-confirmed message
+      const confirmed = data?.message || { ...tempMsg, id: Date.now() };
+      setMessages(prev => prev.map(m => m.id === tempId ? { ...confirmed, sender_role: 'student' } : m));
     } catch (e) {
       // Roll back optimistic message and show error
       setMessages(prev => prev.filter(m => m.id !== tempId));
