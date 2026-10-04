@@ -8,6 +8,7 @@ import StudentLayout from './pages/student/StudentLayout.jsx';
 import Program from './pages/student/Program.jsx';
 import UnitDetail from './pages/student/UnitDetail.jsx';
 import Appendix from './pages/student/Appendix.jsx';
+import StudentMessages from './pages/student/StudentMessages.jsx';
 import TeacherLayout from './pages/teacher/TeacherLayout.jsx';
 import TeacherDashboard from './pages/teacher/TeacherDashboard.jsx';
 import Students from './pages/teacher/Students.jsx';
@@ -46,6 +47,7 @@ export default function App() {
         <Route path="progress" element={<Progress />} />
         <Route path="extra" element={<ExtraMaterial />} />
         <Route path="appendix/:id" element={<Appendix />} />
+        <Route path="messages" element={<StudentMessages />} />
       </Route>
 
       <Route path="/teacher" element={<RequireAuth role="teacher"><TeacherLayout /></RequireAuth>}>

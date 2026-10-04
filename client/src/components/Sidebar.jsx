@@ -9,6 +9,7 @@ const NAV_ITEMS_AFTER_PROFILE = [
   { to: '/program', icon: '📚', label: 'Program' },
   { to: '/progress', icon: '📊', label: 'Progress' },
   { to: '/extra', icon: '⭐', label: 'Extra Material' },
+  { to: '/messages', icon: '💬', label: 'Messages' },
 ];
 
 export default function Sidebar({ open, onClose, onProfileClick, user, onLogout }) {
