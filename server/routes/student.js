@@ -119,8 +119,13 @@ router.get('/messages', (req, res) => {
 router.post('/messages', (req, res) => {
   const { body } = req.body || {};
   if (!body) return res.status(400).json({ error: 'body required' });
-  // Find any teacher assigned — for now use the first teacher in DB
-  const teacher = db.prepare("SELECT id FROM users WHERE role = 'teacher' ORDER BY id LIMIT 1").get();
+  // Prefer the teacher who already has a thread with this student,
+  // then the teacher who has classes scheduled with them,
+  // then fall back to the first teacher in DB.
+  const teacher =
+    db.prepare("SELECT teacher_id AS id FROM student_messages WHERE student_id = ? ORDER BY id DESC LIMIT 1").get(req.user.id) ||
+    db.prepare("SELECT teacher_id AS id FROM scheduled_classes WHERE student_id = ? ORDER BY id DESC LIMIT 1").get(req.user.id) ||
+    db.prepare("SELECT id FROM users WHERE role = 'teacher' ORDER BY id LIMIT 1").get();
   if (!teacher) return res.status(500).json({ error: 'No teacher available' });
   const info = db.prepare(
     `INSERT INTO student_messages (student_id, teacher_id, sender_role, body) VALUES (?,?,?,?)`
