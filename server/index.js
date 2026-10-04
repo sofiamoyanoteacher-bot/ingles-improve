@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 const studentRoutes = require('./routes/student');
 const homeworkRoutes = require('./routes/homework');
 const teacherRoutes = require('./routes/teacher');
+const calendarRoutes = require('./routes/calendar');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -30,6 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/homework', homeworkRoutes);
 app.use('/api/teacher', teacherRoutes);
+app.use('/api/calendar', calendarRoutes);
 
 app.use((err, req, res, next) => {
   if (err) {

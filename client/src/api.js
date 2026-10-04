@@ -59,6 +59,26 @@ export const api = {
   teacherTogglePayment: (userId, year, month, paid) =>
     request(`/teacher/payments/${userId}`, { method: 'PUT', body: { year, month, paid } }),
   teacherStats: () => request('/teacher/stats'),
+  // Calendar / availability
+  calendarGetAvailability: () => request('/calendar/availability'),
+  calendarSetAvailability: (slots) => request('/calendar/availability', { method: 'PUT', body: { slots } }),
+  calendarGetClasses: (query = {}) => {
+    const qs = new URLSearchParams(query).toString();
+    return request(`/calendar/classes${qs ? `?${qs}` : ''}`);
+  },
+  calendarCreateClass: (payload) => request('/calendar/classes', { method: 'POST', body: payload }),
+  calendarUpdateClass: (id, payload) => request(`/calendar/classes/${id}`, { method: 'PUT', body: payload }),
+  calendarDeleteClass: (id) => request(`/calendar/classes/${id}`, { method: 'DELETE' }),
+  calendarSetAttendance: (id, payload) => request(`/calendar/classes/${id}/attendance`, { method: 'PUT', body: payload }),
+  // Messaging (teacher side)
+  calendarGetMessages: (studentId) => request(`/calendar/messages${studentId ? `?studentId=${studentId}` : ''}`),
+  calendarSendMessage: (student_id, body) => request('/calendar/messages', { method: 'POST', body: { student_id, body } }),
+  calendarUnreadCount: () => request('/calendar/messages/unread-count'),
+  // Messaging (student side)
+  studentGetMessages: () => request('/student/messages'),
+  studentSendMessage: (body) => request('/student/messages', { method: 'POST', body: { body } }),
+  studentGetClasses: () => request('/student/classes'),
+
   async downloadTeacherFile(submissionId, filename, originalName) {
     const token = getToken();
     const res = await fetch(`/api/teacher/homework/${submissionId}/files/${filename}`, {

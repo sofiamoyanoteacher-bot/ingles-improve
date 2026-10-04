@@ -15,6 +15,9 @@ import HomeworkInbox from './pages/teacher/HomeworkInbox.jsx';
 import FeedbackHistory from './pages/teacher/FeedbackHistory.jsx';
 import Settings from './pages/teacher/Settings.jsx';
 import Billing from './pages/teacher/Billing.jsx';
+import Calendar from './pages/teacher/Calendar.jsx';
+import Reports from './pages/teacher/Reports.jsx';
+import Messages from './pages/teacher/Messages.jsx';
 
 function FullScreenLoader() {
   return <div className="min-h-screen flex items-center justify-center text-gray-400 text-sm">Cargando…</div>;
@@ -49,6 +52,9 @@ export default function App() {
         <Route index element={<TeacherDashboard />} />
         <Route path="students" element={<Students />} />
         <Route path="billing" element={<Billing />} />
+        <Route path="calendar" element={<Calendar />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="messages" element={<Messages />} />
         <Route path="homework" element={<HomeworkInbox />} />
         <Route path="feedback" element={<FeedbackHistory />} />
         <Route path="settings" element={<Settings />} />

@@ -96,4 +96,47 @@ if (!hasClassProgress) {
   db.exec(`ALTER TABLE unit_progress ADD COLUMN class_progress TEXT DEFAULT '{"1":false,"2":false,"3":false,"4":false}'`);
 }
 
+// Teacher availability slots (recurring weekly slots a teacher marks as free)
+db.exec(`
+CREATE TABLE IF NOT EXISTS teacher_availability (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  teacher_id INTEGER NOT NULL REFERENCES users(id),
+  day_of_week INTEGER NOT NULL,  -- 0=Sun, 1=Mon ... 6=Sat
+  hour INTEGER NOT NULL,         -- 0-23
+  minute INTEGER NOT NULL DEFAULT 0,
+  UNIQUE(teacher_id, day_of_week, hour, minute)
+);
+
+CREATE TABLE IF NOT EXISTS scheduled_classes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  teacher_id INTEGER NOT NULL REFERENCES users(id),
+  student_id INTEGER NOT NULL REFERENCES users(id),
+  scheduled_at TEXT NOT NULL,    -- ISO datetime
+  duration_min INTEGER NOT NULL DEFAULT 60,
+  meet_link TEXT DEFAULT '',
+  notes TEXT DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'scheduled',  -- scheduled | done | cancelled
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS class_attendance (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  class_id INTEGER NOT NULL REFERENCES scheduled_classes(id),
+  student_id INTEGER NOT NULL REFERENCES users(id),
+  attended INTEGER NOT NULL DEFAULT 0,
+  material_covered TEXT DEFAULT '',
+  UNIQUE(class_id, student_id)
+);
+
+CREATE TABLE IF NOT EXISTS student_messages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  student_id INTEGER NOT NULL REFERENCES users(id),
+  teacher_id INTEGER NOT NULL REFERENCES users(id),
+  sender_role TEXT NOT NULL DEFAULT 'student',  -- 'student' | 'teacher'
+  body TEXT NOT NULL,
+  read_by_teacher INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+`);
+
 module.exports = db;

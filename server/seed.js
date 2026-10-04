@@ -28,6 +28,19 @@ upsertUser({
   role: 'teacher',
 });
 
+// Demo teacher logins (for testing platform without billing admin)
+const demoTeachers = [
+  { email: 'teacherstarter@improve.com', password: 'Teacher123', name: 'Teacher', last_name: 'Starter' },
+  { email: 'teacherbasic@improve.com',   password: 'Teacher123', name: 'Teacher', last_name: 'Basic' },
+  { email: 'teachernative@improve.com',  password: 'Teacher123', name: 'Teacher', last_name: 'Native' },
+  { email: 'teachermaira@improve.com',   password: 'Teacher123', name: 'Maira',   last_name: 'Improve' },
+  { email: 'teacherdelfina@improve.com', password: 'Teacher123', name: 'Delfina', last_name: 'Improve' },
+  { email: 'teacherailin@improve.com',   password: 'Teacher123', name: 'Ailin',   last_name: 'Improve' },
+];
+for (const t of demoTeachers) {
+  upsertUser({ ...t, role: 'teacher' });
+}
+
 const students = [
   // Improve Basic (B1-B2)
   { email: 'alumno1@improve.com', password: 'Alumno2026!', name: 'Valentina', last_name: 'Appezzatto', age: 28, profession: 'Diseñadora', program: 'basic' },
@@ -69,5 +82,6 @@ for (const s of students) {
 }
 
 console.log('Seed completo:');
-console.log(`  Teacher: ${teacherEmail} / Teacher2026!`);
+console.log(`  Teacher (admin): ${teacherEmail} / Teacher2026!`);
+for (const t of demoTeachers) console.log(`  Teacher: ${t.email} / ${t.password} (${t.name} ${t.last_name})`);
 for (const s of students) console.log(`  Alumno [${s.program}]: ${s.email} / ${s.password} (${s.name} ${s.last_name})`);

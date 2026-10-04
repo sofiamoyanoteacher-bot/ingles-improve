@@ -108,4 +108,37 @@ router.get('/payment-status', (req, res) => {
   res.json({ year, month, paid: row ? !!row.paid : false });
 });
 
+// Student → teacher messaging
+router.get('/messages', (req, res) => {
+  const messages = db.prepare(
+    'SELECT * FROM student_messages WHERE student_id = ? ORDER BY created_at'
+  ).all(req.user.id);
+  res.json({ messages });
+});
+
+router.post('/messages', (req, res) => {
+  const { body } = req.body || {};
+  if (!body) return res.status(400).json({ error: 'body required' });
+  // Find any teacher assigned — for now use the first teacher in DB
+  const teacher = db.prepare("SELECT id FROM users WHERE role = 'teacher' ORDER BY id LIMIT 1").get();
+  if (!teacher) return res.status(500).json({ error: 'No teacher available' });
+  const info = db.prepare(
+    `INSERT INTO student_messages (student_id, teacher_id, sender_role, body) VALUES (?,?,?,?)`
+  ).run(req.user.id, teacher.id, 'student', body);
+  const msg = db.prepare('SELECT * FROM student_messages WHERE id = ?').get(info.lastInsertRowid);
+  res.status(201).json({ message: msg });
+});
+
+// Student upcoming classes
+router.get('/classes', (req, res) => {
+  const classes = db.prepare(`
+    SELECT sc.*, u.name AS teacher_name, u.last_name AS teacher_last_name
+    FROM scheduled_classes sc
+    JOIN users u ON u.id = sc.teacher_id
+    WHERE sc.student_id = ? AND sc.status = 'scheduled'
+    ORDER BY sc.scheduled_at
+  `).all(req.user.id);
+  res.json({ classes });
+});
+
 module.exports = router;
