@@ -90,6 +90,11 @@ if (!userCols.includes('end_date'))     db.exec(`ALTER TABLE users ADD COLUMN en
 // teacher_type: 'admin' = full access, 'teacher' = calendar/reports/messages only
 if (!userCols.includes('teacher_type')) db.exec(`ALTER TABLE users ADD COLUMN teacher_type TEXT DEFAULT 'teacher'`);
 
+// Migration: recurrence group for scheduled classes
+const classcols = db.prepare("PRAGMA table_info(scheduled_classes)").all().map((c) => c.name);
+if (!classcols.includes('recurrence_group_id'))
+  db.exec(`ALTER TABLE scheduled_classes ADD COLUMN recurrence_group_id TEXT DEFAULT NULL`);
+
 // Migration: class_progress tracks completion of the 4 classes per unit independently
 // from the existing tab-level flags. Guarded because SQLite has no ADD COLUMN IF NOT EXISTS.
 const hasClassProgress = db.prepare("PRAGMA table_info(unit_progress)").all()

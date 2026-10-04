@@ -68,7 +68,8 @@ export const api = {
   },
   calendarCreateClass: (payload) => request('/calendar/classes', { method: 'POST', body: payload }),
   calendarUpdateClass: (id, payload) => request(`/calendar/classes/${id}`, { method: 'PUT', body: payload }),
-  calendarDeleteClass: (id) => request(`/calendar/classes/${id}`, { method: 'DELETE' }),
+  calendarDeleteClass: (id, allInGroup = false) =>
+    request(`/calendar/classes/${id}${allInGroup ? '?all_in_group=1' : ''}`, { method: 'DELETE' }),
   calendarSetAttendance: (id, payload) => request(`/calendar/classes/${id}/attendance`, { method: 'PUT', body: payload }),
   // Messaging (teacher side)
   calendarGetMessages: (studentId) => request(`/calendar/messages${studentId ? `?studentId=${studentId}` : ''}`),
