@@ -287,28 +287,40 @@ export default function Calendar() {
 
       {/* Context menu when clicking a class */}
       {deleteMenu && (
-        <div className="fixed z-50 bg-white border border-gray-200 rounded-xl shadow-lg py-1 min-w-[200px]"
-          style={{ left: Math.min(deleteMenu.x, window.innerWidth - 220), top: deleteMenu.y + 4 }}
+        <div className="fixed z-[999] bg-white border border-gray-200 rounded-xl shadow-xl py-1 min-w-[220px]"
+          style={{ left: Math.min(deleteMenu.x, window.innerWidth - 240), top: Math.min(deleteMenu.y + 4, window.innerHeight - 220) }}
+          onMouseDown={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}>
           <div className="px-4 py-2 text-xs font-semibold text-gray-500 border-b border-gray-100">
             {deleteMenu.cls.student_name} {deleteMenu.cls.student_last_name}
           </div>
-          <button onClick={() => { openEdit(deleteMenu.cls); setDeleteMenu(null); }}
+          <button type="button"
+            onMouseDown={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); openEdit(deleteMenu.cls); setDeleteMenu(null); }}
             className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50">✏️ Edit</button>
           {deleteMenu.cls.status !== 'done' && (
-            <button onClick={(e) => { e.stopPropagation(); markDone(deleteMenu.cls, e).then(() => setDeleteMenu(null)); }}
+            <button type="button"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); markDone(deleteMenu.cls, e).then(() => setDeleteMenu(null)); }}
               className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50">✅ Mark as done</button>
           )}
           {deleteMenu.cls.meet_link && (
             <a href={deleteMenu.cls.meet_link} target="_blank" rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="block px-4 py-2 text-sm hover:bg-gray-50">🎥 Open Meet link</a>
           )}
           <div className="border-t border-gray-100 mt-1" />
-          <button onClick={deleteOne} className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50">
+          <button type="button"
+            onMouseDown={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); deleteOne(); }}
+            className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50">
             🗑 Delete this class
           </button>
           {deleteMenu.groupId && (
-            <button onClick={deleteGroup} className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium">
+            <button type="button"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); deleteGroup(); }}
+              className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium">
               🗑 Delete all recurring classes
             </button>
           )}
