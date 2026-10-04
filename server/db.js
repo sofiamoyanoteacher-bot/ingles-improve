@@ -83,10 +83,12 @@ if (!hasProgram) {
 
 // Migration: billing fields on users
 const userCols = db.prepare("PRAGMA table_info(users)").all().map((c) => c.name);
-if (!userCols.includes('schedule'))    db.exec(`ALTER TABLE users ADD COLUMN schedule TEXT DEFAULT ''`);
-if (!userCols.includes('monthly_fee')) db.exec(`ALTER TABLE users ADD COLUMN monthly_fee REAL DEFAULT 0`);
-if (!userCols.includes('start_date'))  db.exec(`ALTER TABLE users ADD COLUMN start_date TEXT DEFAULT ''`);
-if (!userCols.includes('end_date'))    db.exec(`ALTER TABLE users ADD COLUMN end_date TEXT DEFAULT ''`);
+if (!userCols.includes('schedule'))     db.exec(`ALTER TABLE users ADD COLUMN schedule TEXT DEFAULT ''`);
+if (!userCols.includes('monthly_fee'))  db.exec(`ALTER TABLE users ADD COLUMN monthly_fee REAL DEFAULT 0`);
+if (!userCols.includes('start_date'))   db.exec(`ALTER TABLE users ADD COLUMN start_date TEXT DEFAULT ''`);
+if (!userCols.includes('end_date'))     db.exec(`ALTER TABLE users ADD COLUMN end_date TEXT DEFAULT ''`);
+// teacher_type: 'admin' = full access, 'teacher' = calendar/reports/messages only
+if (!userCols.includes('teacher_type')) db.exec(`ALTER TABLE users ADD COLUMN teacher_type TEXT DEFAULT 'teacher'`);
 
 // Migration: class_progress tracks completion of the 4 classes per unit independently
 // from the existing tab-level flags. Guarded because SQLite has no ADD COLUMN IF NOT EXISTS.

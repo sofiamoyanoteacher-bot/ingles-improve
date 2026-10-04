@@ -15,6 +15,7 @@ function publicUser(u) {
     profession: u.profession,
     role: u.role,
     program: u.program || 'basic',
+    teacher_type: u.teacher_type || 'teacher',
   };
 }
 

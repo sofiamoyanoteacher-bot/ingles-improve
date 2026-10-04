@@ -3,22 +3,24 @@ const db = require('./db');
 
 const SALT_ROUNDS = 10;
 
-function upsertUser({ email, password, name, last_name, age, profession, role, program }) {
+function upsertUser({ email, password, name, last_name, age, profession, role, program, teacher_type }) {
   const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
   const hash = bcrypt.hashSync(password, SALT_ROUNDS);
   const prog = program || 'basic';
+  const ttype = teacher_type || 'teacher';
   if (existing) {
     db.prepare(
-      'UPDATE users SET password_hash=?, name=?, last_name=?, age=?, profession=?, role=?, program=? WHERE id=?'
-    ).run(hash, name, last_name || '', age || null, profession || null, role, prog, existing.id);
+      'UPDATE users SET password_hash=?, name=?, last_name=?, age=?, profession=?, role=?, program=?, teacher_type=? WHERE id=?'
+    ).run(hash, name, last_name || '', age || null, profession || null, role, prog, ttype, existing.id);
     return existing.id;
   }
   const info = db.prepare(
-    'INSERT INTO users (email, password_hash, name, last_name, age, profession, role, program) VALUES (?,?,?,?,?,?,?,?)'
-  ).run(email, hash, name, last_name || '', age || null, profession || null, role, prog);
+    'INSERT INTO users (email, password_hash, name, last_name, age, profession, role, program, teacher_type) VALUES (?,?,?,?,?,?,?,?,?)'
+  ).run(email, hash, name, last_name || '', age || null, profession || null, role, prog, ttype);
   return info.lastInsertRowid;
 }
 
+// Admin teacher — full access (billing, students, homework, etc.)
 const teacherEmail = process.env.TEACHER_EMAIL || 'teacher@improve.com';
 upsertUser({
   email: teacherEmail,
@@ -26,20 +28,30 @@ upsertUser({
   name: 'Profe',
   last_name: 'Improve',
   role: 'teacher',
+  teacher_type: 'admin',
 });
 
-// Demo teacher logins (for testing platform without billing admin)
-const demoTeachers = [
+// Demo admin accounts (full access)
+const adminTeachers = [
   { email: 'teacherstarter@improve.com', password: 'Teacher123', name: 'Teacher', last_name: 'Starter' },
   { email: 'teacherbasic@improve.com',   password: 'Teacher123', name: 'Teacher', last_name: 'Basic' },
   { email: 'teachernative@improve.com',  password: 'Teacher123', name: 'Teacher', last_name: 'Native' },
+];
+for (const t of adminTeachers) {
+  upsertUser({ ...t, role: 'teacher', teacher_type: 'admin' });
+}
+
+// Named teachers — restricted access (calendar, reports, messages only)
+const namedTeachers = [
   { email: 'teachermaira@improve.com',   password: 'Teacher123', name: 'Maira',   last_name: 'Improve' },
   { email: 'teacherdelfina@improve.com', password: 'Teacher123', name: 'Delfina', last_name: 'Improve' },
   { email: 'teacherailin@improve.com',   password: 'Teacher123', name: 'Ailin',   last_name: 'Improve' },
 ];
-for (const t of demoTeachers) {
-  upsertUser({ ...t, role: 'teacher' });
+for (const t of namedTeachers) {
+  upsertUser({ ...t, role: 'teacher', teacher_type: 'teacher' });
 }
+
+const demoTeachers = [...adminTeachers, ...namedTeachers];
 
 const students = [
   // Improve Basic (B1-B2)
