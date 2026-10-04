@@ -324,7 +324,7 @@ export default function Calendar() {
             <div className="space-y-3">
               <div>
                 <label className="text-xs text-gray-500 mb-1 block">Student</label>
-                <select value={form.student_id} onChange={(e) => setForm({ ...form, student_id: e.target.value })}
+                <select value={form.student_id} onChange={(e) => setForm((f) => ({ ...f, student_id: e.target.value }))}
                   className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm">
                   <option value="">Select student…</option>
                   {students.map((s) => (
@@ -337,13 +337,13 @@ export default function Calendar() {
                 <div>
                   <label className="text-xs text-gray-500 mb-1 block">Date & time</label>
                   <input type="datetime-local" value={form.scheduled_at}
-                    onChange={(e) => setForm({ ...form, scheduled_at: e.target.value })}
+                    onChange={(e) => setForm((f) => ({ ...f, scheduled_at: e.target.value }))}
                     className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm" />
                 </div>
                 <div>
                   <label className="text-xs text-gray-500 mb-1 block">Duration (min)</label>
                   <input type="number" value={form.duration_min} min={15} step={15}
-                    onChange={(e) => setForm({ ...form, duration_min: e.target.value })}
+                    onChange={(e) => setForm((f) => ({ ...f, duration_min: e.target.value }))}
                     className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm" />
                 </div>
               </div>
@@ -351,50 +351,60 @@ export default function Calendar() {
               <div>
                 <label className="text-xs text-gray-500 mb-1 block">Google Meet link</label>
                 <input type="url" value={form.meet_link} placeholder="https://meet.google.com/..."
-                  onChange={(e) => setForm({ ...form, meet_link: e.target.value })}
+                  onChange={(e) => setForm((f) => ({ ...f, meet_link: e.target.value }))}
                   className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm" />
               </div>
 
               <div>
                 <label className="text-xs text-gray-500 mb-1 block">Notes</label>
                 <input value={form.notes} placeholder="Optional"
-                  onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                  onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
                   className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm" />
               </div>
 
               {!editId && (
-                <div className="border border-gray-100 rounded-xl p-3 space-y-2">
-                  <label className="flex items-center gap-2 text-sm font-medium cursor-pointer">
+                <div className="border border-gray-200 rounded-xl p-3 space-y-3">
+                  <label className="flex items-center gap-2 text-sm font-medium cursor-pointer select-none">
                     <input type="checkbox" checked={form.repeat}
-                      onChange={(e) => setForm({ ...form, repeat: e.target.checked })} />
+                      onChange={(e) => setForm((f) => ({ ...f, repeat: e.target.checked }))} />
                     Repeat weekly
                   </label>
                   {form.repeat && (
                     <>
                       <div>
-                        <div className="text-xs text-gray-500 mb-1.5">Repeat on</div>
-                        <div className="flex gap-1.5 flex-wrap">
-                          {DAY_FULL.map((name, di) => (
-                            <button key={di} type="button"
-                              onClick={() => toggleRecurDay(di)}
-                              className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition-colors
-                                ${form.recur_days.includes(di)
-                                  ? 'bg-blue-600 text-white border-blue-600'
-                                  : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
-                              {name.slice(0, 3)}
-                            </button>
-                          ))}
+                        <div className="text-xs font-medium text-gray-600 mb-2">
+                          Days — tap to select, tap again to deselect (pick as many as you need)
                         </div>
+                        <div className="flex gap-2 flex-wrap">
+                          {DAY_FULL.map((name, di) => {
+                            const selected = form.recur_days.includes(di);
+                            return (
+                              <button key={di} type="button"
+                                onClick={(e) => { e.stopPropagation(); toggleRecurDay(di); }}
+                                className={`w-12 h-10 rounded-xl text-xs font-semibold border-2 transition-all
+                                  ${selected
+                                    ? 'bg-blue-600 text-white border-blue-600 shadow-md scale-105'
+                                    : 'bg-white text-gray-500 border-gray-200 hover:border-blue-300 hover:text-blue-600'}`}>
+                                {name.slice(0, 3)}
+                              </button>
+                            );
+                          })}
+                        </div>
+                        {form.recur_days.length > 0 && (
+                          <div className="mt-2 text-xs text-blue-700 font-medium">
+                            ✓ {form.recur_days.length} day{form.recur_days.length > 1 ? 's' : ''} selected: {form.recur_days.map(d => DAY_FULL[d]).join(', ')}
+                          </div>
+                        )}
                       </div>
                       <div>
                         <label className="text-xs text-gray-500 mb-1 block">Repeat until</label>
                         <input type="date" value={form.recur_until}
-                          onChange={(e) => setForm({ ...form, recur_until: e.target.value })}
+                          onChange={(e) => setForm((f) => ({ ...f, recur_until: e.target.value }))}
                           className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm" />
                       </div>
                       {form.recur_days.length > 0 && form.recur_until && (
-                        <div className="text-xs text-blue-600 bg-blue-50 rounded-lg px-3 py-2">
-                          Every {form.recur_days.map(d => DAY_FULL[d]).join(' & ')} until {form.recur_until}
+                        <div className="text-xs text-blue-700 bg-blue-50 border border-blue-100 rounded-xl px-3 py-2 font-medium">
+                          📅 Every {form.recur_days.map(d => DAY_FULL[d]).join(' & ')} until {form.recur_until}
                         </div>
                       )}
                     </>
