@@ -7,6 +7,7 @@ export default function StudentMessages() {
   const [messages, setMessages] = useState([]);
   const [body, setBody] = useState('');
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const bottomRef = useRef(null);
 
   useEffect(() => {
@@ -29,10 +30,13 @@ export default function StudentMessages() {
   async function send() {
     if (!body.trim() || sending) return;
     setSending(true);
+    setError('');
     try {
       await api.studentSendMessage(body.trim());
       setBody('');
       load();
+    } catch (e) {
+      setError(e.message || 'Could not send message. Please try again.');
     } finally {
       setSending(false);
     }
@@ -79,6 +83,7 @@ export default function StudentMessages() {
         </div>
 
         {/* input */}
+        {error && <div className="px-4 py-2 text-xs text-red-500 bg-red-50 border-t border-red-100">{error}</div>}
         <div className="px-4 py-3 border-t border-gray-100 flex gap-2">
           <textarea
             value={body}
