@@ -11,8 +11,11 @@ export default function Messages() {
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    api.teacherStudents().then(({ students }) => setStudents(students));
-  }, []);
+    const fetch = user?.teacher_type === 'admin'
+      ? api.teacherStudents()
+      : api.calendarMyStudents();
+    fetch.then(({ students }) => setStudents(students));
+  }, [user]);
 
   useEffect(() => {
     if (!selected) return;

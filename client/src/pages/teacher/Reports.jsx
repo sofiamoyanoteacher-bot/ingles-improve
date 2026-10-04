@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api } from '../../api';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 function pct(done, total) {
   return total ? Math.round((done / total) * 100) : 0;
@@ -14,9 +15,14 @@ export default function Reports() {
   const [attForm, setAttForm] = useState({ classId: '', attended: true, material_covered: '' });
   const [loading, setLoading] = useState(false);
 
+  const { user } = useAuth();
+
   useEffect(() => {
-    api.teacherStudents().then(({ students }) => setStudents(students));
-  }, []);
+    const fetch = user?.teacher_type === 'admin'
+      ? api.teacherStudents()
+      : api.calendarMyStudents();
+    fetch.then(({ students }) => setStudents(students));
+  }, [user]);
 
   async function selectStudent(s) {
     setSelected(s);

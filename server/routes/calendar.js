@@ -35,6 +35,19 @@ router.put('/availability', (req, res) => {
   res.json({ slots: updated });
 });
 
+// ── Students assigned to this teacher ────────────────────────────────────────
+
+router.get('/my-students', (req, res) => {
+  const students = db.prepare(
+    `SELECT DISTINCT u.id, u.name, u.last_name, u.email, u.program
+     FROM scheduled_classes sc
+     JOIN users u ON u.id = sc.student_id
+     WHERE sc.teacher_id = ?
+     ORDER BY u.name, u.last_name`
+  ).all(req.user.id);
+  res.json({ students });
+});
+
 // ── Scheduled classes ────────────────────────────────────────────────────────
 
 router.get('/classes', (req, res) => {

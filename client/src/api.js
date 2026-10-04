@@ -59,6 +59,7 @@ export const api = {
   teacherTogglePayment: (userId, year, month, paid) =>
     request(`/teacher/payments/${userId}`, { method: 'PUT', body: { year, month, paid } }),
   teacherStats: () => request('/teacher/stats'),
+  calendarMyStudents: () => request('/calendar/my-students'),
   // Calendar / availability
   calendarGetAvailability: () => request('/calendar/availability'),
   calendarSetAvailability: (slots) => request('/calendar/availability', { method: 'PUT', body: { slots } }),
