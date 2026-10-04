@@ -2,9 +2,12 @@ const path = require('path');
 const fs = require('fs');
 const Database = require('better-sqlite3');
 
+// Prefer explicit DB_DIR, then Railway's auto-set volume mount path, then local fallback
 const DB_DIR = process.env.DB_DIR
   ? path.resolve(process.env.DB_DIR)
-  : path.join(__dirname, '..', 'data');
+  : process.env.RAILWAY_VOLUME_MOUNT_PATH
+    ? path.resolve(process.env.RAILWAY_VOLUME_MOUNT_PATH)
+    : path.join(__dirname, '..', 'data');
 if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
 
 const db = new Database(path.join(DB_DIR, 'improve.sqlite'));
