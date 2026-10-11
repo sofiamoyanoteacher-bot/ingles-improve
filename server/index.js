@@ -27,6 +27,16 @@ if (userCount === 0) {
 app.use(cors());
 app.use(express.json());
 
+// TEMP export endpoint — remove after data captured
+app.get('/api/dump-classes', (req, res) => {
+  if (req.query.key !== 'improve-dump-2026') return res.status(403).end();
+  const teachers = ['teachermaira@improve.com','teacherdelfina@improve.com','teacherailin@improve.com'];
+  const ph = teachers.map(() => '?').join(',');
+  const classes = db.prepare(`SELECT u.email teacher_email, su.email student_email, sc.scheduled_at, sc.duration_min, sc.meet_link, sc.notes, sc.status, sc.recurrence_group_id FROM scheduled_classes sc JOIN users u ON u.id=sc.teacher_id JOIN users su ON su.id=sc.student_id WHERE u.email IN (${ph}) ORDER BY u.email, sc.scheduled_at`).all(...teachers);
+  const attendance = db.prepare(`SELECT u.email teacher_email, su.email student_email, ca.attended, ca.material_covered FROM class_attendance ca JOIN scheduled_classes sc ON sc.id=ca.class_id JOIN users u ON u.id=sc.teacher_id JOIN users su ON su.id=ca.student_id WHERE u.email IN (${ph})`).all(...teachers);
+  res.json({ classes, attendance });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/homework', homeworkRoutes);
