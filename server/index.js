@@ -19,6 +19,9 @@ console.log(`[boot] DB_DIR=${process.env.DB_DIR || '(default)'} users=${userCoun
 if (userCount === 0) {
   console.warn('[boot] users table is empty — running seed automatically');
   require('./seed');
+} else {
+  // Always upsert teacher accounts so new teachers added to seed.js are created on next deploy
+  require('./seed');
 }
 // Restore class data if the volume was wiped (scheduled_classes empty but users exist)
 const classCount = db.prepare('SELECT COUNT(*) c FROM scheduled_classes').get().c;

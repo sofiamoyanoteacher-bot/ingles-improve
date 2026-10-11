@@ -46,6 +46,7 @@ const namedTeachers = [
   { email: 'teachermaira@improve.com',   password: 'Teacher123', name: 'Maira',   last_name: 'Improve' },
   { email: 'teacherdelfina@improve.com', password: 'Teacher123', name: 'Delfina', last_name: 'Improve' },
   { email: 'teacherailin@improve.com',   password: 'Teacher123', name: 'Ailin',   last_name: 'Improve' },
+  { email: 'teachercamila@improve.com',  password: 'Teacher123', name: 'Camila',  last_name: 'Improve' },
 ];
 for (const t of namedTeachers) {
   upsertUser({ ...t, role: 'teacher', teacher_type: 'teacher' });
